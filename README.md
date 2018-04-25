@@ -1,2 +1,2 @@
-# QuickQUiz
+# QuickQuiz
 Quick Quiz Generator
