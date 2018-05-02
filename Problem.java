@@ -1,56 +1,87 @@
+public class Problem
+{
+    private String problemImage;
 
-public class Problem {
-	private String problemImage;
-	private String solutionImage;
-	private String name;
-	private String type;
-	private char answer;
+    private String solutionImage;
 
-	public Problem(String probim, String solim, String nam, String category, char ans) {
-		problemImage = probim;
-		solutionImage = solim;
-		name = nam;
-		type = category;
-		answer = ans;
-	}
+    private String name;
 
-	public String getProblemImage() {
-		return problemImage;
-	}
+    private String type;
 
-	public String getSolutionImage() {
-		return solutionImage;
-	}
+    private char answer;
 
-	public String getName() {
-		return name;
-	}
 
-	public String getType() {
-		return type;
-	}
+    public Problem(
+        String probim,
+        String solim,
+        String nam,
+        String category,
+        char ans )
+    {
+        problemImage = probim;
+        solutionImage = solim;
+        name = nam;
+        type = category;
+        answer = ans;
+    }
 
-	public char getAnswer() {
-		return answer;
-	}
 
-	public void setProblemImage(String probim) {
-		problemImage = probim;
-	}
+    public String getProblemImage()
+    {
+        return problemImage;
+    }
 
-	public void setSolutionImage(String solim) {
-		solutionImage = solim;
-	}
 
-	public void setName(String nam) {
-		name = nam;
-	}
+    public String getSolutionImage()
+    {
+        return solutionImage;
+    }
 
-	public void setType(String category) {
-		type = category;
-	}
 
-	public void setAnswer(char ans) {
-		answer = ans;
-	}
+    public String getName()
+    {
+        return name;
+    }
+
+
+    public String getType()
+    {
+        return type;
+    }
+
+
+    public char getAnswer()
+    {
+        return answer;
+    }
+
+
+    public void setProblemImage( String probim )
+    {
+        problemImage = probim;
+    }
+
+
+    public void setSolutionImage( String solim )
+    {
+        solutionImage = solim;
+    }
+
+
+    public void setName( String nam )
+    {
+        name = nam;
+    }
+
+
+    public void setType( String category )
+    {
+        type = category;
+    }
+
+
+    public void setAnswer( char ans )
+    {
+        answer = ans;
+    }
 }
