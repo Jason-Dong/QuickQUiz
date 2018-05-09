@@ -6,8 +6,8 @@ import javax.swing.border.*;
 
 public class MainMenu
 {
-    JFrame frame;
-    ProblemDatabase problem;
+    private JFrame frame;
+    private ProblemDatabase problem;
 
     public MainMenu( ProblemDatabase problem )
     {
@@ -23,9 +23,11 @@ public class MainMenu
 
         JButton addMenu = new JButton( "Add Problems" );
         addMenu.setBounds( 200, 350, 400, 100 );
+        addMenu.addActionListener( new AddButtonListener() );
 
         JButton removeMenu = new JButton( "Remove Problems" );
         removeMenu.setBounds( 200, 450, 400, 100 );
+        removeMenu.addActionListener( new RemoveButtonListener() );
 
         JLabel text = new JLabel( "Quick Quiz Generator" );
         text.setFont( new Font( "font", Font.PLAIN, 48 ) );
@@ -69,21 +71,24 @@ public class MainMenu
         }
     }
 
-    // private class AddButtonListener implements ActionListener
-    // {
-    // public void actionPerformed( ActionEvent e )
-    // {
-    // AddMenu addMenu = new AddMenu( null );
-    // }
-    // }
-    //
-    //
-    // private class RemoveButtonListener implements ActionListener
-    // {
-    // public void actionPerformed( ActionEvent e )
-    // {
-    // RemoveMenu removeMenu = new RemoveMenu( null );
-    // }
-    // }
+
+    private class AddButtonListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            AddMenu addMenu = new AddMenu( problem );
+            frame.dispose();
+        }
+    }
+
+
+    private class RemoveButtonListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            RemoveMenu removeMenu = new RemoveMenu( problem );
+            frame.dispose();
+        }
+    }
 
 }
