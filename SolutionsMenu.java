@@ -2,8 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-// package net.codejava.graphic;
-
 
 public class SolutionsMenu extends JPanel
 {
@@ -22,18 +20,22 @@ public class SolutionsMenu extends JPanel
     {
         JLabel label1;
         JButton back = new JButton( "Back" );
-        back.setBounds( 750, 100, 50, 50);
+        back.setBounds( 25, 500, 50, 50 );
 
-        ImageIcon icon = createImageIcon( "images/2016_1.png", "First Image" );
+        ImageIcon icon = createImageIcon( "images/2016_1.png",
+            "First Image" );
         Image image = icon.getImage();
-        Image newImage = image.getScaledInstance( 750, 300, Image.SCALE_DEFAULT );
+        Image newImage = image
+            .getScaledInstance( 750, 250, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
 
         label1 = new JLabel( "First Image", icon, JLabel.CENTER );
 
-        label1.setBounds( 0, 0, 750, 300 );
-        label1.setVerticalTextPosition( JLabel.BOTTOM );
-        label1.setHorizontalTextPosition( JLabel.CENTER );
+        label1.setBounds( 25, 25, 750, 250 );
+        // label1.setVerticalTextPosition( JLabel.BOTTOM ); //only needed for
+        // text underneath
+        // label1.setHorizontalTextPosition( JLabel.CENTER ); //only needed for
+        // text underneath
         if ( menu == 0 ) // called from QQMenu
             back.addActionListener( new BackButtonListenerQQ() );
         else // called from TrainMenu
@@ -44,7 +46,7 @@ public class SolutionsMenu extends JPanel
         thisWindow.setDefaultCloseOperation( 0 );
         thisWindow.setVisible( true );
         Container c = thisWindow.getContentPane();
-        
+
         c.add( label1 );
         c.add( back );
 
@@ -126,30 +128,12 @@ public class SolutionsMenu extends JPanel
 
 
     /**
-     * This method creates a frame of size 800 by 600 and instantiates
-     * solutionMenu to add it to the frame.
-     */
-    public static void createAndShowGUI()
-    {
-        thisWindow = new JFrame( "SolutionsMenu" );
-        thisWindow.setBounds( 0, 0, 800, 600 );
-        thisWindow.setDefaultCloseOperation( 0 );
-        thisWindow.add( new SolutionsMenu( problem, prob, 1 ) );
-        thisWindow.setVisible( true );
-
-        thisWindow.setLayout( null );
-        thisWindow.setResizable( false );
-    }
-
-
-    /**
      * Runs the GUI method.
      * 
      * @param args
      */
     public static void main( String[] args )
     {
-//        createAndShowGUI();
-        SolutionsMenu hi = new SolutionsMenu(null, null, 0);
+        SolutionsMenu temp = new SolutionsMenu( null, null, 0 );
     }
 }
