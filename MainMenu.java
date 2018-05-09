@@ -4,20 +4,22 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 
-public class MainMenu extends JFrame
+public class MainMenu
 {
     JFrame frame;
-
+    ProblemDatabase problem;
 
     public MainMenu( ProblemDatabase problem )
     {
+        this.problem = problem;
+        
         JButton QQMenu = new JButton( "Quick Quiz" );
         QQMenu.setBounds( 200, 150, 400, 100 );
-        QQButtonListener listen1 = new QQButtonListener();
-        QQMenu.addActionListener( listen1 );
+        QQMenu.addActionListener( new QQButtonListener() );
 
         JButton trainMenu = new JButton( "Training" );
         trainMenu.setBounds( 200, 250, 400, 100 );
+        trainMenu.addActionListener( new TrainButtonListener() );
 
         JButton addMenu = new JButton( "Add Problems" );
         addMenu.setBounds( 200, 350, 400, 100 );
@@ -52,7 +54,7 @@ public class MainMenu extends JFrame
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( null );
+            QQMenu qqMenu = new QQMenu( problem );
             frame.dispose();
         }
     }
@@ -62,7 +64,7 @@ public class MainMenu extends JFrame
     {
         public void actionPerformed( ActionEvent e )
         {
-            TrainMenu trainMenu = new TrainMenu( null );
+            TrainMenu trainMenu = new TrainMenu( problem );
             frame.dispose();
         }
     }
