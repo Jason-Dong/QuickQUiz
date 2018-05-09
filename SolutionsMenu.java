@@ -1,22 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.*;
-
-import java.lang.Object;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import java.io.*;
-import java.awt.geom.*;
 
 // package net.codejava.graphic;
 
@@ -38,17 +22,16 @@ public class SolutionsMenu extends JPanel
     {
         JLabel label1;
         JButton back = new JButton( "Back" );
-        back.setBounds( 100, 100, 100, 100 );
+        back.setBounds( 750, 100, 50, 50);
 
-        ImageIcon icon = createImageIcon( "images/2016_1.png",
-            "First Image" );
+        ImageIcon icon = createImageIcon( "images/2016_1.png", "First Image" );
         Image image = icon.getImage();
-        Image newImage = image
-            .getScaledInstance( 750, 300, Image.SCALE_DEFAULT );
+        Image newImage = image.getScaledInstance( 750, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
-        // Create the first label.
+
         label1 = new JLabel( "First Image", icon, JLabel.CENTER );
-        // Set the position of its text, relative to its icon:
+
+        label1.setBounds( 0, 0, 750, 300 );
         label1.setVerticalTextPosition( JLabel.BOTTOM );
         label1.setHorizontalTextPosition( JLabel.CENTER );
         if ( menu == 0 ) // called from QQMenu
@@ -56,11 +39,17 @@ public class SolutionsMenu extends JPanel
         else // called from TrainMenu
             back.addActionListener( new BackButtonListenerTrain() );
 
-        // Create tool tips, for the heck of it.
-        // label1.setToolTipText( "Image & Text" );
+        thisWindow = new JFrame( "SolutionsMenu" );
+        thisWindow.setBounds( 0, 0, 800, 600 );
+        thisWindow.setDefaultCloseOperation( 0 );
+        thisWindow.setVisible( true );
+        Container c = thisWindow.getContentPane();
+        
+        c.add( label1 );
+        c.add( back );
 
-        add( label1 );
-        add( back );
+        thisWindow.setLayout( null );
+        thisWindow.setResizable( false );
     }
 
 
@@ -142,11 +131,9 @@ public class SolutionsMenu extends JPanel
      */
     public static void createAndShowGUI()
     {
-        // back.addActionListener( new BackButtonListener() );
         thisWindow = new JFrame( "SolutionsMenu" );
         thisWindow.setBounds( 0, 0, 800, 600 );
-        // frame.pack();
-        thisWindow.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        thisWindow.setDefaultCloseOperation( 0 );
         thisWindow.add( new SolutionsMenu( problem, prob, 1 ) );
         thisWindow.setVisible( true );
 
@@ -162,6 +149,7 @@ public class SolutionsMenu extends JPanel
      */
     public static void main( String[] args )
     {
-        createAndShowGUI();
+//        createAndShowGUI();
+        SolutionsMenu hi = new SolutionsMenu(null, null, 0);
     }
 }
