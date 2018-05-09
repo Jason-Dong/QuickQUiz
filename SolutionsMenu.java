@@ -27,12 +27,14 @@ public class SolutionsMenu extends JPanel
 
     private static ProblemDatabase problem;
 
+    private static Problem prob;
+
 
     /**
      * Constructor for the SolutionsMenu class. This creates a image JLabel and
-     * a text below.
+     * a text below. Additionally, it creates a back button which is centered.
      */
-    public SolutionsMenu( ProblemDatabase probDat, int x )
+    public SolutionsMenu( ProblemDatabase probDat, Problem prob, int menu )
     {
         JLabel label1;
         JButton back = new JButton( "Back" );
@@ -49,7 +51,7 @@ public class SolutionsMenu extends JPanel
         // Set the position of its text, relative to its icon:
         label1.setVerticalTextPosition( JLabel.BOTTOM );
         label1.setHorizontalTextPosition( JLabel.CENTER );
-        if ( x == 0 ) // called from QQMenu
+        if ( menu == 0 ) // called from QQMenu
             back.addActionListener( new BackButtonListenerQQ() );
         else // called from TrainMenu
             back.addActionListener( new BackButtonListenerTrain() );
@@ -62,6 +64,20 @@ public class SolutionsMenu extends JPanel
     }
 
 
+    /**
+     * This nested class calls QQMenu, which only runs if QQMenu is calling
+     * SolutionsMenu (it will create Solutions with an integer in the parameter,
+     * which lets the SolutionsMenu class know which class called it (QQMenu
+     * passes in a 0, and TrainMenu passes in a 1). It then creates a new
+     * TrainMenu GUI window, and closes the SolutionsMenu window.
+     *
+     * @author jdong758
+     * @version May 9, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListenerQQ implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -72,6 +88,20 @@ public class SolutionsMenu extends JPanel
     }
 
 
+    /**
+     * This nested class calls TrainMenu, which only runs if TrainMenu is
+     * calling SolutionsMenu (it will create Solutions with an integer in the
+     * parameter, which lets the SolutionsMenu class know which class called it
+     * (QQMenu passes in a 0, and TrainMenu passes in a 1). It then creates a
+     * new TrainMenu GUI window, and closes the SolutionsMenu window.
+     *
+     * @author jdong758
+     * @version May 9, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListenerTrain implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -117,11 +147,11 @@ public class SolutionsMenu extends JPanel
         thisWindow.setBounds( 0, 0, 800, 600 );
         // frame.pack();
         thisWindow.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        thisWindow.add( new SolutionsMenu( problem, 1 ) );
+        thisWindow.add( new SolutionsMenu( problem, prob, 1 ) );
         thisWindow.setVisible( true );
 
-        // thisWindow.setLayout( null );
-        // thisWindow.setResizable( false );
+        thisWindow.setLayout( null );
+        thisWindow.setResizable( false );
     }
 
 
