@@ -31,7 +31,7 @@ public class MainMenu
 
         JLabel text = new JLabel( "Quick Quiz Generator" );
         text.setFont( new Font( "font", Font.PLAIN, 48 ) );
-        text.setHorizontalAlignment( text.CENTER );
+        text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 100 );
 
         frame = new JFrame( "MainMenu" );
