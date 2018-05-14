@@ -10,6 +10,19 @@ public class AddMenu
     private JTextField problempathfield;
     private JTextField solutionpathfield;
     private JTextField namepathfield;
+    private int type;
+    private JButton kinematics;
+    private JButton newton;
+    private JButton energy;
+    private JButton rotation;
+    private JButton gravitation;
+    private JButton fluids;
+    private JButton a;
+    private JButton b;
+    private JButton cp;
+    private JButton d;
+    private JButton e;
+    private char ans;
     
     public AddMenu(ProblemDatabase problem)
     {
@@ -49,13 +62,55 @@ public class AddMenu
         typetxt.setHorizontalAlignment( typetxt.LEFT );
         typetxt.setVerticalAlignment(typetxt.TOP);
         
-        JButton kinematics = new JButton( "Kinematics" );
-        kinematics.setBounds( 100, 320, 150, 20 );
-        kinematics.addActionListener( new PathnameListener() );
+        kinematics = new JButton( "Kinematics" );
+        kinematics.setBounds( 100, 320, 100, 20 );
+        kinematics.addActionListener( new kinematicsListener() );
         
-        JButton newton = new JButton( "Newton's Laws" );
-        newton.setBounds( 250, 320, 150, 20 );
-        newton.addActionListener( new PathnameListener() );
+        newton = new JButton( "Newton's Laws" );
+        newton.setBounds( 200, 320, 100, 20 );
+        newton.addActionListener( new newtonListener() );
+        
+        energy = new JButton( "Energy" );
+        energy.setBounds( 300, 320, 100, 20 );
+        energy.addActionListener( new energyListener() );
+        
+        rotation = new JButton( "Rotation" );
+        rotation.setBounds( 400, 320, 100, 20 );
+        rotation.addActionListener( new rotationListener() );
+        
+        gravitation = new JButton( "Gravitation" );
+        gravitation.setBounds( 500, 320, 100, 20 );
+        gravitation.addActionListener( new gravitationListener() );
+        
+        fluids = new JButton( "Fluids" );
+        fluids.setBounds( 600, 320, 100, 20 );
+        fluids.addActionListener( new fluidsListener() );
+        
+        JLabel answertxt = new JLabel( "Choose Answer:" );
+        answertxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
+        answertxt.setBounds( 200, 345, 500, 20 );
+        answertxt.setHorizontalAlignment( typetxt.LEFT );
+        answertxt.setVerticalAlignment(typetxt.TOP);
+        
+        a = new JButton( "A" );
+        a.setBounds( 200, 365, 50, 20 );
+        a.addActionListener( new gravitationListener() );
+        
+        b = new JButton( "B" );
+        b.setBounds( 250, 365, 50, 20 );
+        b.addActionListener( new gravitationListener() );
+        
+        cp = new JButton( "C" );
+        cp.setBounds( 300, 365, 50, 20 );
+        cp.addActionListener( new gravitationListener() );
+        
+        d = new JButton( "D" );
+        d.setBounds( 350, 365, 50, 20 );
+        d.addActionListener( new gravitationListener() );
+        
+        e = new JButton( "E" );
+        e.setBounds( 400, 365, 50, 20 );
+        e.addActionListener( new gravitationListener() );
         
         JButton pathname = new JButton( "Enter" );
         pathname.setBounds( 600, 200, 50, 20 );
@@ -86,6 +141,17 @@ public class AddMenu
         c.add(typetxt);
         c.add(kinematics);
         c.add(newton);
+        c.add(energy);
+        c.add(rotation);
+        c.add(gravitation);
+        c.add(fluids);
+        
+        c.add(answertxt);
+        c.add(a);
+        c.add(b);
+        c.add(cp);
+        c.add(d);
+        c.add(e);
         
         frame.setResizable( false );
         frame.setVisible( true );
@@ -109,6 +175,90 @@ public class AddMenu
     			problempathfield.setText("");
     			solutionpathfield.setText("");
     			namepathfield.setText("");
+    		}
+    }
+    
+    private class kinematicsListener implements ActionListener
+    {
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			kinematics.setEnabled(false);
+    			newton.setEnabled(true);
+    		    energy.setEnabled(true);
+    		    rotation.setEnabled(true);
+    		    gravitation.setEnabled(true);
+    		    fluids.setEnabled(true);
+    			type = 0;
+    		}
+    }
+    
+    private class newtonListener implements ActionListener
+    {
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			kinematics.setEnabled(true);
+    			newton.setEnabled(false);
+    		    energy.setEnabled(true);
+    		    rotation.setEnabled(true);
+    		    gravitation.setEnabled(true);
+    		    fluids.setEnabled(true);
+    			type = 1;
+    		}
+    }
+    
+    private class energyListener implements ActionListener
+    {
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			kinematics.setEnabled(true);
+    			newton.setEnabled(true);
+    		    energy.setEnabled(false);
+    		    rotation.setEnabled(true);
+    		    gravitation.setEnabled(true);
+    		    fluids.setEnabled(true);
+    			type = 3;
+    		}
+    }
+    
+    private class rotationListener implements ActionListener
+    {
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			kinematics.setEnabled(true);
+    			newton.setEnabled(true);
+    		    energy.setEnabled(true);
+    		    rotation.setEnabled(false);
+    		    gravitation.setEnabled(true);
+    		    fluids.setEnabled(true);
+    			type = 4;
+    		}
+    }
+    
+    private class gravitationListener implements ActionListener
+    {
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			kinematics.setEnabled(true);
+    			newton.setEnabled(true);
+    		    energy.setEnabled(true);
+    		    rotation.setEnabled(true);
+    		    gravitation.setEnabled(false);
+    		    fluids.setEnabled(true);
+    			type = 4;
+    		}
+    }
+    
+    private class fluidsListener implements ActionListener
+    {
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			kinematics.setEnabled(true);
+    			newton.setEnabled(true);
+    		    energy.setEnabled(true);
+    		    rotation.setEnabled(true);
+    		    gravitation.setEnabled(true);
+    		    fluids.setEnabled(false);
+    			type = 5;
     		}
     }
 }
