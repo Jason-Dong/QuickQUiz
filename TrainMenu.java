@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.Timer;
+
 import java.util.*;
 
 
@@ -17,9 +18,13 @@ public class TrainMenu
 
     private int index = 0;
 
-    private int score;
-
     JLabel problemImage;
+
+    private Timer timer;
+
+    private int timerCount;
+
+    JLabel timerDisplay;
 
 
     public TrainMenu( ProblemDatabase problem )
@@ -63,7 +68,7 @@ public class TrainMenu
         JButton finish = new JButton( "Finish Test" );
         finish.setBounds( 250, 500, 300, 50 );
         finish.addActionListener( new FinishButtonListener() );
-
+    
         JButton prevProb = new JButton( "Previous Problem" );
         prevProb.setBounds( 250, 400, 150, 50 );
         prevProb.addActionListener( new PrevButtonListener() );
@@ -71,6 +76,11 @@ public class TrainMenu
         JButton nextProb = new JButton( "Next Problem" );
         nextProb.setBounds( 400, 400, 150, 50 );
         nextProb.addActionListener( new NextButtonListener() );
+
+        timerDisplay = new JLabel( "Time Left: 75:00" );
+        timerDisplay.setFont( new Font( "font", Font.PLAIN, 18 ) );
+        timerDisplay.setBounds( 630, 10, 150, 50 );
+        timerDisplay.setHorizontalAlignment( JLabel.CENTER );
 
         frame = new JFrame( "Training Menu" );
         frame.setDefaultCloseOperation( 0 );
@@ -87,6 +97,7 @@ public class TrainMenu
         c.add( finish );
         c.add( prevProb );
         c.add( nextProb );
+        c.add( timerDisplay );
 
         ImageIcon icon = createImageIcon( "images/2016_1.png", "image" );
         Image image = icon.getImage();
@@ -96,7 +107,7 @@ public class TrainMenu
         int number = index + 1;
 
         problemImage = new JLabel( "Problem " + number, icon, JLabel.CENTER );
-
+        problemImage.setFont( new Font( "font", Font.PLAIN, 18 ) );
         problemImage.setBounds( 60, 60, 680, 340 );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
@@ -105,6 +116,10 @@ public class TrainMenu
 
         frame.setResizable( false );
         frame.setVisible( true );
+
+        TimerListener time = new TimerListener();
+        timer = new Timer( 1000, time );
+        timer.start();
 
     }
 
@@ -136,6 +151,96 @@ public class TrainMenu
         problemImage.setIcon( icon );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
+    }
+
+
+    private void updateFinish()
+    {
+        int score = 0;
+
+        // for ( int i = 0; i < 25; i++ )
+        // {
+        // if ( question.get( i ).getAnswer() == answers[i] )
+        // {
+        // score++;
+        // }
+        // }
+
+        timer.stop();
+
+        JLabel numCorrect = new JLabel( "Score: " + score + "/25" );
+        numCorrect.setBounds( 350, 400, 100, 50 );
+        numCorrect.setHorizontalAlignment( JLabel.CENTER );
+
+        JButton back = new JButton( "Back" );
+        back.setBounds( 10, 10, 50, 50 );
+        back.addActionListener( new BackButtonListener() );
+        
+        JButton prevProb = new JButton( "Previous Problem" );
+        prevProb.setBounds( 250, 500, 150, 50 );
+        prevProb.addActionListener( new PrevButtonListener() );
+
+        JButton nextProb = new JButton( "Next Problem" );
+        nextProb.setBounds( 400, 500, 150, 50 );
+        nextProb.addActionListener( new NextButtonListener() );
+
+        JButton viewSol = new JButton( "See Solution" );
+        viewSol.setBounds( 300, 450, 200, 50 );
+        viewSol.addActionListener( new ViewButtonListener() );
+
+        frame = new JFrame( "Training Menu" );
+        frame.setDefaultCloseOperation( 0 );
+        Container c = frame.getContentPane();
+        frame.setLayout( null );
+        frame.setBounds( 0, 0, 800, 600 );
+
+        index = 0;
+
+        update();
+
+        c.add( back );
+        c.add( prevProb );
+        c.add( nextProb );
+        c.add( viewSol );
+        c.add( problemImage );
+        c.add( numCorrect );
+
+        frame.setVisible( true );
+    }
+
+
+    private class TimerListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            timerCount++;
+            int numSecondsLeft = 75 * 60 - timerCount;
+            if ( numSecondsLeft < 0 )
+            {
+                updateFinish();
+            }
+            int seconds = numSecondsLeft % 60;
+            if ( seconds < 10 )
+            {
+                timerDisplay.setText( "Time Left: " + numSecondsLeft / 60 + ":0" + seconds );
+            }
+            else
+            {
+                timerDisplay.setText( "Time Left: " + numSecondsLeft / 60 + ":" + seconds );
+            }
+        }
+    }
+    
+    private class PrevButtonListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            if ( index != 0 )
+            {
+                index--;
+                update();
+            }
+        }
     }
 
 
@@ -205,19 +310,6 @@ public class TrainMenu
     }
 
 
-    private class PrevButtonListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            if ( index != 0 )
-            {
-                index--;
-                update();
-            }
-        }
-    }
-
-
     private class NextButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -244,52 +336,7 @@ public class TrainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-//            for ( int i = 0; i < 25; i++ )
-//            {
-//                if ( question.get( i ).getAnswer() == answers[i] )
-//                {
-//                    score++;
-//                }
-//            }
-
-            JLabel numCorrect = new JLabel( "Score: " + score + "/25" );
-            numCorrect.setBounds( 350, 400, 100, 50 );
-            numCorrect.setHorizontalAlignment( JLabel.CENTER );
-
-            JButton back = new JButton( "Back" );
-            back.setBounds( 10, 10, 50, 50 );
-            back.addActionListener( new BackButtonListener() );
-
-            JButton prevProb = new JButton( "Previous Problem" );
-            prevProb.setBounds( 250, 500, 150, 50 );
-            prevProb.addActionListener( new PrevButtonListener() );
-
-            JButton nextProb = new JButton( "Next Problem" );
-            nextProb.setBounds( 400, 500, 150, 50 );
-            nextProb.addActionListener( new NextButtonListener() );
-
-            JButton viewSol = new JButton( "See Solution" );
-            viewSol.setBounds( 300, 450, 200, 50 );
-            viewSol.addActionListener( new ViewButtonListener() );
-
-            frame = new JFrame( "Training Menu" );
-            frame.setDefaultCloseOperation( 0 );
-            Container c = frame.getContentPane();
-            frame.setLayout( null );
-            frame.setBounds( 0, 0, 800, 600 );
-
-            index = 0;
-
-            update();
-
-            c.add( back );
-            c.add( prevProb );
-            c.add( nextProb );
-            c.add( viewSol );
-            c.add( problemImage );
-            c.add( numCorrect );
-
-            frame.setVisible( true );
+            updateFinish();
         }
     }
 
