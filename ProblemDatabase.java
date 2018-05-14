@@ -1,36 +1,53 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 
 public class ProblemDatabase
 {
-    ArrayList<ArrayList<Problem>> problemListCategories; // Kinematics,
-                                                         // Newton's,
-                                                         // Energy,
-                                                         // Rotation,
-                                                         // Gravitation,
-                                                         // Fluids.
+    ArrayList<ArrayList<Problem>> problemListSorted;
 
-    ArrayList<Problem> problemListProblems;
+    ArrayList<Problem> problemListUnsorted;
 
     ArrayList<Problem> usedList;
 
     Problem prob;
 
 
+    // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
+
     public ProblemDatabase()
-    // seperate text file titled problems.txt
     {
-        problemListCategories = new ArrayList<ArrayList<Problem>>();
-        problemListProblems = new ArrayList<Problem>();
+        problemListSorted = new ArrayList<ArrayList<Problem>>();
+        problemListUnsorted = new ArrayList<Problem>();
+        usedList = new ArrayList<Problem>();
+
+        Scanner readIn = null;
+
+        for ( int i = 0; i < 6; i++ )
+        {
+            problemListSorted.add( new ArrayList<Problem>() );
+        }
         try
         {
-            InputStream file = new FileInputStream( "problems.rtf" );
-            
+            readIn = new Scanner( new File( "ProblemFile/problems.txt" ) );
         }
-        catch ( IOException e )
+        catch ( FileNotFoundException exc )
         {
-            System.out.print( "Excpetion" );
+            System.out.println( "Cannot find problems file" );
+            System.exit( 0 );
+        }
+
+        while ( readIn.hasNext() )
+        {
+            String problemImage = readIn.next();
+            String solutionImage = readIn.next();
+            String name = readIn.next();
+            int category = readIn.nextInt();
+            String answer = readIn.next();
+            char ans = answer.charAt( 0 );
+
+            prob = new Problem( problemImage, solutionImage, name, category, ans );
+            addProblem( prob );
         }
 
     }
@@ -38,119 +55,55 @@ public class ProblemDatabase
 
     public void reset()
     {
-        for ( Problem x : usedList )
+        for ( Problem pr : usedList )
         {
-            String type = x.getType();
-            if ( type.equals( "Kinematics" ) )
-                problemListCategories.get( 0 ).add( x );
-            else if ( type.equals( "Newton's Laws" ) )
-                problemListCategories.get( 1 ).add( x );
-            else if ( type.equals( "Energy" ) )
-                problemListCategories.get( 2 ).add( x );
-            else if ( type.equals( "Rotation" ) )
-                problemListCategories.get( 3 ).add( x );
-            else if ( type.equals( "Gravitation" ) )
-                problemListCategories.get( 4 ).add( x );
-            else if ( type.equals( "Fluids" ) )
-                problemListCategories.get( 5 ).add( x );
-            usedList.remove( x );
+            usedList.remove( pr );
+            problemListUnsorted.add( pr );
+            problemListSorted.get( pr.getType() ).add( pr );
+
         }
     }
 
 
-    public Problem giveRandProblem( String type )
+    public Problem giveRandProblem()
     {
-        if ( type.equals( "Kinematics" ) )
+        if ( problemListUnsorted.size() > 0 )
         {
-            int randNum = (int)( Math.random()
-                * problemListCategories.get( 0 ).size() + 1 );
-            usedList.add( problemListCategories.get( 0 ).get( randNum ) );
-            Problem temp = problemListCategories.get( 0 ).get( randNum );
-            problemListCategories.get( 0 ).remove( randNum );
-            return temp;
-        }
-
-        else if ( type.equals( "Newton's Laws" ) )
-        {
-            int randNum = (int)( Math.random()
-                * problemListCategories.get( 1 ).size() + 1 );
-            usedList.add( problemListCategories.get( 1 ).get( randNum ) );
-            Problem temp = problemListCategories.get( 1 ).get( randNum );
-            problemListCategories.get( 1 ).remove( randNum );
-            return temp;
-        }
-        else if ( type.equals( "Energy" ) )
-        {
-            int randNum = (int)( Math.random()
-                * problemListCategories.get( 2 ).size() + 1 );
-            usedList.add( problemListCategories.get( 2 ).get( randNum ) );
-            Problem temp = problemListCategories.get( 2 ).get( randNum );
-            problemListCategories.get( 2 ).remove( randNum );
-            return temp;
-        }
-        else if ( type.equals( "Rotation" ) )
-        {
-            int randNum = (int)( Math.random()
-                * problemListCategories.get( 3 ).size() + 1 );
-            usedList.add( problemListCategories.get( 3 ).get( randNum ) );
-            Problem temp = problemListCategories.get( 3 ).get( randNum );
-            problemListCategories.get( 3 ).remove( randNum );
-            return temp;
-        }
-        else if ( type.equals( "Gravitation" ) )
-        {
-            int randNum = (int)( Math.random()
-                * problemListCategories.get( 4 ).size() + 1 );
-            usedList.add( problemListCategories.get( 4 ).get( randNum ) );
-            Problem temp = problemListCategories.get( 4 ).get( randNum );
-            problemListCategories.get( 4 ).remove( randNum );
-            return temp;
-        }
-        else if ( type.equals( "Fluids" ) )
-        {
-            int randNum = (int)( Math.random()
-                * problemListCategories.get( 5 ).size() + 1 );
-            usedList.add( problemListCategories.get( 5 ).get( randNum ) );
-            Problem temp = problemListCategories.get( 5 ).get( randNum );
-            problemListCategories.get( 5 ).remove( randNum );
-            return temp;
+            prob = problemListUnsorted.get( (int)Math.random() * problemListUnsorted.size() );
+            problemListUnsorted.remove( prob );
+            problemListSorted.get( prob.getType() ).remove( prob );
+            usedList.add( prob );
+            return prob;
         }
         return null;
     }
 
 
-    public void removeProblem( Problem temp )
+    public Problem giveRandProblem( int type )
     {
-        String type = temp.getType();
-        if ( type.equals( "Kinematics" ) )
-            problemListCategories.get( 0 ).remove( temp );
-        else if ( type.equals( "Newton's Laws" ) )
-            problemListCategories.get( 1 ).remove( temp );
-        else if ( type.equals( "Energy" ) )
-            problemListCategories.get( 2 ).remove( temp );
-        else if ( type.equals( "Rotation" ) )
-            problemListCategories.get( 3 ).remove( temp );
-        else if ( type.equals( "Gravitation" ) )
-            problemListCategories.get( 4 ).remove( temp );
-        else if ( type.equals( "Fluids" ) )
-            problemListCategories.get( 5 ).remove( temp );
+        if ( problemListUnsorted.size() > 0 )
+        {
+            prob = problemListSorted.get( type )
+                .get( (int)Math.random() * problemListSorted.get( type ).size() );
+            problemListUnsorted.remove( prob );
+            problemListSorted.get( type ).remove( prob );
+            usedList.add( prob );
+            return prob;
+        }
+        return null;
     }
 
 
-    public void addProblem( Problem temp )
+    public void removeProblem( Problem pr )
     {
-        String type = temp.getType();
-        if ( type.equals( "Kinematics" ) )
-            problemListCategories.get( 0 ).add( temp );
-        else if ( type.equals( "Newton's Laws" ) )
-            problemListCategories.get( 1 ).add( temp );
-        else if ( type.equals( "Energy" ) )
-            problemListCategories.get( 2 ).add( temp );
-        else if ( type.equals( "Rotation" ) )
-            problemListCategories.get( 3 ).add( temp );
-        else if ( type.equals( "Gravitation" ) )
-            problemListCategories.get( 4 ).add( temp );
-        else if ( type.equals( "Fluids" ) )
-            problemListCategories.get( 5 ).add( temp );
+        problemListUnsorted.remove( pr );
+        problemListSorted.get( pr.getType() ).remove( pr );
+    }
+
+
+    public void addProblem( Problem pr )
+    {
+        problemListSorted.get( pr.getType() ).add( pr );
+        problemListUnsorted.add( pr );
     }
 }
