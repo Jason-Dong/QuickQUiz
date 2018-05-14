@@ -6,17 +6,12 @@ public class Problem
 
     private String name;
 
-    private String type;
+    private int type;
 
     private char answer;
 
 
-    public Problem(
-        String probim,
-        String solim,
-        String nam,
-        String category,
-        char ans )
+    public Problem( String probim, String solim, String nam, int category, char ans )
     {
         problemImage = probim;
         solutionImage = solim;
@@ -44,7 +39,7 @@ public class Problem
     }
 
 
-    public String getType()
+    public int getType()
     {
         return type;
     }
@@ -74,7 +69,7 @@ public class Problem
     }
 
 
-    public void setType( String category )
+    public void setType( int category )
     {
         type = category;
     }
