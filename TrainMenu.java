@@ -3,8 +3,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.Timer;
 
-import java.util.*;
-
 
 public class TrainMenu
 {
@@ -12,7 +10,7 @@ public class TrainMenu
 
     private ProblemDatabase problem;
 
-    private ArrayList<Problem> question;
+    private Problem[] question;
 
     private char[] answers;
 
@@ -24,58 +22,64 @@ public class TrainMenu
 
     private int timerCount;
 
+    JLabel curAns;
+
     JLabel timerDisplay;
 
 
     public TrainMenu( ProblemDatabase problem )
     {
-        // this.problem = problem;
-        //
-        // question = new ArrayList<Problem>();
-        // answers = new char[25];
-        //
-        // index = 0;
-        //
-        // for (int i = 0; i < 25; i++)
-        // {
-        // question.add( problem.giveRandProblem() );
-        // }
+        this.problem = problem;
+
+        question = new Problem[25];
+        answers = new char[25];
+
+        index = 0;
+
+        for ( int i = 0; i < 25; i++ )
+        {
+            question[i] = problem.giveRandProblem();
+        }
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
         back.addActionListener( new BackButtonListener() );
 
         JButton choice1 = new JButton( "A" );
-        choice1.setBounds( 150, 450, 100, 50 );
+        choice1.setBounds( 150, 475, 100, 25 );
         choice1.addActionListener( new AButtonListener() );
 
         JButton choice2 = new JButton( "B" );
-        choice2.setBounds( 250, 450, 100, 50 );
+        choice2.setBounds( 250, 475, 100, 25 );
         choice2.addActionListener( new BButtonListener() );
 
         JButton choice3 = new JButton( "C" );
-        choice3.setBounds( 350, 450, 100, 50 );
+        choice3.setBounds( 350, 475, 100, 25 );
         choice3.addActionListener( new CButtonListener() );
 
         JButton choice4 = new JButton( "D" );
-        choice4.setBounds( 450, 450, 100, 50 );
+        choice4.setBounds( 450, 475, 100, 25 );
         choice4.addActionListener( new DButtonListener() );
 
         JButton choice5 = new JButton( "E" );
-        choice5.setBounds( 550, 450, 100, 50 );
+        choice5.setBounds( 550, 475, 100, 25 );
         choice5.addActionListener( new EButtonListener() );
 
         JButton finish = new JButton( "Finish Test" );
         finish.setBounds( 250, 500, 300, 50 );
         finish.addActionListener( new FinishButtonListener() );
-    
+
         JButton prevProb = new JButton( "Previous Problem" );
-        prevProb.setBounds( 250, 400, 150, 50 );
+        prevProb.setBounds( 250, 425, 150, 50 );
         prevProb.addActionListener( new PrevButtonListener() );
 
         JButton nextProb = new JButton( "Next Problem" );
-        nextProb.setBounds( 400, 400, 150, 50 );
+        nextProb.setBounds( 400, 425, 150, 50 );
         nextProb.addActionListener( new NextButtonListener() );
+
+        curAns = new JLabel( "Current Answer: " + answers[index] );
+        curAns.setBounds( 200, 400, 375, 25 );
+        curAns.setHorizontalAlignment( JLabel.CENTER );
 
         timerDisplay = new JLabel( "Time Left: 75:00" );
         timerDisplay.setFont( new Font( "font", Font.PLAIN, 18 ) );
@@ -97,9 +101,10 @@ public class TrainMenu
         c.add( finish );
         c.add( prevProb );
         c.add( nextProb );
+        c.add( curAns );
         c.add( timerDisplay );
 
-        ImageIcon icon = createImageIcon( "images/2016_1.png", "image" );
+        ImageIcon icon = createImageIcon( question[0].getProblemImage(), "image" );
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
@@ -126,21 +131,8 @@ public class TrainMenu
 
     private void update()
     {
-        Container c = frame.getContentPane();
 
-        // if (problemImage != null)
-        // {
-        // c.remove( problemImage );
-        // }
-
-        // ImageIcon icon = createImageIcon( question.get( index
-        // ).getProblemImage(), "image" );
-        // Image image = icon.getImage();
-        // Image newImage = image.getScaledInstance( 680, 300,
-        // Image.SCALE_DEFAULT );
-        // icon.setImage( newImage );
-
-        ImageIcon icon = createImageIcon( "images/2016_1.png", "image" );
+        ImageIcon icon = createImageIcon( question[index].getProblemImage(), "image1" );
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
@@ -151,6 +143,9 @@ public class TrainMenu
         problemImage.setIcon( icon );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
+
+        curAns.setText( "Current Answer: " + answers[index] );
+
     }
 
 
@@ -158,13 +153,13 @@ public class TrainMenu
     {
         int score = 0;
 
-        // for ( int i = 0; i < 25; i++ )
-        // {
-        // if ( question.get( i ).getAnswer() == answers[i] )
-        // {
-        // score++;
-        // }
-        // }
+        for ( int i = 0; i < 25; i++ )
+        {
+            if ( question[i].getAnswer() == answers[i] )
+            {
+                score++;
+            }
+        }
 
         timer.stop();
 
@@ -175,7 +170,7 @@ public class TrainMenu
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
         back.addActionListener( new BackButtonListener() );
-        
+
         JButton prevProb = new JButton( "Previous Problem" );
         prevProb.setBounds( 250, 500, 150, 50 );
         prevProb.addActionListener( new PrevButtonListener() );
@@ -230,25 +225,13 @@ public class TrainMenu
             }
         }
     }
-    
-    private class PrevButtonListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            if ( index != 0 )
-            {
-                index--;
-                update();
-            }
-        }
-    }
 
 
     private class BackButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
         {
-            // problem.reset();
+            problem.reset();
             MainMenu mainMenu = new MainMenu( problem );
             frame.dispose();
         }
@@ -260,7 +243,10 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'A';
-            index++;
+            if ( index < 24 )
+            {
+                index++;
+            }
             update();
         }
     }
@@ -271,7 +257,10 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'B';
-            index++;
+            if ( index < 24 )
+            {
+                index++;
+            }
             update();
         }
     }
@@ -282,7 +271,10 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'C';
-            index++;
+            if ( index < 24 )
+            {
+                index++;
+            }
             update();
         }
     }
@@ -293,7 +285,10 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'D';
-            index++;
+            if ( index < 24 )
+            {
+                index++;
+            }
             update();
         }
     }
@@ -304,8 +299,24 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'E';
-            index++;
+            if ( index < 24 )
+            {
+                index++;
+            }
             update();
+        }
+    }
+
+
+    private class PrevButtonListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            if ( index != 0 )
+            {
+                index--;
+                update();
+            }
         }
     }
 
@@ -327,7 +338,7 @@ public class TrainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            SolutionsMenu sol = new SolutionsMenu( problem, question.get( index ), 1 );
+            SolutionsMenu sol = new SolutionsMenu( question[index] );
         }
     }
 
@@ -364,14 +375,4 @@ public class TrainMenu
         }
     }
 
-
-    /**
-     * Runs the GUI method.
-     * 
-     * @param args
-     */
-    public static void main( String[] args )
-    {
-        TrainMenu hi = new TrainMenu( null );
-    }
 }
