@@ -184,12 +184,6 @@ images/2015_Solution_22.png
 2
 C
 
-images/2015_23.png
-images/2015_Solution_23.png
-2015Problem23
-2
-B
-
 images/2015_24.png
 images/2015_Solution_24.png
 2015Problem24
