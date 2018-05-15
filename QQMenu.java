@@ -17,8 +17,6 @@ public class QQMenu
 
     private Stack<Problem> forward;
 
-    private int index = 0;
-
     JLabel problemImage;
 
     private Timer timer;
@@ -34,15 +32,104 @@ public class QQMenu
 
     public QQMenu( ProblemDatabase problem )
     {
-        // this.problem = problem;
-        //
-        //
-        // index = 0;
-        //
-        // for (int i = 0; i < 25; i++)
-        // {
-        // forward.push( problem.giveRandProblem() );
-        // }
+        this.problem = problem;
+        back = new Stack<Problem>();
+        forward = new Stack<Problem>();
+
+        updateProblem();
+    }
+
+
+    private void updateSolutionsPage( Problem prob )
+    {
+        frame.dispose();
+        timer.stop();
+        timerCount = 0;
+
+        scoreDisplay.setText( "Score: " + totalScore );
+        scoreDisplay.setBounds( 300, 400, 200, 25 );
+        scoreDisplay.setHorizontalAlignment( JLabel.CENTER );
+
+        JButton back = new JButton( "Back" );
+        back.setBounds( 10, 10, 50, 50 );
+        back.addActionListener( new BackButtonListener() );
+
+        JButton prevProb = new JButton( "Previous Problem" );
+        prevProb.setBounds( 250, 475, 150, 25 );
+        prevProb.addActionListener( new PrevButtonListener() );
+
+        JButton nextProb = new JButton( "Next Problem" );
+        nextProb.setBounds( 400, 475, 150, 25 );
+        nextProb.addActionListener( new NextButtonListener() );
+
+        JButton viewSol = new JButton( "See Solution" );
+        viewSol.setBounds( 300, 425, 200, 50 );
+        viewSol.addActionListener( new ViewButtonListener() );
+
+        JButton continueButton = new JButton( "Continue to Next Problem" );
+        continueButton.setBounds( 300, 500, 200, 50 );
+        continueButton.addActionListener( new ContinueButtonListener() );
+
+        frame = new JFrame( "Quick Quiz Menu" );
+        frame.setDefaultCloseOperation( 0 );
+        Container c = frame.getContentPane();
+        frame.setLayout( null );
+        frame.setBounds( 0, 0, 800, 600 );
+
+        c.add( back );
+        c.add( viewSol );
+        c.add( prevProb );
+        c.add( nextProb );
+        c.add( continueButton );
+        c.add( problemImage );
+        c.add( scoreDisplay );
+
+        ImageIcon icon = createImageIcon( forward.peek().getProblemImage(), "image" );
+        Image image = icon.getImage();
+        Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
+        icon.setImage( newImage );
+
+        problemImage.setText( "Problem " + (this.back.size() + 1) );
+        problemImage.setIcon( icon );
+        problemImage.setVerticalTextPosition( JLabel.BOTTOM );
+        problemImage.setHorizontalTextPosition( JLabel.CENTER );
+
+        c.add( problemImage );
+
+        frame.setVisible( true );
+        frame.setResizable( false );
+    }
+
+
+    private void updateScore( boolean correct, int time )
+    {
+        if ( correct )
+        {
+            if ( time <= 180 )
+            {
+                totalScore += 100;
+            }
+            else
+            {
+                totalScore += 50;
+            }
+        }
+    }
+
+
+    private void updateProblem()
+    {
+        while ( !forward.isEmpty() )
+        {
+            back.push( forward.pop() );
+        }
+
+        if ( frame != null )
+        {
+            frame.dispose();
+        }
+
+        forward.push( problem.giveRandProblem() );
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
@@ -68,14 +155,6 @@ public class QQMenu
         choice5.setBounds( 550, 500, 100, 50 );
         choice5.addActionListener( new EButtonListener() );
 
-        JButton prevProb = new JButton( "Previous Problem" );
-        prevProb.setBounds( 250, 450, 150, 50 );
-        prevProb.addActionListener( new PrevButtonListener() );
-
-        JButton nextProb = new JButton( "Next Problem" );
-        nextProb.setBounds( 400, 450, 150, 50 );
-        nextProb.addActionListener( new NextButtonListener() );
-
         timerDisplay = new JLabel( "Time: 0:00" );
         timerDisplay.setFont( new Font( "font", Font.PLAIN, 18 ) );
         timerDisplay.setBounds( 650, 10, 150, 50 );
@@ -97,19 +176,15 @@ public class QQMenu
         c.add( choice3 );
         c.add( choice4 );
         c.add( choice5 );
-        c.add( prevProb );
-        c.add( nextProb );
         c.add( scoreDisplay );
         c.add( timerDisplay );
 
-        ImageIcon icon = createImageIcon( "images/2016_1.png", "image" );
+        ImageIcon icon = createImageIcon( forward.peek().getProblemImage(), "image" );
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
 
-        int number = index + 1;
-
-        problemImage = new JLabel( "Problem " + number, icon, JLabel.CENTER );
+        problemImage = new JLabel( "Problem " + ( this.back.size() + 1 ), icon, JLabel.CENTER );
         problemImage.setFont( new Font( "font", Font.PLAIN, 18 ) );
         problemImage.setBounds( 60, 60, 680, 340 );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
@@ -123,86 +198,6 @@ public class QQMenu
         TimerListener time = new TimerListener();
         timer = new Timer( 1000, time );
         timer.start();
-
-    }
-
-
-    private void updateSolutionsPage(Problem prob, boolean forward)
-    {
-        timer.stop();
-
-        scoreDisplay.setText( "Score: " + totalScore );
-        scoreDisplay.setBounds( 300, 400, 200, 50 );
-        scoreDisplay.setHorizontalAlignment( JLabel.CENTER );
-
-        JButton back = new JButton( "Back" );
-        back.setBounds( 10, 10, 50, 50 );
-        back.addActionListener( new BackButtonListener() );
-
-        JButton prevProb = new JButton( "Previous Problem" );
-        prevProb.setBounds( 250, 500, 150, 50 );
-        prevProb.addActionListener( new PrevButtonListener() );
-
-        JButton nextProb = new JButton( "Next Problem" );
-        nextProb.setBounds( 400, 500, 150, 50 );
-        nextProb.addActionListener( new NextButtonListener() );
-
-        JButton viewSol = new JButton( "See Solution" );
-        viewSol.setBounds( 300, 450, 200, 50 );
-        viewSol.addActionListener( new ViewButtonListener() );
-
-        frame = new JFrame( "Quick Quiz Menu" );
-        frame.setDefaultCloseOperation( 0 );
-        Container c = frame.getContentPane();
-        frame.setLayout( null );
-        frame.setBounds( 0, 0, 800, 600 );
-
-        c.add( back );
-        c.add( viewSol );
-        c.add( problemImage );
-        c.add( scoreDisplay );
-
-        frame.setVisible( true );
-    }
-
-
-    private void updateScore( boolean correct, int time )
-    {
-        if ( correct )
-        {
-            if ( time <= 180 )
-            {
-                totalScore += 100;
-            }
-            else
-            {
-                totalScore += 50;
-            }
-        }
-    }
-
-
-    private void updateProblem( Problem prob )
-    {
-        Container c = frame.getContentPane();
-
-        // ImageIcon icon = createImageIcon( prob.getProblemImage(), "image" );
-        // Image image = icon.getImage();
-        // Image newImage = image.getScaledInstance( 680, 300,
-        // Image.SCALE_DEFAULT );
-        // icon.setImage( newImage );
-
-        ImageIcon icon = createImageIcon( "images/2016_1.png", "image" );
-        Image image = icon.getImage();
-        Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
-        icon.setImage( newImage );
-
-        int number = index;
-
-        problemImage.setText( "Problem " + number );
-        problemImage.setIcon( icon );
-        problemImage.setVerticalTextPosition( JLabel.BOTTOM );
-        problemImage.setHorizontalTextPosition( JLabel.CENTER );
     }
 
 
@@ -228,7 +223,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            // problem.reset();
+            problem.reset();
             MainMenu mainMenu = new MainMenu( problem );
             frame.dispose();
         }
@@ -239,9 +234,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            index++;
             updateScore( forward.peek().getAnswer() == 'A', timerCount );
-            updateSolutionsPage();
+            updateSolutionsPage( forward.peek() );
         }
     }
 
@@ -250,9 +244,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            index++;
             updateScore( forward.peek().getAnswer() == 'B', timerCount );
-            updateSolutionsPage();
+            updateSolutionsPage( forward.peek() );
         }
     }
 
@@ -261,9 +254,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            index++;
             updateScore( forward.peek().getAnswer() == 'C', timerCount );
-            updateSolutionsPage();
+            updateSolutionsPage( forward.peek() );
         }
     }
 
@@ -272,9 +264,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            index++;
             updateScore( forward.peek().getAnswer() == 'D', timerCount );
-            updateSolutionsPage();
+            updateSolutionsPage( forward.peek() );
         }
     }
 
@@ -283,9 +274,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            index++;
             updateScore( forward.peek().getAnswer() == 'E', timerCount );
-            updateSolutionsPage();
+            updateSolutionsPage( forward.peek() );
         }
     }
 
@@ -297,7 +287,7 @@ public class QQMenu
             if ( !back.isEmpty() )
             {
                 forward.push( back.pop() );
-                updateProblem( forward.peek(), true);
+                updateSolutionsPage( forward.peek() );
             }
         }
     }
@@ -307,10 +297,10 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            if ( index != 24 )
+            if ( forward.size() > 1 )
             {
-                index++;
-                update();
+                back.push( forward.pop() );
+                updateSolutionsPage( forward.peek() );
             }
         }
     }
@@ -320,7 +310,16 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            SolutionsMenu sol = new SolutionsMenu( problem, question.get( index ), 1 );
+            SolutionsMenu sol = new SolutionsMenu( forward.peek() );
+        }
+    }
+
+
+    private class ContinueButtonListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            updateProblem();
         }
     }
 
@@ -356,163 +355,7 @@ public class QQMenu
      */
     public static void main( String[] args )
     {
-        QQMenu hi = new QQMenu( null );
+        ProblemDatabase probd = new ProblemDatabase();
+        QQMenu hi = new QQMenu( probd );
     }
 }
-
-// public class QQMenu
-// {
-// private JFrame frame;
-//
-// private ProblemDatabase problem;
-//
-// private Problem question;
-//
-// private int points;
-//
-//
-// public QQMenu( ProblemDatabase problem )
-// {
-// this.problem = problem;
-//
-// points = 0;
-//
-// question = problem.giveRandProblem();
-//
-// JButton back = new JButton( "Back" );
-// back.setBounds( 10, 10, 50, 50 );
-// back.addActionListener( new BackButtonListener() );
-//
-// JButton choice1 = new JButton( "A" );
-// choice1.setBounds( 150, 500, 100, 50 );
-// choice1.addActionListener( new AButtonListener() );
-//
-// JButton choice2 = new JButton( "B" );
-// choice2.setBounds(250, 500, 100, 50 );
-// choice2.addActionListener( new BButtonListener() );
-//
-// JButton choice3 = new JButton( "C" );
-// choice3.setBounds( 350, 500, 100, 50 );
-// choice3.addActionListener( new CButtonListener() );
-//
-// JButton choice4 = new JButton( "D" );
-// choice4.setBounds( 450, 500, 100, 50 );
-// choice4.addActionListener( new DButtonListener() );
-//
-// JButton choice5 = new JButton( "E" );
-// choice5.setBounds( 550, 500, 100, 50 );
-// choice5.addActionListener( new EButtonListener() );
-//
-//
-// frame = new JFrame( "Quick Quiz Menu" );
-// frame.setDefaultCloseOperation( 0 );
-// Container c = frame.getContentPane();
-// frame.setLayout( null );
-// frame.setBounds( 0, 0, 800, 600 );
-//
-// c.add( back );
-// c.add( choice1 );
-// c.add( choice2 );
-// c.add( choice3 );
-// c.add( choice4 );
-// c.add( choice5 );
-//
-// frame.setResizable( false );
-// frame.setVisible( true );
-// }
-//
-//
-// private class BackButtonListener implements ActionListener
-// {
-// public void actionPerformed( ActionEvent e )
-// {
-// MainMenu mainMenu = new MainMenu( problem );
-// frame.dispose();
-// }
-// }
-//
-// private class AButtonListener implements ActionListener
-// {
-// public void actionPerformed( ActionEvent e )
-// {
-// if (question.getAnswer() == 'A')
-// {
-//
-// }
-// else
-// {
-//
-// }
-//
-// SolutionsMenu solution = new SolutionsMenu(problem, question, 0);
-// }
-// }
-//
-// private class BButtonListener implements ActionListener
-// {
-// public void actionPerformed( ActionEvent e )
-// {
-// if (question.getAnswer() == 'B')
-// {
-//
-// }
-// else
-// {
-//
-// }
-//
-// SolutionsMenu solution = new SolutionsMenu(problem, question, 0);
-// }
-// }
-//
-// private class CButtonListener implements ActionListener
-// {
-// public void actionPerformed( ActionEvent e )
-// {
-// if (question.getAnswer() == 'C')
-// {
-//
-// }
-// else
-// {
-//
-// }
-//
-// SolutionsMenu solution = new SolutionsMenu(problem, question, 0);
-// }
-// }
-//
-// private class DButtonListener implements ActionListener
-// {
-// public void actionPerformed( ActionEvent e )
-// {
-// if (question.getAnswer() == 'D')
-// {
-//
-// }
-// else
-// {
-//
-// }
-//
-// SolutionsMenu solution = new SolutionsMenu(problem, question, 0);
-// }
-// }
-//
-// private class EButtonListener implements ActionListener
-// {
-// public void actionPerformed( ActionEvent e )
-// {
-// if (question.getAnswer() == 'E')
-// {
-//
-// }
-// else
-// {
-//
-// }
-//
-// SolutionsMenu solution = new SolutionsMenu(problem, question, 0);
-// }
-// }
-// }

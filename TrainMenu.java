@@ -201,6 +201,7 @@ public class TrainMenu
         c.add( numCorrect );
 
         frame.setVisible( true );
+        frame.setResizable( false );
     }
 
 
