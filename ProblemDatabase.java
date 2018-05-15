@@ -15,6 +15,18 @@ public class ProblemDatabase
 
     // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
 
+    public ProblemDatabase(boolean test)
+    {
+        problemListSorted = new ArrayList<ArrayList<Problem>>();
+        problemListUnsorted = new ArrayList<Problem>();
+        usedList = new ArrayList<Problem>();
+        
+        for ( int i = 0; i < 6; i++ )
+        {
+            problemListSorted.add( new ArrayList<Problem>() );
+        }
+    }
+    
     public ProblemDatabase()
     {
         problemListSorted = new ArrayList<ArrayList<Problem>>();
@@ -94,10 +106,26 @@ public class ProblemDatabase
     }
 
 
-    public void removeProblem( Problem pr )
+    public boolean removeProblem(String name, int type)
     {
-        problemListUnsorted.remove( pr );
-        problemListSorted.get( pr.getType() ).remove( pr );
+        Problem toremove = null;
+        for(Problem p : problemListUnsorted)
+        {
+            if(p.getName().equals(name) && p.getType() == type)
+            {
+                toremove = p;
+                break;
+            }
+        }
+        
+        if(toremove == null)
+        {
+            return false;
+        }
+        
+        problemListUnsorted.remove( toremove );
+        problemListSorted.get( toremove.getType() ).remove( toremove);
+        return true;
     }
 
 
