@@ -226,8 +226,8 @@ public class AddMenu
                 Problem toadd = new Problem( problempathfield
                     .getText(), solutionpathfield.getText(), namepathfield.getText(), type, ans );
                 problem.addProblem( toadd );
-                System.out.println( problempathfield
-                    .getText() + solutionpathfield.getText() + namepathfield.getText() + type + ans );
+                //System.out.println( problempathfield
+                //    .getText() + solutionpathfield.getText() + namepathfield.getText() + type + ans );
                 problempathfield.setText( "" );
                 solutionpathfield.setText( "" );
                 namepathfield.setText( "" );
