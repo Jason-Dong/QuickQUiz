@@ -105,13 +105,12 @@ public class ProblemDatabase
         return null;
     }
 
-
-    public boolean removeProblem(String name, int type)
+    public boolean removeProblem(String name)
     {
         Problem toremove = null;
         for(Problem p : problemListUnsorted)
         {
-            if(p.getName().equals(name) && p.getType() == type)
+            if(p.getName().equals(name))
             {
                 toremove = p;
                 break;
@@ -126,6 +125,52 @@ public class ProblemDatabase
         problemListUnsorted.remove( toremove );
         problemListSorted.get( toremove.getType() ).remove( toremove);
         return true;
+    }
+    
+    public boolean removeProblem(String name, int type)
+    {
+        if(type == -1)
+        {
+            Problem toremove = null;
+            for(Problem p : problemListUnsorted)
+            {
+                if(p.getName().equals(name))
+                {
+                    toremove = p;
+                    break;
+                }
+            }
+            
+            if(toremove == null)
+            {
+                return false;
+            }
+            
+            problemListUnsorted.remove( toremove );
+            problemListSorted.get( toremove.getType() ).remove( toremove);
+            return true;
+        }
+        else
+        {
+            Problem toremove = null;
+            for(Problem p : problemListUnsorted)
+            {
+                if(p.getName().equals(name) && p.getType() == type)
+                {
+                    toremove = p;
+                    break;
+                }
+            }
+            
+            if(toremove == null)
+            {
+                return false;
+            }
+            
+            problemListUnsorted.remove( toremove );
+            problemListSorted.get( type ).remove( toremove);
+            return true;
+        }
     }
 
 
