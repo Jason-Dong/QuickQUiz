@@ -100,7 +100,7 @@ public class StartMenu
                     return;
                 }
             		
-            		MainMenu main = new MainMenu(new ProblemDatabase(namepathfield.getText()));
+            		MainMenu main = new MainMenu(new ProblemDatabase(pathproblems));
             		frame.dispose();
             		
             }
