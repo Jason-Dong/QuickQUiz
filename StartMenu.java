@@ -47,7 +47,7 @@ public class StartMenu
         frame.setLayout( null );
         frame.setBounds( 0, 0, 800, 600 );
 
-        warntxt = new JLabel( "Please complete all required fields!" );
+        warntxt = new JLabel( "Please complete the required field!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
         warntxt.setHorizontalAlignment( warntxt.LEFT );
@@ -62,6 +62,7 @@ public class StartMenu
         notfoundtxt.setVerticalAlignment( notfoundtxt.TOP );
         notfoundtxt.setVisible( false );
 
+        namepathfield.setText("/Users/JohnDoe/Desktop/QuickQuiz/");
         c.add( text );
         c.add( pathname );
         c.add( warntxt );
