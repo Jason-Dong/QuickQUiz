@@ -29,7 +29,7 @@ public class ProblemDatabase
         }
         try
         {
-            readIn = new Scanner( new File( "/Users/kbhattaram702/Desktop/QuickQuiz/src/ProblemFile/problems.txt" ) );
+            readIn = new Scanner( new File( pathfield ) );
         }
         catch ( FileNotFoundException exc )
         {
