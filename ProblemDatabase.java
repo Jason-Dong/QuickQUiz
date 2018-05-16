@@ -15,7 +15,7 @@ public class ProblemDatabase
 
     // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
     
-    public ProblemDatabase()
+    public ProblemDatabase(String pathfield)
     {
         problemListSorted = new ArrayList<ArrayList<Problem>>();
         problemListUnsorted = new ArrayList<Problem>();
