@@ -14,32 +14,27 @@ public class MainMenu
         this.problem = problem;
         
         JButton QQMenu = new JButton( "Quick Quiz" );
-        QQMenu.setBounds( 200, 125, 400, 75 );
+        QQMenu.setBounds( 200, 150, 400, 100 );
         QQMenu.addActionListener( new QQButtonListener() );
 
         JButton trainMenu = new JButton( "Training" );
-        trainMenu.setBounds( 200, 200, 400, 75 );
+        trainMenu.setBounds( 200, 250, 400, 100 );
         trainMenu.addActionListener( new TrainButtonListener() );
 
         JButton addMenu = new JButton( "Add Problems" );
-        addMenu.setBounds( 200, 275, 400, 75 );
+        addMenu.setBounds( 200, 350, 400, 100 );
         addMenu.addActionListener( new AddButtonListener() );
 
         JButton removeMenu = new JButton( "Remove Problems" );
-        removeMenu.setBounds( 200, 350, 400, 75 );
+        removeMenu.setBounds( 200, 450, 400, 100 );
         removeMenu.addActionListener( new RemoveButtonListener() );
-        
-        JButton statsMenu = new JButton( "Statistics" );
-        statsMenu.setBounds( 200, 425, 400, 75 );
-        statsMenu.addActionListener( new StatButtonListener() );
 
         JLabel text = new JLabel( "Quick Quiz Generator" );
         text.setFont( new Font( "font", Font.PLAIN, 48 ) );
         text.setHorizontalAlignment( JLabel.CENTER );
-        text.setBounds( 100, 30, 600, 75 );
-        
+        text.setBounds( 100, 30, 600, 100 );
 
-        frame = new JFrame( "Main Menu" );
+        frame = new JFrame( "MainMenu" );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         Container c = frame.getContentPane();
         frame.setLayout( null );
@@ -49,7 +44,6 @@ public class MainMenu
         c.add( trainMenu );
         c.add( addMenu );
         c.add( removeMenu );
-        c.add(statsMenu);
         c.add( text );
 
         frame.setResizable( false );
@@ -93,15 +87,6 @@ public class MainMenu
         public void actionPerformed( ActionEvent e )
         {
             RemoveMenu removeMenu = new RemoveMenu( problem );
-            frame.dispose();
-        }
-    }
-    
-    private class StatButtonListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            StatsMenu statsMenu = new StatsMenu();
             frame.dispose();
         }
     }
