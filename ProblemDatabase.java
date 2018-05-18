@@ -14,8 +14,8 @@ public class ProblemDatabase
 
 
     // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
-    
-    public ProblemDatabase(String pathfield)
+
+    public ProblemDatabase()
     {
         problemListSorted = new ArrayList<ArrayList<Problem>>();
         problemListUnsorted = new ArrayList<Problem>();
@@ -29,7 +29,8 @@ public class ProblemDatabase
         }
         try
         {
-            readIn = new Scanner( new File( pathfield ) );
+            readIn = new Scanner( new File(
+                "/Users/austin/Dropbox/workspaceAPCS/QuickQuiz/ProblemFile/problems.txt" ) );
         }
         catch ( FileNotFoundException exc )
         {
@@ -55,12 +56,13 @@ public class ProblemDatabase
 
     public void reset()
     {
-        for ( Problem pr : usedList )
+
+        while ( !usedList.isEmpty() )
         {
+            Problem pr = usedList.get( 0 );
             usedList.remove( pr );
             problemListUnsorted.add( pr );
             problemListSorted.get( pr.getType() ).add( pr );
-
         }
     }
 
@@ -69,7 +71,7 @@ public class ProblemDatabase
     {
         if ( problemListUnsorted.size() > 0 )
         {
-            prob = problemListUnsorted.get( (int)Math.random() * problemListUnsorted.size() );
+            prob = problemListUnsorted.get( (int)( Math.random() * problemListUnsorted.size() ) );
             problemListUnsorted.remove( prob );
             problemListSorted.get( prob.getType() ).remove( prob );
             usedList.add( prob );
@@ -84,7 +86,7 @@ public class ProblemDatabase
         if ( problemListUnsorted.size() > 0 )
         {
             prob = problemListSorted.get( type )
-                .get( (int)Math.random() * problemListSorted.get( type ).size() );
+                .get( (int)( Math.random() * problemListSorted.get( type ).size() ) );
             problemListUnsorted.remove( prob );
             problemListSorted.get( type ).remove( prob );
             usedList.add( prob );
@@ -92,66 +94,81 @@ public class ProblemDatabase
         }
         return null;
     }
-    
-    public boolean removeProblem(String name, int type)
+
+
+    public boolean removeProblem( String name )
     {
-        if(type == -1)
+        Problem toremove = null;
+        for ( Problem p : problemListUnsorted )
+        {
+            if ( p.getName().equals( name ) )
+            {
+                toremove = p;
+                break;
+            }
+        }
+
+        if ( toremove == null )
+        {
+            return false;
+        }
+
+        problemListUnsorted.remove( toremove );
+        problemListSorted.get( toremove.getType() ).remove( toremove );
+        return true;
+    }
+
+
+    public boolean removeProblem( String name, int type )
+    {
+        if ( type == -1 )
         {
             Problem toremove = null;
-            for(Problem p : problemListUnsorted)
+            for ( Problem p : problemListUnsorted )
             {
-                if(p.getName().equals(name))
+                if ( p.getName().equals( name ) )
                 {
                     toremove = p;
                     break;
                 }
             }
-            
-            if(toremove == null)
+
+            if ( toremove == null )
             {
                 return false;
             }
-            
+
             problemListUnsorted.remove( toremove );
-            problemListSorted.get( toremove.getType() ).remove( toremove);
+            problemListSorted.get( toremove.getType() ).remove( toremove );
             return true;
         }
         else
         {
             Problem toremove = null;
-            for(Problem p : problemListUnsorted)
+            for ( Problem p : problemListUnsorted )
             {
-                if(p.getName().equals(name) && p.getType() == type)
+                if ( p.getName().equals( name ) && p.getType() == type )
                 {
                     toremove = p;
                     break;
                 }
             }
-            
-            if(toremove == null)
+
+            if ( toremove == null )
             {
                 return false;
             }
-            
+
             problemListUnsorted.remove( toremove );
-            problemListSorted.get( type ).remove( toremove);
+            problemListSorted.get( type ).remove( toremove );
             return true;
         }
     }
 
 
-    public boolean addProblem( Problem pr )
+    public void addProblem( Problem pr )
     {
-        for(Problem p : problemListUnsorted)
-        {
-            if(p.getName().equals(pr.getName()))
-            {
-                return false;
-            }
-        }
-        
         problemListSorted.get( pr.getType() ).add( pr );
         problemListUnsorted.add( pr );
-        return true;
     }
 }
