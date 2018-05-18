@@ -4,22 +4,26 @@ import java.util.*;
 
 public class Statistics
 {
-    int totalProblems;
+    int[] totalProblems;
 
-    int correctProblems;
+    int[] correctProblems;
 
     int time;
 
-    ArrayList<ArrayList<Float>> quickQuizPercents;
+    ArrayList<ArrayList<Double>> quickQuizPercents;
 
-    public Statistics(int ClassCalledFrom, int TypeOfProblem, int NumCorrect, int TotalNumOfProbs)
+    public Statistics()
     {
-        quickQuizPercents = new ArrayList<ArrayList<Float>>();
+        quickQuizPercents = new ArrayList<ArrayList<Double>>();
         
-        if (ClassCalledFrom == 0)
+        for(int i = 0; i < 6; i++)
         {
-            quickQuizPercents.add(Float.valueOf( (float)NumCorrect / TotalNumOfProbs ));
+        		quickQuizPercents.add(new ArrayList<Double>());
         }
+        
+        totalProblems = new int[6];
+        correctProblems = new int[6];
+        time = 0;
     }
     
     public void addTime( int newTime )
@@ -36,20 +40,37 @@ public class Statistics
 
     public double getPercent()
     {
-        return (double)correctProblems / (double)totalProblems;
+    		int total = 0;
+    		int correct = 0;
+        for(int i = 0; i < 6; i++)
+        {
+        		correct += correctProblems[i];
+        		total += totalProblems[i];
+        }
+        return correct/total;
+    }
+    
+    public double getPercent(int type)
+    {
+        return correctProblems[type] / totalProblems[type];
     }
 
 
-    public void addScore( int numCorrect, int TotalNum )
+    public void addScore( int numCorrect, int TotalNum, int type )
     {
-        correctProblems += numCorrect;
-        totalProblems += TotalNum;
+        correctProblems[type] += numCorrect;
+        totalProblems[type] += TotalNum;
     }
 
 
     public double avgTimePerProblem()
     {
-        return (double)time / (double)totalProblems;
+    		int total = 0;
+		for(int i = 0; i < 6; i++)
+		{
+			total += totalProblems[i];
+		}
+        return (double)time / total;
     }
     
     
