@@ -70,7 +70,7 @@ public class ProblemDatabase
     {
         if ( problemListUnsorted.size() > 0 )
         {
-            prob = problemListUnsorted.get( (int)(Math.random() * problemListUnsorted.size()) );
+            prob = problemListUnsorted.get( (int)( Math.random() * problemListUnsorted.size() ) );
             problemListUnsorted.remove( prob );
             problemListSorted.get( prob.getType() ).remove( prob );
             usedList.add( prob );
@@ -85,7 +85,7 @@ public class ProblemDatabase
         if ( problemListUnsorted.size() > 0 )
         {
             prob = problemListSorted.get( type )
-                .get( (int)Math.random() * problemListSorted.get( type ).size() );
+                .get( (int)( Math.random() * problemListSorted.get( type ).size() ) );
             problemListUnsorted.remove( prob );
             problemListSorted.get( type ).remove( prob );
             usedList.add( prob );

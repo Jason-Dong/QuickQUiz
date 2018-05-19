@@ -13,19 +13,19 @@ public class QQMenu
 
     private ProblemDatabase problem;
 
-    private Stack<Problem> back;
+    private Stack<Problem> backStack;
 
-    private Stack<Problem> forward;
+    private Stack<Problem> forwardStack;
 
     JLabel problemImage;
-
-    private Timer timer;
-
-    private int timerCount;
 
     JLabel timerDisplay;
 
     JLabel scoreDisplay;
+
+    private Timer timer;
+
+    private int timerCount;
 
     private int totalScore;
 
@@ -33,10 +33,105 @@ public class QQMenu
     public QQMenu( ProblemDatabase problem )
     {
         this.problem = problem;
-        back = new Stack<Problem>();
-        forward = new Stack<Problem>();
+        backStack = new Stack<Problem>();
+        forwardStack = new Stack<Problem>();
 
         updateProblem();
+    }
+
+
+    private void updateProblem()
+    {
+        while ( !forwardStack.isEmpty() )
+        {
+            backStack.push( forwardStack.pop() );
+        }
+
+        if ( frame != null )
+        {
+            frame.dispose();
+        }
+
+        Problem prb = problem.giveRandProblem();
+
+        if ( prb == null )
+        {
+            updateFinish();
+        }
+        else
+        {
+            forwardStack.push( prb );
+
+            JButton back = new JButton( "Back" );
+            back.setBounds( 10, 10, 50, 50 );
+            back.addActionListener( new BackButtonListener() );
+
+            JButton choice1 = new JButton( "A" );
+            choice1.setBounds( 150, 500, 100, 50 );
+            choice1.addActionListener( new AButtonListener() );
+
+            JButton choice2 = new JButton( "B" );
+            choice2.setBounds( 250, 500, 100, 50 );
+            choice2.addActionListener( new BButtonListener() );
+
+            JButton choice3 = new JButton( "C" );
+            choice3.setBounds( 350, 500, 100, 50 );
+            choice3.addActionListener( new CButtonListener() );
+
+            JButton choice4 = new JButton( "D" );
+            choice4.setBounds( 450, 500, 100, 50 );
+            choice4.addActionListener( new DButtonListener() );
+
+            JButton choice5 = new JButton( "E" );
+            choice5.setBounds( 550, 500, 100, 50 );
+            choice5.addActionListener( new EButtonListener() );
+
+            timerDisplay = new JLabel( "Time: 0:00" );
+            timerDisplay.setFont( new Font( "font", Font.PLAIN, 18 ) );
+            timerDisplay.setBounds( 650, 10, 150, 50 );
+            timerDisplay.setHorizontalAlignment( JLabel.CENTER );
+
+            scoreDisplay = new JLabel( "Score: 0" );
+            scoreDisplay.setBounds( 300, 400, 200, 50 );
+            scoreDisplay.setHorizontalAlignment( JLabel.CENTER );
+
+            frame = new JFrame( "Quick Quiz Menu" );
+            frame.setDefaultCloseOperation( 0 );
+            Container c = frame.getContentPane();
+            frame.setLayout( null );
+            frame.setBounds( 0, 0, 800, 600 );
+
+            c.add( back );
+            c.add( choice1 );
+            c.add( choice2 );
+            c.add( choice3 );
+            c.add( choice4 );
+            c.add( choice5 );
+            c.add( scoreDisplay );
+            c.add( timerDisplay );
+
+            ImageIcon icon = createImageIcon( forwardStack.peek().getProblemImage(), "image" );
+            Image image = icon.getImage();
+            Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
+            icon.setImage( newImage );
+
+            problemImage = new JLabel( "Problem " + ( this.backStack.size() + 1 ),
+                icon,
+                JLabel.CENTER );
+            problemImage.setFont( new Font( "font", Font.PLAIN, 18 ) );
+            problemImage.setBounds( 60, 60, 680, 340 );
+            problemImage.setVerticalTextPosition( JLabel.BOTTOM );
+            problemImage.setHorizontalTextPosition( JLabel.CENTER );
+
+            c.add( problemImage );
+
+            frame.setResizable( false );
+            frame.setVisible( true );
+
+            TimerListener time = new TimerListener();
+            timer = new Timer( 1000, time );
+            timer.start();
+        }
     }
 
 
@@ -84,12 +179,12 @@ public class QQMenu
         c.add( problemImage );
         c.add( scoreDisplay );
 
-        ImageIcon icon = createImageIcon( forward.peek().getProblemImage(), "image" );
+        ImageIcon icon = createImageIcon( forwardStack.peek().getProblemImage(), "image" );
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
 
-        problemImage.setText( "Problem " + (this.back.size() + 1) );
+        problemImage.setText( "Problem " + ( backStack.size() + 1 ) );
         problemImage.setIcon( icon );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
@@ -117,52 +212,9 @@ public class QQMenu
     }
 
 
-    private void updateProblem()
+    private void updateFinish()
     {
-        while ( !forward.isEmpty() )
-        {
-            back.push( forward.pop() );
-        }
-
-        if ( frame != null )
-        {
-            frame.dispose();
-        }
-
-        forward.push( problem.giveRandProblem() );
-
-        JButton back = new JButton( "Back" );
-        back.setBounds( 10, 10, 50, 50 );
-        back.addActionListener( new BackButtonListener() );
-
-        JButton choice1 = new JButton( "A" );
-        choice1.setBounds( 150, 500, 100, 50 );
-        choice1.addActionListener( new AButtonListener() );
-
-        JButton choice2 = new JButton( "B" );
-        choice2.setBounds( 250, 500, 100, 50 );
-        choice2.addActionListener( new BButtonListener() );
-
-        JButton choice3 = new JButton( "C" );
-        choice3.setBounds( 350, 500, 100, 50 );
-        choice3.addActionListener( new CButtonListener() );
-
-        JButton choice4 = new JButton( "D" );
-        choice4.setBounds( 450, 500, 100, 50 );
-        choice4.addActionListener( new DButtonListener() );
-
-        JButton choice5 = new JButton( "E" );
-        choice5.setBounds( 550, 500, 100, 50 );
-        choice5.addActionListener( new EButtonListener() );
-
-        timerDisplay = new JLabel( "Time: 0:00" );
-        timerDisplay.setFont( new Font( "font", Font.PLAIN, 18 ) );
-        timerDisplay.setBounds( 650, 10, 150, 50 );
-        timerDisplay.setHorizontalAlignment( JLabel.CENTER );
-
-        scoreDisplay = new JLabel( "Score: 0" );
-        scoreDisplay.setBounds( 300, 400, 200, 50 );
-        scoreDisplay.setHorizontalAlignment( JLabel.CENTER );
+        frame.dispose();
 
         frame = new JFrame( "Quick Quiz Menu" );
         frame.setDefaultCloseOperation( 0 );
@@ -170,34 +222,20 @@ public class QQMenu
         frame.setLayout( null );
         frame.setBounds( 0, 0, 800, 600 );
 
+        JButton back = new JButton( "Back" );
+        back.setBounds( 10, 10, 50, 50 );
+        back.addActionListener( new BackButtonListener() );
+
+        JLabel finish = new JLabel("That's all of the problems!");
+        finish.setFont( new Font("font", Font.PLAIN, 36) );
+        finish.setBounds( 60, 60, 680, 340 );
+        finish.setHorizontalAlignment( JLabel.CENTER );
+
         c.add( back );
-        c.add( choice1 );
-        c.add( choice2 );
-        c.add( choice3 );
-        c.add( choice4 );
-        c.add( choice5 );
-        c.add( scoreDisplay );
-        c.add( timerDisplay );
-
-        ImageIcon icon = createImageIcon( forward.peek().getProblemImage(), "image" );
-        Image image = icon.getImage();
-        Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
-        icon.setImage( newImage );
-
-        problemImage = new JLabel( "Problem " + ( this.back.size() + 1 ), icon, JLabel.CENTER );
-        problemImage.setFont( new Font( "font", Font.PLAIN, 18 ) );
-        problemImage.setBounds( 60, 60, 680, 340 );
-        problemImage.setVerticalTextPosition( JLabel.BOTTOM );
-        problemImage.setHorizontalTextPosition( JLabel.CENTER );
-
-        c.add( problemImage );
-
-        frame.setResizable( false );
+        c.add( finish );
+        
         frame.setVisible( true );
-
-        TimerListener time = new TimerListener();
-        timer = new Timer( 1000, time );
-        timer.start();
+        frame.setResizable( false );
     }
 
 
@@ -234,8 +272,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            updateScore( forward.peek().getAnswer() == 'A', timerCount );
-            updateSolutionsPage( forward.peek() );
+            updateScore( forwardStack.peek().getAnswer() == 'A', timerCount );
+            updateSolutionsPage( forwardStack.peek() );
         }
     }
 
@@ -244,8 +282,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            updateScore( forward.peek().getAnswer() == 'B', timerCount );
-            updateSolutionsPage( forward.peek() );
+            updateScore( forwardStack.peek().getAnswer() == 'B', timerCount );
+            updateSolutionsPage( forwardStack.peek() );
         }
     }
 
@@ -254,8 +292,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            updateScore( forward.peek().getAnswer() == 'C', timerCount );
-            updateSolutionsPage( forward.peek() );
+            updateScore( forwardStack.peek().getAnswer() == 'C', timerCount );
+            updateSolutionsPage( forwardStack.peek() );
         }
     }
 
@@ -264,8 +302,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            updateScore( forward.peek().getAnswer() == 'D', timerCount );
-            updateSolutionsPage( forward.peek() );
+            updateScore( forwardStack.peek().getAnswer() == 'D', timerCount );
+            updateSolutionsPage( forwardStack.peek() );
         }
     }
 
@@ -274,8 +312,8 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            updateScore( forward.peek().getAnswer() == 'E', timerCount );
-            updateSolutionsPage( forward.peek() );
+            updateScore( forwardStack.peek().getAnswer() == 'E', timerCount );
+            updateSolutionsPage( forwardStack.peek() );
         }
     }
 
@@ -284,10 +322,10 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            if ( !back.isEmpty() )
+            if ( !backStack.isEmpty() )
             {
-                forward.push( back.pop() );
-                updateSolutionsPage( forward.peek() );
+                forwardStack.push( backStack.pop() );
+                updateSolutionsPage( forwardStack.peek() );
             }
         }
     }
@@ -297,10 +335,10 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            if ( forward.size() > 1 )
+            if ( forwardStack.size() > 1 )
             {
-                back.push( forward.pop() );
-                updateSolutionsPage( forward.peek() );
+                backStack.push( forwardStack.pop() );
+                updateSolutionsPage( forwardStack.peek() );
             }
         }
     }
@@ -310,7 +348,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            SolutionsMenu sol = new SolutionsMenu( forward.peek() );
+            SolutionsMenu sol = new SolutionsMenu( forwardStack.peek() );
         }
     }
 
@@ -347,15 +385,4 @@ public class QQMenu
         }
     }
 
-
-    /**
-     * Runs the GUI method.
-     * 
-     * @param args
-     */
-    public static void main( String[] args )
-    {
-        ProblemDatabase probd = new ProblemDatabase();
-        QQMenu hi = new QQMenu( probd );
-    }
 }

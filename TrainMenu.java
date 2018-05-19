@@ -162,6 +162,7 @@ public class TrainMenu
         }
 
         timer.stop();
+        frame.dispose();
 
         JLabel numCorrect = new JLabel( "Score: " + score + "/25" );
         numCorrect.setBounds( 350, 400, 100, 50 );
