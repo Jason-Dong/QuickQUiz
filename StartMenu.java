@@ -17,14 +17,15 @@ public class StartMenu
     private Container c;
 
     private JLabel warntxt;
-    
+
     private JLabel notfoundtxt;
 
 
-    public StartMenu(  )
+    public StartMenu()
     {
-        
-        JLabel nametxt = new JLabel( "Enter the location of the program file to begin (ex. /Users/JohnDoe/Desktop/QuickQuiz/)" );
+
+        JLabel nametxt = new JLabel(
+            "Enter the location of the program file to begin (ex. /Users/JohnDoe/Desktop/QuickQuiz/)" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         nametxt.setBounds( 200, 180, 500, 20 );
         nametxt.setHorizontalAlignment( nametxt.LEFT );
@@ -36,13 +37,13 @@ public class StartMenu
         pathname.setBounds( 100, 200, 50, 20 );
         pathname.addActionListener( new PathnameListener() );
 
-        JLabel text = new JLabel( "Welcome!" );
+        JLabel text = new JLabel( "Welcome to Quick Quiz!" );
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
         text.setHorizontalAlignment( text.CENTER );
         text.setBounds( 100, 30, 600, 100 );
 
         frame = new JFrame( "Fîzîk" );
-        frame.setDefaultCloseOperation( 0 );
+        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         c = frame.getContentPane();
         frame.setLayout( null );
         frame.setBounds( 0, 0, 800, 600 );
@@ -54,19 +55,18 @@ public class StartMenu
         warntxt.setVerticalAlignment( warntxt.TOP );
         warntxt.setVisible( false );
 
-        notfoundtxt = new JLabel(
-            "File not found! Please check the fields" );
+        notfoundtxt = new JLabel( "File not found! Please check the fields" );
         notfoundtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         notfoundtxt.setBounds( 200, 500, 500, 20 );
         notfoundtxt.setHorizontalAlignment( notfoundtxt.LEFT );
         notfoundtxt.setVerticalAlignment( notfoundtxt.TOP );
         notfoundtxt.setVisible( false );
 
-        namepathfield.setText("/Users/JohnDoe/Desktop/QuickQuiz/");
+        namepathfield.setText( "/Users/JohnDoe/Desktop/QuickQuiz/" );
         c.add( text );
         c.add( pathname );
         c.add( warntxt );
-        c.add( notfoundtxt);
+        c.add( notfoundtxt );
 
         c.add( namepathfield );
         c.add( nametxt );
@@ -76,12 +76,11 @@ public class StartMenu
     }
 
 
-
     private class PathnameListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
         {
-            if (namepathfield.getText().trim().isEmpty())
+            if ( namepathfield.getText().trim().isEmpty() )
             {
                 warntxt.setVisible( true );
                 notfoundtxt.setVisible( false );
@@ -89,10 +88,11 @@ public class StartMenu
             }
             else
             {
-            		String pathproblems = namepathfield.getText() + "src/ProblemFile/problems.txt";
-            		try
+                String pathproblems = namepathfield.getText() + "ProblemFile/problems.txt";
+                System.out.println( pathproblems );
+                try
                 {
-            			Scanner readIn = new Scanner( new File( pathproblems ) );
+                    Scanner readIn = new Scanner( new File( pathproblems ) );
                 }
                 catch ( FileNotFoundException exc )
                 {
@@ -100,10 +100,10 @@ public class StartMenu
                     notfoundtxt.setVisible( true );
                     return;
                 }
-            		
-            		MainMenu main = new MainMenu(new ProblemDatabase(pathproblems));
-            		frame.dispose();
-            		
+
+                MainMenu main = new MainMenu( new ProblemDatabase( pathproblems ) );
+                frame.dispose();
+
             }
         }
     }
