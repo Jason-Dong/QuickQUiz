@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.io.*;
-import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -50,7 +48,6 @@ public class AddMenu
 
     private JLabel newtxt;
 
-    private JLabel existtxt;
 
     public AddMenu( ProblemDatabase problem )
     {
@@ -170,20 +167,12 @@ public class AddMenu
         newtxt.setHorizontalAlignment( warntxt.LEFT );
         newtxt.setVerticalAlignment( warntxt.TOP );
         newtxt.setVisible( false );
-        
-        existtxt = new JLabel( "Another problem already has this name!" );
-        existtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
-        existtxt.setBounds( 200, 500, 500, 20 );
-        existtxt.setHorizontalAlignment( existtxt.LEFT );
-        existtxt.setVerticalAlignment( existtxt.TOP );
-        existtxt.setVisible( false );
 
         c.add( back );
         c.add( text );
         c.add( pathname );
         c.add( warntxt );
         c.add( newtxt );
-        c.add(existtxt);
 
         c.add( problempathfield );
         c.add( problemtxt );
@@ -231,17 +220,15 @@ public class AddMenu
             {
                 newtxt.setVisible( false );
                 warntxt.setVisible( true );
-                existtxt.setVisible(false);
-            }
-            else if (!problem.addProblem(new Problem( problempathfield
-                    .getText(), solutionpathfield.getText(), namepathfield.getText(), type, ans)))
-            {
-            	    newtxt.setVisible( false );
-                warntxt.setVisible( false );
-                existtxt.setVisible(true);
             }
             else
             {
+                Problem toadd = new Problem( problempathfield
+                    .getText(), solutionpathfield.getText(), namepathfield.getText(), type, ans );
+                problem.addProblem( toadd );
+                // System.out.println( problempathfield
+                // .getText() + solutionpathfield.getText() +
+                // namepathfield.getText() + type + ans );
                 problempathfield.setText( "" );
                 solutionpathfield.setText( "" );
                 namepathfield.setText( "" );
@@ -259,7 +246,6 @@ public class AddMenu
                 ans = 'h';
                 type = -1;
                 warntxt.setVisible( false );
-                existtxt.setVisible(false);
                 newtxt.setVisible( true );
             }
         }
@@ -306,7 +292,7 @@ public class AddMenu
             rotation.setEnabled( true );
             gravitation.setEnabled( true );
             fluids.setEnabled( true );
-            type = 3;
+            type = 2;
         }
     }
 
@@ -321,7 +307,7 @@ public class AddMenu
             rotation.setEnabled( false );
             gravitation.setEnabled( true );
             fluids.setEnabled( true );
-            type = 4;
+            type = 3;
         }
     }
 
