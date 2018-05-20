@@ -3,10 +3,9 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-public class SolutionsMenu extends JPanel
+public class SolutionsMenu
 {
     private static JFrame thisWindow;
-
 
 
     /**
@@ -65,7 +64,7 @@ public class SolutionsMenu extends JPanel
     {
         public void actionPerformed( ActionEvent e )
         {
-            
+
             thisWindow.dispose();
         }
     }
