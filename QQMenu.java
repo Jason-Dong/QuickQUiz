@@ -29,12 +29,15 @@ public class QQMenu
 
     private int totalScore;
 
+    private int problemType;
 
-    public QQMenu( ProblemDatabase problem )
+
+    public QQMenu( ProblemDatabase problem, int type )
     {
         this.problem = problem;
         backStack = new Stack<Problem>();
         forwardStack = new Stack<Problem>();
+        problemType = type;
 
         updateProblem();
     }
@@ -52,7 +55,16 @@ public class QQMenu
             frame.dispose();
         }
 
-        Problem prb = problem.giveRandProblem();
+        Problem prb;
+
+        if ( problemType == -1 )
+        {
+            prb = problem.giveRandProblem();
+        }
+        else
+        {
+            prb = problem.giveRandProblem( problemType );
+        }
 
         if ( prb == null )
         {
@@ -226,14 +238,14 @@ public class QQMenu
         back.setBounds( 10, 10, 50, 50 );
         back.addActionListener( new BackButtonListener() );
 
-        JLabel finish = new JLabel("That's all of the problems!");
-        finish.setFont( new Font("font", Font.PLAIN, 36) );
+        JLabel finish = new JLabel( "That's all of the problems!" );
+        finish.setFont( new Font( "font", Font.PLAIN, 36 ) );
         finish.setBounds( 60, 60, 680, 340 );
         finish.setHorizontalAlignment( JLabel.CENTER );
 
         c.add( back );
         c.add( finish );
-        
+
         frame.setVisible( true );
         frame.setResizable( false );
     }

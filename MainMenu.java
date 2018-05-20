@@ -7,12 +7,14 @@ import javax.swing.border.*;
 public class MainMenu
 {
     private JFrame frame;
+
     private ProblemDatabase problem;
+
 
     public MainMenu( ProblemDatabase problem )
     {
         this.problem = problem;
-        
+
         JButton QQMenu = new JButton( "Quick Quiz" );
         QQMenu.setBounds( 200, 125, 400, 75 );
         QQMenu.addActionListener( new QQButtonListener() );
@@ -28,7 +30,7 @@ public class MainMenu
         JButton removeMenu = new JButton( "Remove Problems" );
         removeMenu.setBounds( 200, 350, 400, 75 );
         removeMenu.addActionListener( new RemoveButtonListener() );
-        
+
         JButton statsMenu = new JButton( "Statistics" );
         statsMenu.setBounds( 200, 425, 400, 75 );
         statsMenu.addActionListener( new StatButtonListener() );
@@ -37,7 +39,6 @@ public class MainMenu
         text.setFont( new Font( "font", Font.PLAIN, 48 ) );
         text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 75 );
-        
 
         frame = new JFrame( "Main Menu" );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -49,7 +50,7 @@ public class MainMenu
         c.add( trainMenu );
         c.add( addMenu );
         c.add( removeMenu );
-        c.add(statsMenu);
+        c.add( statsMenu );
         c.add( text );
 
         frame.setResizable( false );
@@ -62,7 +63,7 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem );
+            TypeMenu typeMenu = new TypeMenu( problem );
             frame.dispose();
         }
     }
@@ -96,7 +97,8 @@ public class MainMenu
             frame.dispose();
         }
     }
-    
+
+
     private class StatButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
