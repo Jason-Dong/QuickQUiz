@@ -176,7 +176,7 @@ public class QQMenu
         viewSol.setBounds( 300, 425, 200, 50 );
         viewSol.addActionListener( new ViewButtonListener() );
 
-        JButton continueButton = new JButton( "Continue to Next Problem" );
+        JButton continueButton = new JButton( "Continue to New Problem" );
         continueButton.setBounds( 300, 500, 200, 50 );
         continueButton.addActionListener( new ContinueButtonListener() );
 
