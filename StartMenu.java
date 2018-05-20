@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import javax.swing.*;
-import javax.swing.border.*;
 
 
 public class StartMenu
@@ -19,17 +18,20 @@ public class StartMenu
     private JLabel warntxt;
 
     private JLabel notfoundtxt;
+    
+    private Statistics stats;
 
 
-    public StartMenu()
+    public StartMenu(Statistics statistics)
     {
-
+        stats = statistics;
+        
         JLabel nametxt = new JLabel(
             "Enter the location of the program file to begin (ex. /Users/JohnDoe/Desktop/QuickQuiz/)" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         nametxt.setBounds( 200, 180, 500, 20 );
-        nametxt.setHorizontalAlignment( nametxt.LEFT );
-        nametxt.setVerticalAlignment( nametxt.TOP );
+        nametxt.setHorizontalAlignment( JLabel.LEFT );
+        nametxt.setVerticalAlignment( JLabel.TOP );
         namepathfield = new JTextField();
         namepathfield.setBounds( 200, 200, 400, 20 );
 
@@ -39,7 +41,7 @@ public class StartMenu
 
         JLabel text = new JLabel( "Welcome to Quick Quiz!" );
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
-        text.setHorizontalAlignment( text.CENTER );
+        text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 100 );
 
         frame = new JFrame( "Fîzîk" );
@@ -51,15 +53,15 @@ public class StartMenu
         warntxt = new JLabel( "Please complete the required field!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
-        warntxt.setHorizontalAlignment( warntxt.LEFT );
-        warntxt.setVerticalAlignment( warntxt.TOP );
+        warntxt.setHorizontalAlignment( JLabel.LEFT );
+        warntxt.setVerticalAlignment( JLabel.TOP );
         warntxt.setVisible( false );
 
         notfoundtxt = new JLabel( "File not found! Please check the fields" );
         notfoundtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         notfoundtxt.setBounds( 200, 500, 500, 20 );
-        notfoundtxt.setHorizontalAlignment( notfoundtxt.LEFT );
-        notfoundtxt.setVerticalAlignment( notfoundtxt.TOP );
+        notfoundtxt.setHorizontalAlignment( JLabel.LEFT );
+        notfoundtxt.setVerticalAlignment( JLabel.TOP );
         notfoundtxt.setVisible( false );
 
         namepathfield.setText( "/Users/JohnDoe/Desktop/QuickQuiz/" );
@@ -89,7 +91,6 @@ public class StartMenu
             else
             {
                 String pathproblems = namepathfield.getText() + "ProblemFile/problems.txt";
-                System.out.println( pathproblems );
                 try
                 {
                     Scanner readIn = new Scanner( new File( pathproblems ) );
@@ -101,7 +102,7 @@ public class StartMenu
                     return;
                 }
 
-                MainMenu main = new MainMenu( new ProblemDatabase( pathproblems ) );
+                MainMenu main = new MainMenu( new ProblemDatabase( pathproblems ), stats );
                 frame.dispose();
 
             }

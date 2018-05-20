@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 
 public class AddMenu
@@ -48,12 +47,15 @@ public class AddMenu
 
     private JLabel newtxt;
 
+    private Statistics stats;
 
-    public AddMenu( ProblemDatabase problem )
+
+    public AddMenu( ProblemDatabase problem, Statistics statistics )
     {
         ans = 'h';
         type = -1;
         this.problem = problem;
+        stats = statistics;
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
@@ -62,32 +64,32 @@ public class AddMenu
         JLabel problemtxt = new JLabel( "Problem Image Pathname" );
         problemtxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         problemtxt.setBounds( 200, 180, 500, 20 );
-        problemtxt.setHorizontalAlignment( problemtxt.LEFT );
-        problemtxt.setVerticalAlignment( problemtxt.TOP );
+        problemtxt.setHorizontalAlignment( JLabel.LEFT );
+        problemtxt.setVerticalAlignment( JLabel.TOP );
         problempathfield = new JTextField();
         problempathfield.setBounds( 200, 200, 400, 20 );
 
         JLabel solutiontxt = new JLabel( "Solution Image Pathname" );
         solutiontxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         solutiontxt.setBounds( 200, 220, 500, 20 );
-        solutiontxt.setHorizontalAlignment( solutiontxt.LEFT );
-        solutiontxt.setVerticalAlignment( solutiontxt.TOP );
+        solutiontxt.setHorizontalAlignment( JLabel.LEFT );
+        solutiontxt.setVerticalAlignment( JLabel.TOP );
         solutionpathfield = new JTextField();
         solutionpathfield.setBounds( 200, 240, 400, 20 );
 
         JLabel nametxt = new JLabel( "Problem Name" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         nametxt.setBounds( 200, 260, 500, 20 );
-        nametxt.setHorizontalAlignment( nametxt.LEFT );
-        nametxt.setVerticalAlignment( nametxt.TOP );
+        nametxt.setHorizontalAlignment( JLabel.LEFT );
+        nametxt.setVerticalAlignment( JLabel.TOP );
         namepathfield = new JTextField();
         namepathfield.setBounds( 200, 280, 400, 20 );
 
         JLabel typetxt = new JLabel( "Choose Problem Type" );
         typetxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         typetxt.setBounds( 200, 300, 500, 20 );
-        typetxt.setHorizontalAlignment( typetxt.LEFT );
-        typetxt.setVerticalAlignment( typetxt.TOP );
+        typetxt.setHorizontalAlignment( JLabel.LEFT );
+        typetxt.setVerticalAlignment( JLabel.TOP );
 
         kinematics = new JButton( "Kinematics" );
         kinematics.setBounds( 100, 320, 100, 20 );
@@ -116,8 +118,8 @@ public class AddMenu
         JLabel answertxt = new JLabel( "Choose Answer:" );
         answertxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         answertxt.setBounds( 200, 345, 500, 20 );
-        answertxt.setHorizontalAlignment( typetxt.LEFT );
-        answertxt.setVerticalAlignment( typetxt.TOP );
+        answertxt.setHorizontalAlignment( JLabel.LEFT );
+        answertxt.setVerticalAlignment( JLabel.TOP );
 
         ap = new JButton( "A" );
         ap.setBounds( 200, 365, 50, 20 );
@@ -145,7 +147,7 @@ public class AddMenu
 
         JLabel text = new JLabel( "Add Problems" );
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
-        text.setHorizontalAlignment( text.CENTER );
+        text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 100 );
 
         frame = new JFrame( "Fîzîk" );
@@ -157,15 +159,15 @@ public class AddMenu
         warntxt = new JLabel( "Please complete all required fields!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
-        warntxt.setHorizontalAlignment( warntxt.LEFT );
-        warntxt.setVerticalAlignment( warntxt.TOP );
+        warntxt.setHorizontalAlignment( JLabel.LEFT );
+        warntxt.setVerticalAlignment( JLabel.TOP );
         warntxt.setVisible( false );
 
         newtxt = new JLabel( "Success! Enter a new problem or return to main menu." );
         newtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         newtxt.setBounds( 200, 500, 500, 20 );
-        newtxt.setHorizontalAlignment( warntxt.LEFT );
-        newtxt.setVerticalAlignment( warntxt.TOP );
+        newtxt.setHorizontalAlignment( JLabel.LEFT );
+        newtxt.setVerticalAlignment( JLabel.TOP );
         newtxt.setVisible( false );
 
         c.add( back );
@@ -205,7 +207,7 @@ public class AddMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            MainMenu mainMenu = new MainMenu( problem );
+            MainMenu mainMenu = new MainMenu( problem, stats );
             frame.dispose();
         }
     }

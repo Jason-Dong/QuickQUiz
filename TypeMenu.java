@@ -8,11 +8,14 @@ public class TypeMenu
     private JFrame frame;
 
     private ProblemDatabase problem;
+    
+    private Statistics stats;
 
 
-    public TypeMenu( ProblemDatabase problem )
+    public TypeMenu( ProblemDatabase problem, Statistics statistics )
     {
         this.problem = problem;
+        stats = statistics;
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
@@ -76,7 +79,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            MainMenu mainMenu = new MainMenu( problem );
+            MainMenu mainMenu = new MainMenu( problem, stats );
             frame.dispose();
         }
     }
@@ -86,7 +89,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, 0 );
+            QQMenu qqMenu = new QQMenu( problem, 0, stats);
             frame.dispose();
         }
     }
@@ -96,7 +99,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, 1 );
+            QQMenu qqMenu = new QQMenu( problem, 1, stats );
             frame.dispose();
         }
     }
@@ -106,7 +109,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, 2 );
+            QQMenu qqMenu = new QQMenu( problem, 2, stats );
             frame.dispose();
         }
     }
@@ -116,7 +119,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, 3 );
+            QQMenu qqMenu = new QQMenu( problem, 3, stats );
             frame.dispose();
         }
     }
@@ -126,7 +129,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, 4 );
+            QQMenu qqMenu = new QQMenu( problem, 4, stats );
             frame.dispose();
         }
     }
@@ -136,7 +139,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, 5 );
+            QQMenu qqMenu = new QQMenu( problem, 5, stats );
             frame.dispose();
         }
     }
@@ -146,7 +149,7 @@ public class TypeMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, -1 );
+            QQMenu qqMenu = new QQMenu( problem, -1, stats );
             frame.dispose();
         }
     }

@@ -16,7 +16,7 @@ public class SolutionsMenu extends JPanel
     public SolutionsMenu( Problem prob )
     {
         JLabel label1;
-        JButton back = new JButton( "Back" );
+        JButton back = new JButton( "Close" );
         back.setBounds( 375, 500, 50, 50 );
 
         ImageIcon icon = createImageIcon( prob.getSolutionImage(), "image" );
@@ -65,6 +65,7 @@ public class SolutionsMenu extends JPanel
     {
         public void actionPerformed( ActionEvent e )
         {
+            
             thisWindow.dispose();
         }
     }

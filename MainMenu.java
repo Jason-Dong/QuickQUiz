@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 
 public class MainMenu
@@ -10,10 +9,13 @@ public class MainMenu
 
     private ProblemDatabase problem;
 
+    private Statistics stats;
 
-    public MainMenu( ProblemDatabase problem )
+
+    public MainMenu( ProblemDatabase problem, Statistics statistics )
     {
         this.problem = problem;
+        stats = statistics;
 
         JButton QQMenu = new JButton( "Quick Quiz" );
         QQMenu.setBounds( 200, 125, 400, 75 );
@@ -63,7 +65,7 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            TypeMenu typeMenu = new TypeMenu( problem );
+            TypeMenu typeMenu = new TypeMenu( problem, stats );
             frame.dispose();
         }
     }
@@ -73,7 +75,7 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            TrainMenu trainMenu = new TrainMenu( problem );
+            TrainMenu trainMenu = new TrainMenu( problem, stats );
             frame.dispose();
         }
     }
@@ -83,7 +85,7 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            AddMenu addMenu = new AddMenu( problem );
+            AddMenu addMenu = new AddMenu( problem, stats );
             frame.dispose();
         }
     }
@@ -93,7 +95,7 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            RemoveMenu removeMenu = new RemoveMenu( problem );
+            RemoveMenu removeMenu = new RemoveMenu( problem, stats );
             frame.dispose();
         }
     }
@@ -103,7 +105,7 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            StatsMenu statsMenu = new StatsMenu();
+            StatsMenu statsMenu = new StatsMenu( problem, stats );
             frame.dispose();
         }
     }

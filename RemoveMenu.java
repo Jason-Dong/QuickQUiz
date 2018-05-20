@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 
 public class RemoveMenu
@@ -31,14 +30,17 @@ public class RemoveMenu
     private JLabel warntxt;
 
     private JLabel newtxt;
-    
+
     private JLabel notfoundtxt;
+    
+    private Statistics stats;
 
 
-    public RemoveMenu( ProblemDatabase problem )
+    public RemoveMenu( ProblemDatabase problem, Statistics statistics )
     {
         type = -1;
         this.problem = problem;
+        stats = statistics;
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
@@ -47,16 +49,16 @@ public class RemoveMenu
         JLabel nametxt = new JLabel( "Problem to Remove Name" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         nametxt.setBounds( 200, 180, 500, 20 );
-        nametxt.setHorizontalAlignment( nametxt.LEFT );
-        nametxt.setVerticalAlignment( nametxt.TOP );
+        nametxt.setHorizontalAlignment( JLabel.LEFT );
+        nametxt.setVerticalAlignment( JLabel.TOP );
         namepathfield = new JTextField();
         namepathfield.setBounds( 200, 200, 400, 20 );
 
         JLabel typetxt = new JLabel( "Choose Problem to Remove's Type (if known)" );
         typetxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         typetxt.setBounds( 200, 220, 500, 20 );
-        typetxt.setHorizontalAlignment( typetxt.LEFT );
-        typetxt.setVerticalAlignment( typetxt.TOP );
+        typetxt.setHorizontalAlignment( JLabel.LEFT );
+        typetxt.setVerticalAlignment( JLabel.TOP );
 
         kinematics = new JButton( "Kinematics" );
         kinematics.setBounds( 100, 240, 100, 20 );
@@ -88,7 +90,7 @@ public class RemoveMenu
 
         JLabel text = new JLabel( "Remove Problems" );
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
-        text.setHorizontalAlignment( text.CENTER );
+        text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 100 );
 
         frame = new JFrame( "Fîzîk" );
@@ -100,24 +102,22 @@ public class RemoveMenu
         warntxt = new JLabel( "Please complete all required fields!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
-        warntxt.setHorizontalAlignment( warntxt.LEFT );
-        warntxt.setVerticalAlignment( warntxt.TOP );
+        warntxt.setHorizontalAlignment( JLabel.LEFT );
+        warntxt.setVerticalAlignment( JLabel.TOP );
         warntxt.setVisible( false );
 
-        newtxt = new JLabel(
-            "Success! Remove a new problem or return to main menu." );
+        newtxt = new JLabel( "Success! Remove a new problem or return to main menu." );
         newtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         newtxt.setBounds( 200, 500, 500, 20 );
-        newtxt.setHorizontalAlignment( warntxt.LEFT );
-        newtxt.setVerticalAlignment( warntxt.TOP );
+        newtxt.setHorizontalAlignment( JLabel.LEFT );
+        newtxt.setVerticalAlignment( JLabel.TOP );
         newtxt.setVisible( false );
 
-        notfoundtxt = new JLabel(
-            "Problem not found! Please check the fields" );
+        notfoundtxt = new JLabel( "Problem not found! Please check the fields" );
         notfoundtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         notfoundtxt.setBounds( 200, 500, 500, 20 );
-        notfoundtxt.setHorizontalAlignment( notfoundtxt.LEFT );
-        notfoundtxt.setVerticalAlignment( notfoundtxt.TOP );
+        notfoundtxt.setHorizontalAlignment( JLabel.LEFT );
+        notfoundtxt.setVerticalAlignment( JLabel.TOP );
         notfoundtxt.setVisible( false );
 
         c.add( back );
@@ -125,7 +125,7 @@ public class RemoveMenu
         c.add( pathname );
         c.add( warntxt );
         c.add( newtxt );
-        c.add( notfoundtxt);
+        c.add( notfoundtxt );
 
         c.add( namepathfield );
         c.add( nametxt );
@@ -147,7 +147,7 @@ public class RemoveMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            MainMenu mainMenu = new MainMenu( problem );
+            MainMenu mainMenu = new MainMenu( problem, stats );
             frame.dispose();
         }
     }
@@ -157,7 +157,7 @@ public class RemoveMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            if (namepathfield.getText() == "")
+            if ( namepathfield.getText() == "" )
             {
                 newtxt.setVisible( false );
                 warntxt.setVisible( true );

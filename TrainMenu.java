@@ -14,23 +14,25 @@ public class TrainMenu
 
     private char[] answers;
 
-    private int index = 0;
+    private JLabel problemImage;
 
-    JLabel problemImage;
+    private JLabel curAns;
+
+    private JLabel timerDisplay;
+
+    private int index = 0;
 
     private Timer timer;
 
     private int timerCount;
 
-    JLabel curAns;
-
-    JLabel timerDisplay;
+    private Statistics stats;
 
 
-    public TrainMenu( ProblemDatabase problem )
+    public TrainMenu( ProblemDatabase problem, Statistics statistics )
     {
         this.problem = problem;
-
+        stats = statistics;
         question = new Problem[25];
         answers = new char[25];
 
@@ -153,15 +155,22 @@ public class TrainMenu
     {
         int score = 0;
 
+        timer.stop();
+        stats.addTime( timerCount );
+
         for ( int i = 0; i < 25; i++ )
         {
             if ( question[i].getAnswer() == answers[i] )
             {
                 score++;
+                stats.addScore( 1, 1, question[i].getType() );
+            }
+            else
+            {
+                stats.addScore( 0, 1, question[i].getType() );
             }
         }
 
-        timer.stop();
         frame.dispose();
 
         JLabel numCorrect = new JLabel( "Score: " + score + "/25" );
@@ -234,7 +243,7 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             problem.reset();
-            MainMenu mainMenu = new MainMenu( problem );
+            MainMenu mainMenu = new MainMenu( problem, stats );
             frame.dispose();
         }
     }

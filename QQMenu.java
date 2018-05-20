@@ -17,11 +17,11 @@ public class QQMenu
 
     private Stack<Problem> forwardStack;
 
-    JLabel problemImage;
+    private JLabel problemImage;
 
-    JLabel timerDisplay;
+    private JLabel timerDisplay;
 
-    JLabel scoreDisplay;
+    private JLabel scoreDisplay;
 
     private Timer timer;
 
@@ -31,13 +31,16 @@ public class QQMenu
 
     private int problemType;
 
+    private Statistics stats;
 
-    public QQMenu( ProblemDatabase problem, int type )
+
+    public QQMenu( ProblemDatabase problem, int type, Statistics statistics )
     {
         this.problem = problem;
         backStack = new Stack<Problem>();
         forwardStack = new Stack<Problem>();
         problemType = type;
+        stats = statistics;
 
         updateProblem();
     }
@@ -150,7 +153,7 @@ public class QQMenu
     private void updateSolutionsPage( Problem prob )
     {
         frame.dispose();
-        timer.stop();
+        stats.addTime( timerCount );
         timerCount = 0;
 
         scoreDisplay.setText( "Score: " + totalScore );
@@ -212,6 +215,7 @@ public class QQMenu
     {
         if ( correct )
         {
+            stats.addScore( 1, 1, forwardStack.peek().getType() );
             if ( time <= 180 )
             {
                 totalScore += 100;
@@ -220,6 +224,10 @@ public class QQMenu
             {
                 totalScore += 50;
             }
+        }
+        else
+        {
+            stats.addScore( 0, 1, forwardStack.peek().getType() );
         }
     }
 
@@ -274,7 +282,7 @@ public class QQMenu
         public void actionPerformed( ActionEvent e )
         {
             problem.reset();
-            MainMenu mainMenu = new MainMenu( problem );
+            MainMenu mainMenu = new MainMenu( problem, stats );
             frame.dispose();
         }
     }
@@ -284,6 +292,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
+            timer.stop();
             updateScore( forwardStack.peek().getAnswer() == 'A', timerCount );
             updateSolutionsPage( forwardStack.peek() );
         }
@@ -294,6 +303,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
+            timer.stop();
             updateScore( forwardStack.peek().getAnswer() == 'B', timerCount );
             updateSolutionsPage( forwardStack.peek() );
         }
@@ -304,6 +314,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
+            timer.stop();
             updateScore( forwardStack.peek().getAnswer() == 'C', timerCount );
             updateSolutionsPage( forwardStack.peek() );
         }
@@ -314,6 +325,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
+            timer.stop();
             updateScore( forwardStack.peek().getAnswer() == 'D', timerCount );
             updateSolutionsPage( forwardStack.peek() );
         }
@@ -324,6 +336,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
+            timer.stop();
             updateScore( forwardStack.peek().getAnswer() == 'E', timerCount );
             updateSolutionsPage( forwardStack.peek() );
         }

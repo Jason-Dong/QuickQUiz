@@ -82,7 +82,7 @@ public class ProblemDatabase
 
     public Problem giveRandProblem( int type )
     {
-        if ( problemListUnsorted.size() > 0 )
+        if ( problemListSorted.get( type ).size() > 0 )
         {
             prob = problemListSorted.get( type )
                 .get( (int)( Math.random() * problemListSorted.get( type ).size() ) );
