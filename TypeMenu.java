@@ -3,15 +3,43 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
+/**
+ * Allows the user to choose the type of problem to practice for QQMenu, then
+ * makes the QQMenu.
+ *
+ * @author Austin Lei
+ * @version May 19, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: none
+ */
 public class TypeMenu
 {
+    /**
+     * Holds all of the GUI elements.
+     */
     private JFrame frame;
 
+    /**
+     * The ProblemDatabase to get all of the problems.
+     */
     private ProblemDatabase problem;
-    
+
+    /**
+     * Holds all of the problem statistics for QuickQuiz.
+     */
     private Statistics stats;
 
 
+    /**
+     * Constructs the window for TypeMenu
+     * 
+     * @param problem
+     *            the ProblemDatabase that holds the problems
+     * @param statistics
+     *            holds the statistics
+     */
     public TypeMenu( ProblemDatabase problem, Statistics statistics )
     {
         this.problem = problem;
@@ -75,6 +103,17 @@ public class TypeMenu
     }
 
 
+    /**
+     * Handles when the back button is clicked; when clicked, returns to
+     * MainMenu by closing all of TypeMenu and creating a MainMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -85,16 +124,38 @@ public class TypeMenu
     }
 
 
+    /**
+     * Handles when the kinematics button is clicked; when clicked, creates a
+     * QQMenu that only has kinematics problems.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class KinematicsListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
         {
-            QQMenu qqMenu = new QQMenu( problem, 0, stats);
+            QQMenu qqMenu = new QQMenu( problem, 0, stats );
             frame.dispose();
         }
     }
 
 
+    /**
+     * Handles when the Newton's law button is clicked; when clicked, creates a
+     * QQMenu that only has Newton's law problems.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class NewtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -105,6 +166,17 @@ public class TypeMenu
     }
 
 
+    /**
+     * Handles when the energy button is clicked; when clicked, creates a QQMenu
+     * that only has energy problems.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class EnergyListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -115,6 +187,17 @@ public class TypeMenu
     }
 
 
+    /**
+     * Handles when the rotation button is clicked; when clicked, creates a
+     * QQMenu that only has rotation problems.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class RotationListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -125,6 +208,17 @@ public class TypeMenu
     }
 
 
+    /**
+     * Handles when the gravitation button is clicked; when clicked, creates a
+     * QQMenu that only has gravitation problems.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class GravitationListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -135,6 +229,17 @@ public class TypeMenu
     }
 
 
+    /**
+     * Handles when the fluids button is clicked; when clicked, creates a QQMenu
+     * that only has fluids problems.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class FluidsListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -145,6 +250,17 @@ public class TypeMenu
     }
 
 
+    /**
+     * Handles when the all button is clicked; when clicked, creates a QQMenu
+     * that includes all problems.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class AllListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
