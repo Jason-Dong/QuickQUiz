@@ -1,34 +1,89 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.Timer;
 
 
+/**
+ * Creates a TrainMenu object. TrainMenu allows the user to practice 25 problems
+ * and scroll back and forth between problems. The user chooses an answer for as
+ * many as possible, then clicks finish test, which allows the user see their
+ * score, scroll back and forth between problems, and see solutions for
+ * problems. At any time, the user can go back to MainMenu with the back button.
+ *
+ * @author AustinLei
+ * @version May 19, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: docs.oracle.com for the createImageIcon method
+ */
 public class TrainMenu
 {
+    /**
+     * Holds all of the GUI elements.
+     */
     private JFrame frame;
 
+    /**
+     * The ProblemDatabase to get all of the problems.
+     */
     private ProblemDatabase problem;
 
-    private Problem[] question;
-
-    private char[] answers;
-
-    private JLabel problemImage;
-
-    private JLabel curAns;
-
-    private JLabel timerDisplay;
-
-    private int index = 0;
-
-    private Timer timer;
-
-    private int timerCount;
-
+    /**
+     * Holds all of the problem statistics for QuickQuiz.
+     */
     private Statistics stats;
 
+    /**
+     * The array that holds the 25 problems.
+     */
+    private Problem[] question;
 
+    /**
+     * The array that holds the answers to the 25 problems.
+     */
+    private char[] answers;
+
+    /**
+     * Holds the image for the problem.
+     */
+    private JLabel problemImage;
+
+    /**
+     * Holds the current answer for a problem.
+     */
+    private JLabel curAns;
+
+    /**
+     * Holds the timer, which increments every second.
+     */
+    private JLabel timerDisplay;
+
+    /**
+     * Holds the current problem number.
+     */
+    private int index = 0;
+
+    /**
+     * Handles the timing, making sure the timer increments every second.
+     */
+    private Timer timer;
+
+    /**
+     * Holds the number of seconds in the timer.
+     */
+    private int timerCount;
+
+
+    /**
+     * Constructs the TrainMenu object; creates the problem image, timer, back
+     * button, and buttons to select the answers.
+     * 
+     * @param problem
+     *            the ProblemDatabase that holds the problems
+     * @param statistics
+     *            holds the statistics
+     */
     public TrainMenu( ProblemDatabase problem, Statistics statistics )
     {
         this.problem = problem;
@@ -131,9 +186,11 @@ public class TrainMenu
     }
 
 
+    /**
+     * Updates the frame to show the current problem given by the index.
+     */
     private void update()
     {
-
         ImageIcon icon = createImageIcon( question[index].getProblemImage(), "image1" );
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
@@ -147,10 +204,14 @@ public class TrainMenu
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
         curAns.setText( "Current Answer: " + answers[index] );
-
     }
 
 
+    /**
+     * Updates the frame when the finish button is clicked; removes the buttons
+     * to enter an answer, allowing the user only to scroll between problems to
+     * see the solutions.
+     */
     private void updateFinish()
     {
         int score = 0;
@@ -215,6 +276,18 @@ public class TrainMenu
     }
 
 
+    /**
+     * Deals with timing; every second, decrements the timer by one second,
+     * starting at 75 minutes. When the timer reaches 0, automatically calls
+     * updateFinish() to allow the user to see the problem solutions.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class TimerListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -238,6 +311,17 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the back button is clicked; when clicked, returns to
+     * MainMenu by closing all of TypeMenu and creating a MainMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -249,6 +333,18 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the A button is clicked; when clicked, sets the answer to
+     * the current problem to A and moves to the next problem, if not at the
+     * last problem. If at last problem, does not move to any problem.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class AButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -263,6 +359,18 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the B button is clicked; when clicked, sets the answer to
+     * the current problem to B and moves to the next problem, if not at the
+     * last problem. If at last problem, does not move to any problem.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -277,6 +385,18 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the C button is clicked; when clicked, sets the answer to
+     * the current problem to C and moves to the next problem, if not at the
+     * last problem. If at last problem, does not move to any problem.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class CButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -291,6 +411,18 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the D button is clicked; when clicked, sets the answer to
+     * the current problem to D and moves to the next problem, if not at the
+     * last problem. If at last problem, does not move to any problem.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class DButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -305,6 +437,18 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the E button is clicked; when clicked, sets the answer to
+     * the current problem to E and moves to the next problem, if not at the
+     * last problem. If at last problem, does not move to any problem.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class EButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -319,6 +463,17 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the previous button is clicked; when clicked, moves to the
+     * previous problem, if possible. If not, does nothing.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class PrevButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -332,6 +487,17 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the next button is clicked; when clicked, moves to the next
+     * problem, if possible. If not, does nothing.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class NextButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -345,6 +511,17 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the View Solutions button is clicked; when clicked, creates
+     * SolutionsMenu for current problem.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class ViewButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -354,6 +531,17 @@ public class TrainMenu
     }
 
 
+    /**
+     * Handles when the Finish button is clicked; when clicked, calls
+     * updateFinish().
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class FinishButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )

@@ -3,15 +3,44 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
+/**
+ * Creates the main menu frame, which leads to the QQMenu, TrainMenu, AddMenu,
+ * RemoveMenu, and the StatsMenu.
+ *
+ * @author Austin Lei
+ * @version May 19, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: none
+ */
 public class MainMenu
 {
+    /**
+     * Holds all of the GUI elements.
+     */
     private JFrame frame;
 
+    /**
+     * The ProblemDatabase to get all of the problems.
+     */
     private ProblemDatabase problem;
 
+    /**
+     * Holds all of the problem statistics for QuickQuiz.
+     */
     private Statistics stats;
 
 
+    /**
+     * Constructs the MainMenu Object, with five buttons that lead to all five
+     * functionalities.
+     * 
+     * @param problem
+     *            the ProblemDatabase that holds the problems
+     * @param statistics
+     *            holds the statistics
+     */
     public MainMenu( ProblemDatabase problem, Statistics statistics )
     {
         this.problem = problem;
@@ -61,6 +90,17 @@ public class MainMenu
     }
 
 
+    /**
+     * Handles when the QQMenu button is clicked; when clicked, goes to QQMenu
+     * by closing all of MainMenu and creating a QQMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class QQButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -71,6 +111,17 @@ public class MainMenu
     }
 
 
+    /**
+     * Handles when the TrainMenu button is clicked; when clicked, goes to
+     * TrainMenu by closing all of MainMenu and creating a QQMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class TrainButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -81,6 +132,17 @@ public class MainMenu
     }
 
 
+    /**
+     * Handles when the AddMenu button is clicked; when clicked, goes to AddMenu
+     * by closing all of MainMenu and creating a QQMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class AddButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -91,6 +153,17 @@ public class MainMenu
     }
 
 
+    /**
+     * Handles when the RemoveMenu button is clicked; when clicked, goes to
+     * RemoveMenu by closing all of MainMenu and creating a QQMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class RemoveButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -101,6 +174,17 @@ public class MainMenu
     }
 
 
+    /**
+     * Handles when the StatsMenu button is clicked; when clicked, goes to
+     * StatsMenu by closing all of MainMenu and creating a QQMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class StatButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )

@@ -10,8 +10,6 @@ public class ProblemDatabase
 
     ArrayList<Problem> usedList;
 
-    Problem prob;
-
 
     // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
 
@@ -46,7 +44,7 @@ public class ProblemDatabase
             String answer = readIn.next();
             char ans = answer.charAt( 0 );
 
-            prob = new Problem( problemImage, solutionImage, name, category, ans );
+            Problem prob = new Problem( problemImage, solutionImage, name, category, ans );
             addProblem( prob );
         }
 
@@ -70,7 +68,8 @@ public class ProblemDatabase
     {
         if ( problemListUnsorted.size() > 0 )
         {
-            prob = problemListUnsorted.get( (int)( Math.random() * problemListUnsorted.size() ) );
+            Problem prob = problemListUnsorted
+                .get( (int)( Math.random() * problemListUnsorted.size() ) );
             problemListUnsorted.remove( prob );
             problemListSorted.get( prob.getType() ).remove( prob );
             usedList.add( prob );
@@ -84,7 +83,7 @@ public class ProblemDatabase
     {
         if ( problemListSorted.get( type ).size() > 0 )
         {
-            prob = problemListSorted.get( type )
+            Problem prob = problemListSorted.get( type )
                 .get( (int)( Math.random() * problemListSorted.get( type ).size() ) );
             problemListUnsorted.remove( prob );
             problemListSorted.get( type ).remove( prob );

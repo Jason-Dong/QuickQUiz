@@ -4,8 +4,9 @@ import javax.swing.*;
 
 
 /**
- * Allows the user to choose the type of problem to practice for QQMenu, then
- * makes the QQMenu.
+ * Allows the user to choose the type of problem to practice for QQMenu by
+ * clicking one of seven buttons (for the type of problems), then makes the
+ * QQMenu. The user can return to MainMenu with the back button.
  *
  * @author Austin Lei
  * @version May 19, 2018
@@ -33,7 +34,7 @@ public class TypeMenu
 
 
     /**
-     * Constructs the window for TypeMenu
+     * Constructs the window for TypeMenu.
      * 
      * @param problem
      *            the ProblemDatabase that holds the problems
