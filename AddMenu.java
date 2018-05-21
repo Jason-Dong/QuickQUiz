@@ -150,7 +150,7 @@ public class AddMenu
         ep.addActionListener( new eListener() );
 
         JButton pathname = new JButton( "Enter" );
-        pathname.setBounds( 600, 200, 50, 20 );
+        pathname.setBounds( 300, 385, 200, 60 );
         pathname.addActionListener( new PathnameListener() );
 
         JLabel text = new JLabel( "Add Problems" );
