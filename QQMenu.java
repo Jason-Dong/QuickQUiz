@@ -1,39 +1,102 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.*;
 
 import javax.swing.*;
 import javax.swing.Timer;
 
 
+/**
+ * Creates a QQMenu object. QQMenu allows the user to as many problems as
+ * wanted, one at a time, and scroll back and forth between problems, of a
+ * specific topic or all topics. The user clicks an answer choice for a problem,
+ * which allows the user see their score, scroll back and forth between
+ * problems, and see solutions for problems. At any time, the user can go back
+ * to MainMenu with the back button.
+ *
+ * @author Austin Lei
+ * @version May 19, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: none
+ */
 public class QQMenu
 {
+    /**
+     * Holds all of the GUI elements.
+     */
     private JFrame frame;
 
+    /**
+     * The ProblemDatabase to get all of the problems.
+     */
     private ProblemDatabase problem;
 
-    private Stack<Problem> backStack;
-
-    private Stack<Problem> forwardStack;
-
-    private JLabel problemImage;
-
-    private JLabel timerDisplay;
-
-    private JLabel scoreDisplay;
-
-    private Timer timer;
-
-    private int timerCount;
-
-    private int totalScore;
-
-    private int problemType;
-
+    /**
+     * Holds all of the problem statistics for QuickQuiz.
+     */
     private Statistics stats;
 
+    /**
+     * Holds all of the problems to give when the back button is clicked.
+     */
+    private Stack<Problem> backStack;
 
+    /**
+     * Holds all of the problems to give when the forward button is clicked.
+     */
+    private Stack<Problem> forwardStack;
+
+    /**
+     * Holds the image for the problem.
+     */
+    private JLabel problemImage;
+
+    /**
+     * Holds the timer, which increments every second.
+     */
+    private JLabel timerDisplay;
+
+    /**
+     * Displays the score, updates every time score changes.
+     */
+    private JLabel scoreDisplay;
+
+    /**
+     * Handles the timing, making sure the timer increments every second.
+     */
+    private Timer timer;
+
+    /**
+     * Holds the number of seconds in the timer.
+     */
+    private int timerCount;
+
+    /**
+     * Holds the score; 100 points for problems solved correctly in less than 3
+     * minutes, and 50 points for problems solved correctly after 3 minutes.
+     */
+    private int totalScore;
+
+    /**
+     * Holds the type of problems to do training; -1 denotes all types of
+     * problems.
+     */
+    private int problemType;
+
+
+    /**
+     * Constructs the QQMenu; takes in the problemDatabase, Statistics, and type
+     * of problem, and calls updateProblem based on these parameters.
+     * 
+     * @param problem
+     *            the problemDatabase that holds all of the problems
+     * @param type
+     *            the type of problem to do; -1 denotes all types
+     * @param statistics
+     *            holds the statistics about the solved problems
+     */
     public QQMenu( ProblemDatabase problem, int type, Statistics statistics )
     {
         this.problem = problem;
@@ -46,6 +109,13 @@ public class QQMenu
     }
 
 
+    /**
+     * Restarts the timer and calls a new random problem of a certain type; if
+     * no more problems, shows that no more problems exist and allows user to
+     * exit to MainMenu through the back button. If problem exists, changes the
+     * display to show the problem, shows the answer choice buttons, and creates
+     * a back button for user go back to MainMenu.
+     */
     private void updateProblem()
     {
         while ( !forwardStack.isEmpty() )
@@ -150,6 +220,16 @@ public class QQMenu
     }
 
 
+    /**
+     * Allow user to see the solutions page for a certain problem; displays the
+     * image of the problem, the score, buttons to go back and forth between
+     * problems, a back button, another button to see the solution, and another
+     * button to see a new problem. Also adds the time used for the problem into
+     * statistics.
+     * 
+     * @param prob
+     *            the problem to display
+     */
     private void updateSolutionsPage( Problem prob )
     {
         frame.dispose();
@@ -211,6 +291,14 @@ public class QQMenu
     }
 
 
+    /**
+     * Updates the score and records the scores in statistics.
+     * 
+     * @param correct
+     *            whether the problem was correct or not
+     * @param time
+     *            the time taken for the problem
+     */
     private void updateScore( boolean correct, int time )
     {
         if ( correct )
@@ -232,6 +320,10 @@ public class QQMenu
     }
 
 
+    /**
+     * Automatically called when all problem of a type exhausted; gives a back
+     * button for user to return to main menu.
+     */
     private void updateFinish()
     {
         frame.dispose();

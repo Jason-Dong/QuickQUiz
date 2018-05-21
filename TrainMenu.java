@@ -210,14 +210,25 @@ public class TrainMenu
     /**
      * Updates the frame when the finish button is clicked; removes the buttons
      * to enter an answer, allowing the user only to scroll between problems to
-     * see the solutions.
+     * see the solutions. Also updates scores/times in statistics.
      */
     private void updateFinish()
     {
         int score = 0;
 
         timer.stop();
-        stats.addTime( timerCount );
+        
+        int[] categories = new int[6];
+        
+        for (int i = 0; i < 25; i++)
+        {
+            categories[question[i].getType()]++;
+        }
+        
+        for (int i = 0; i < 6; i++)
+        {
+            stats.addTime( i, 180*categories[i] );
+        }
 
         for ( int i = 0; i < 25; i++ )
         {
