@@ -8,35 +8,36 @@ public class Statistics
 
     int[] correctProblems;
 
-    int time;
+    Double[] quickQuizPercents;
 
-    ArrayList<ArrayList<Double>> quickQuizPercents;
+    int[] quickQuizTimes;
 
 
     public Statistics()
     {
-        quickQuizPercents = new ArrayList<ArrayList<Double>>();
+        quickQuizPercents = new Double[6];
+        quickQuizTimes = new int[6];
 
         for ( int i = 0; i < 6; i++ )
         {
-            quickQuizPercents.add( new ArrayList<Double>() );
+            quickQuizPercents[i] = 0.0;
+            quickQuizTimes[i] = 0;
         }
 
         totalProblems = new int[6];
         correctProblems = new int[6];
-        time = 0;
     }
 
 
-    public void addTime( int newTime )
+    public void addTime( int category, int newTime )
     {
-        time += newTime;
+        quickQuizTimes[category] += newTime;
     }
 
 
-    public int getTime()
+    public int getTime( int category )
     {
-        return time;
+        return quickQuizTimes[category];
     }
 
 
@@ -66,14 +67,21 @@ public class Statistics
     }
 
 
+    public double avgTimePerProblem(int category)
+    {
+        return (double) quickQuizTimes[category] / totalProblems[category];
+    }
+    
     public double avgTimePerProblem()
     {
         int total = 0;
-        for ( int i = 0; i < 6; i++ )
+        int totProblems = 0;
+        for (int i=0; i<6; i++)
         {
-            total += totalProblems[i];
+            total += quickQuizTimes[i];
+            totProblems += totalProblems[i];
         }
-        return (double)time / total;
+        return (double) total / totProblems;
     }
 
 }
