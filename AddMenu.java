@@ -205,6 +205,7 @@ public class AddMenu
         c.add( warntxt );
         c.add( newtxt );
         c.add(solnotfoundtxt);
+        c.add(existtxt);
         c.add(probnotfoundtxt);
 
         c.add( problempathfield );
