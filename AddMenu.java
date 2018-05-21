@@ -1,6 +1,9 @@
 import java.awt.*;
+import java.io.*;
+import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 
 public class AddMenu
@@ -47,15 +50,20 @@ public class AddMenu
 
     private JLabel newtxt;
 
+    private JLabel existtxt;
+    
+    private JLabel probnotfoundtxt;
+    
+    private JLabel solnotfoundtxt;
+    
     private Statistics stats;
-
 
     public AddMenu( ProblemDatabase problem, Statistics statistics )
     {
+    		stats = statistics;
         ans = 'h';
         type = -1;
         this.problem = problem;
-        stats = statistics;
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
@@ -64,32 +72,32 @@ public class AddMenu
         JLabel problemtxt = new JLabel( "Problem Image Pathname" );
         problemtxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         problemtxt.setBounds( 200, 180, 500, 20 );
-        problemtxt.setHorizontalAlignment( JLabel.LEFT );
-        problemtxt.setVerticalAlignment( JLabel.TOP );
+        problemtxt.setHorizontalAlignment( problemtxt.LEFT );
+        problemtxt.setVerticalAlignment( problemtxt.TOP );
         problempathfield = new JTextField();
         problempathfield.setBounds( 200, 200, 400, 20 );
 
         JLabel solutiontxt = new JLabel( "Solution Image Pathname" );
         solutiontxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         solutiontxt.setBounds( 200, 220, 500, 20 );
-        solutiontxt.setHorizontalAlignment( JLabel.LEFT );
-        solutiontxt.setVerticalAlignment( JLabel.TOP );
+        solutiontxt.setHorizontalAlignment( solutiontxt.LEFT );
+        solutiontxt.setVerticalAlignment( solutiontxt.TOP );
         solutionpathfield = new JTextField();
         solutionpathfield.setBounds( 200, 240, 400, 20 );
 
         JLabel nametxt = new JLabel( "Problem Name" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         nametxt.setBounds( 200, 260, 500, 20 );
-        nametxt.setHorizontalAlignment( JLabel.LEFT );
-        nametxt.setVerticalAlignment( JLabel.TOP );
+        nametxt.setHorizontalAlignment( nametxt.LEFT );
+        nametxt.setVerticalAlignment( nametxt.TOP );
         namepathfield = new JTextField();
         namepathfield.setBounds( 200, 280, 400, 20 );
 
         JLabel typetxt = new JLabel( "Choose Problem Type" );
         typetxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         typetxt.setBounds( 200, 300, 500, 20 );
-        typetxt.setHorizontalAlignment( JLabel.LEFT );
-        typetxt.setVerticalAlignment( JLabel.TOP );
+        typetxt.setHorizontalAlignment( typetxt.LEFT );
+        typetxt.setVerticalAlignment( typetxt.TOP );
 
         kinematics = new JButton( "Kinematics" );
         kinematics.setBounds( 100, 320, 100, 20 );
@@ -118,8 +126,8 @@ public class AddMenu
         JLabel answertxt = new JLabel( "Choose Answer:" );
         answertxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         answertxt.setBounds( 200, 345, 500, 20 );
-        answertxt.setHorizontalAlignment( JLabel.LEFT );
-        answertxt.setVerticalAlignment( JLabel.TOP );
+        answertxt.setHorizontalAlignment( typetxt.LEFT );
+        answertxt.setVerticalAlignment( typetxt.TOP );
 
         ap = new JButton( "A" );
         ap.setBounds( 200, 365, 50, 20 );
@@ -147,7 +155,7 @@ public class AddMenu
 
         JLabel text = new JLabel( "Add Problems" );
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
-        text.setHorizontalAlignment( JLabel.CENTER );
+        text.setHorizontalAlignment( text.CENTER );
         text.setBounds( 100, 30, 600, 100 );
 
         frame = new JFrame( "Fîzîk" );
@@ -159,22 +167,45 @@ public class AddMenu
         warntxt = new JLabel( "Please complete all required fields!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
-        warntxt.setHorizontalAlignment( JLabel.LEFT );
-        warntxt.setVerticalAlignment( JLabel.TOP );
+        warntxt.setHorizontalAlignment( warntxt.LEFT );
+        warntxt.setVerticalAlignment( warntxt.TOP );
         warntxt.setVisible( false );
 
         newtxt = new JLabel( "Success! Enter a new problem or return to main menu." );
         newtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         newtxt.setBounds( 200, 500, 500, 20 );
-        newtxt.setHorizontalAlignment( JLabel.LEFT );
-        newtxt.setVerticalAlignment( JLabel.TOP );
+        newtxt.setHorizontalAlignment( warntxt.LEFT );
+        newtxt.setVerticalAlignment( warntxt.TOP );
         newtxt.setVisible( false );
+        
+        existtxt = new JLabel( "Another problem already has this name!" );
+        existtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
+        existtxt.setBounds( 200, 500, 500, 20 );
+        existtxt.setHorizontalAlignment( existtxt.LEFT );
+        existtxt.setVerticalAlignment( existtxt.TOP );
+        existtxt.setVisible( false );
+        
+        probnotfoundtxt = new JLabel( "Problem file not found! Please check the fields" );
+        probnotfoundtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
+        probnotfoundtxt.setBounds( 200, 500, 500, 20 );
+        probnotfoundtxt.setHorizontalAlignment( JLabel.LEFT );
+        probnotfoundtxt.setVerticalAlignment( JLabel.TOP );
+        probnotfoundtxt.setVisible( false );
+        
+        solnotfoundtxt = new JLabel( "Solution file not found! Please check the fields" );
+        solnotfoundtxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
+        solnotfoundtxt.setBounds( 200, 500, 500, 20 );
+        solnotfoundtxt.setHorizontalAlignment( JLabel.LEFT );
+        solnotfoundtxt.setVerticalAlignment( JLabel.TOP );
+        solnotfoundtxt.setVisible( false );
 
         c.add( back );
         c.add( text );
         c.add( pathname );
         c.add( warntxt );
         c.add( newtxt );
+        c.add(solnotfoundtxt);
+        c.add(probnotfoundtxt);
 
         c.add( problempathfield );
         c.add( problemtxt );
@@ -222,15 +253,53 @@ public class AddMenu
             {
                 newtxt.setVisible( false );
                 warntxt.setVisible( true );
+                existtxt.setVisible(false);
+                probnotfoundtxt.setVisible(false);
+                solnotfoundtxt.setVisible(false);
+                return;
+            }
+            
+            String pathproblems = problempathfield.getText();
+            String solutionpath = solutionpathfield.getText();
+            try
+            {
+                Scanner readIn = new Scanner( new File( pathproblems ) );
+            }
+            catch ( FileNotFoundException exc )
+            {
+            		newtxt.setVisible( false );
+                warntxt.setVisible( false );
+                existtxt.setVisible(false);
+                probnotfoundtxt.setVisible(true);
+                solnotfoundtxt.setVisible(false);
+                return;
+            }
+            
+            try
+            {
+                Scanner readIn = new Scanner( new File( solutionpath ) );
+            }
+            catch ( FileNotFoundException exc )
+            {
+            		newtxt.setVisible( false );
+                warntxt.setVisible( false );
+                existtxt.setVisible(false);
+                probnotfoundtxt.setVisible(false);
+                solnotfoundtxt.setVisible(true);
+                return;
+            }
+            
+            if (!problem.addProblem(new Problem( problempathfield
+                    .getText(), solutionpathfield.getText(), namepathfield.getText(), type, ans)))
+            {
+            	    newtxt.setVisible( false );
+                warntxt.setVisible( false );
+                existtxt.setVisible(true);
+                probnotfoundtxt.setVisible(false);
+                solnotfoundtxt.setVisible(false);
             }
             else
             {
-                Problem toadd = new Problem( problempathfield
-                    .getText(), solutionpathfield.getText(), namepathfield.getText(), type, ans );
-                problem.addProblem( toadd );
-                // System.out.println( problempathfield
-                // .getText() + solutionpathfield.getText() +
-                // namepathfield.getText() + type + ans );
                 problempathfield.setText( "" );
                 solutionpathfield.setText( "" );
                 namepathfield.setText( "" );
@@ -248,7 +317,10 @@ public class AddMenu
                 ans = 'h';
                 type = -1;
                 warntxt.setVisible( false );
+                existtxt.setVisible(false);
                 newtxt.setVisible( true );
+                probnotfoundtxt.setVisible(false);
+                solnotfoundtxt.setVisible(false);
             }
         }
     }
@@ -294,7 +366,7 @@ public class AddMenu
             rotation.setEnabled( true );
             gravitation.setEnabled( true );
             fluids.setEnabled( true );
-            type = 2;
+            type = 3;
         }
     }
 
@@ -309,7 +381,7 @@ public class AddMenu
             rotation.setEnabled( false );
             gravitation.setEnabled( true );
             fluids.setEnabled( true );
-            type = 3;
+            type = 4;
         }
     }
 
