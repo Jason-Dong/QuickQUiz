@@ -26,10 +26,6 @@ public class SolutionsMenu
         label1 = new JLabel( "Solution", icon, JLabel.CENTER );
 
         label1.setBounds( 60, 60, 680, 340 );
-        // label1.setVerticalTextPosition( JLabel.BOTTOM ); //only needed for
-        // text underneath
-        // label1.setHorizontalTextPosition( JLabel.CENTER ); //only needed for
-        // text underneath
         back.addActionListener( new BackButtonListener() );
 
         thisWindow = new JFrame( "SolutionsMenu" );
