@@ -2,40 +2,102 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-
+/**
+ * Allows the user to remove problems, checking each field to ensure that all 
+ * fields are completed and the file pathnames are valid. It also ensures that
+ * nonexistent problems are not removed.
+ *
+ * @author Krishnakumar Bhattaram
+ * @version May 19, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: none
+ */
 public class RemoveMenu
 {
+	/**
+	 * Holds the GUI elements
+	 */
     private JFrame frame;
 
+    /**
+   	 * The problem database for this set
+   	 */
     private ProblemDatabase problem;
 
+    /**
+	 * The text field for the problem name
+	 */
     private JTextField namepathfield;
 
+    /**
+	 * Type of problem to add chosen by the buttons
+	 */
     private int type;
 
+    /**
+	 * The button to select problem type as kinematics
+	 */
     private JButton kinematics;
 
+    /**
+	 * The button to select problem type as newton's laws
+	 */
     private JButton newton;
 
+    /**
+	 * The button to select problem type as energy
+	 */
     private JButton energy;
 
+    /**
+	 * The button to select problem type as rotation
+	 */
     private JButton rotation;
 
+    /**
+	 * The button to select problem type as gravitation
+	 */
     private JButton gravitation;
 
+    /**
+   	 * The button to select problem type as fluids
+   	 */
     private JButton fluids;
 
+    /**
+	 * The container of the frame
+	 */
     private Container c;
 
+    /**
+	 * The text label to warn that the fields are not completed
+	 */
     private JLabel warntxt;
 
+    /**
+	 * The text label to indicate that a problem was removed
+	 */
     private JLabel newtxt;
 
+    /**
+	 * The text label to warn that the name is not in problem
+	 */
     private JLabel notfoundtxt;
     
+    /**
+	 * The statistics from this set
+	 */
     private Statistics stats;
 
-
+    /**
+     * The constructor, which makes visible the frame and adds the buttons and text fields
+     * @param problem	
+     * 			The problem database for this set
+     * @param statistics
+     * 			The statistics for this set
+     */
     public RemoveMenu( ProblemDatabase problem, Statistics statistics )
     {
         type = -1;
@@ -142,7 +204,17 @@ public class RemoveMenu
         frame.setVisible( true );
     }
 
-
+    /**
+     * Handles when the back button is clicked; when clicked, returns to
+     * MainMenu by closing all of TypeMenu and creating a MainMenu object.
+     *
+     * @author Austin Lei
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -152,7 +224,18 @@ public class RemoveMenu
         }
     }
 
-
+    /**
+     * Handles when the enter button is clicked; when clicked, checks if all conditions are 
+     * satisfied (if all fields are entered and all pathnames exist) and displays the appropriate
+     * warnings/successes
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class PathnameListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -189,7 +272,17 @@ public class RemoveMenu
         }
     }
 
-
+    /**
+     * Handles when the kinematics button is clicked; when clicked, changes the type field to match
+     * the topic chosen and disables the chosen button while enabling all others.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class kinematicsListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -204,7 +297,17 @@ public class RemoveMenu
         }
     }
 
-
+    /**
+     * Handles when the newton button is clicked; when clicked, changes the type field to match
+     * the topic chosen and disables the chosen button while enabling all others.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class newtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -219,7 +322,17 @@ public class RemoveMenu
         }
     }
 
-
+    /**
+     * Handles when the energy button is clicked; when clicked, changes the type field to match
+     * the topic chosen and disables the chosen button while enabling all others.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class energyListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -234,7 +347,17 @@ public class RemoveMenu
         }
     }
 
-
+    /**
+     * Handles when the rotation button is clicked; when clicked, changes the type field to match
+     * the topic chosen and disables the chosen button while enabling all others.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class rotationListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -249,7 +372,17 @@ public class RemoveMenu
         }
     }
 
-
+    /**
+     * Handles when the gravitational button is clicked; when clicked, changes the type field to match
+     * the topic chosen and disables the chosen button while enabling all others.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class gravitationListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -264,7 +397,17 @@ public class RemoveMenu
         }
     }
 
-
+    /**
+     * Handles when the fluids button is clicked; when clicked, changes the type field to match
+     * the topic chosen and disables the chosen button while enabling all others.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class fluidsListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
