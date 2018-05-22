@@ -74,6 +74,16 @@ public class TrainMenu
      */
     private int timerCount;
 
+    /**
+     * Holds when the time period for a certain problem started.
+     */
+    private int timeStart;
+
+    /**
+     * Holds the time taken for each problem.
+     */
+    private int[] timePerProblem;
+
 
     /**
      * Constructs the TrainMenu object; creates the problem image, timer, back
@@ -90,6 +100,7 @@ public class TrainMenu
         stats = statistics;
         question = new Problem[25];
         answers = new char[25];
+        timePerProblem = new int[25];
 
         index = 0;
 
@@ -190,7 +201,7 @@ public class TrainMenu
      * Updates the frame to show the current problem given by the index.
      */
     private void update()
-    {
+    {   
         ImageIcon icon = createImageIcon( question[index].getProblemImage(), "image1" );
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
@@ -204,6 +215,8 @@ public class TrainMenu
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
         curAns.setText( "Current Answer: " + answers[index] );
+        
+        timeStart = timerCount;
     }
 
 
@@ -218,16 +231,13 @@ public class TrainMenu
 
         timer.stop();
         
+        timePerProblem[index] += timerCount - timeStart;
+
         int[] categories = new int[6];
-        
-        for (int i = 0; i < 25; i++)
+
+        for ( int i = 0; i < 25; i++ )
         {
             categories[question[i].getType()]++;
-        }
-        
-        for (int i = 0; i < 6; i++)
-        {
-            stats.addTime( i, 180*categories[i] );
         }
 
         for ( int i = 0; i < 25; i++ )
@@ -361,6 +371,7 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'A';
+            timePerProblem[index] += timerCount - timeStart;
             if ( index < 24 )
             {
                 index++;
@@ -387,6 +398,7 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'B';
+            timePerProblem[index] += timerCount - timeStart;
             if ( index < 24 )
             {
                 index++;
@@ -413,6 +425,7 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'C';
+            timePerProblem[index] += timerCount - timeStart;
             if ( index < 24 )
             {
                 index++;
@@ -439,6 +452,7 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'D';
+            timePerProblem[index] += timerCount - timeStart;
             if ( index < 24 )
             {
                 index++;
@@ -465,6 +479,7 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             answers[index] = 'E';
+            timePerProblem[index] += timerCount - timeStart;
             if ( index < 24 )
             {
                 index++;
@@ -489,6 +504,7 @@ public class TrainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
+            timePerProblem[index] += timerCount - timeStart;
             if ( index != 0 )
             {
                 index--;
@@ -513,6 +529,7 @@ public class TrainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
+            timePerProblem[index] += timerCount - timeStart;
             if ( index != 24 )
             {
                 index++;
