@@ -4,15 +4,37 @@ import java.util.*;
 
 public class Statistics
 {
+    /**
+     * TotalProblems holds the total problems for each category, with the same
+     * order throughout all the classes
+     */
     int[] totalProblems;
 
+    /**
+     * Holds the numer of problems right for each category, with the same order
+     * of categories as quickquiz
+     */
     int[] correctProblems;
 
+    /**
+     * This double array holds all the percents for the different categories
+     */
     Double[] quickQuizPercents;
 
+    /**
+     * This holds the times for all the different categories
+     */
     int[] quickQuizTimes;
 
 
+    /**
+     * This constructs Statistics, initializing the quickQuizPercents to an
+     * empty array of size 6 to hold the percents for each category of problems.
+     * The quickQuizTimes array is initialized to an empty array also of size 6
+     * to hold all of the times. All values are set to 0.0 (for
+     * quickQuizPercents) or 0 (for quickQuizTimes), and totalProblems and
+     * correctProblems are also initialized to empty integer arrays of size 6.
+     */
     public Statistics()
     {
         quickQuizPercents = new Double[6];
@@ -29,15 +51,44 @@ public class Statistics
     }
 
 
+    /**
+     * Adds the time to the correct category, taking in two parameters: the time
+     * to add and the category to which the time should go in.
+     * 
+     * @param category
+     *            is the category of which the time should be added to
+     * @param newTime
+     *            is the increased amount of time of which should be added to
+     *            the time integer array
+     */
     public void addTime( int category, int newTime )
     {
         quickQuizTimes[category] += newTime;
     }
 
 
+    /**
+     * This returns the amount of time spent on a category of problems, which is the 
+     * @param category is the category of the problems which the user wants to see the time of
+     * @return
+     */
     public int getTime( int category )
     {
-        return quickQuizTimes[category];
+        int total = 0;
+        int time = 0;
+        for ( int i = 0; i < 6; i++ )
+        {
+            time += quickQuizTimes[i];
+            total += totalProblems[i];
+        }
+        if ( total != 0 )
+        {
+            return time / total;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
 

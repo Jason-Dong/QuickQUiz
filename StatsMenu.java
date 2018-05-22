@@ -58,7 +58,7 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         text.setBounds( 100, 30, 600, 75 );
 
         JLabel avgTimePerProblem = new JLabel(
-            "Average Time Per Problem" );
+            "Average Time Per Problem in Seconds" );
         avgTimePerProblem.setFont( new Font( "font", Font.PLAIN, 30 ) );
         avgTimePerProblem.setHorizontalAlignment( JLabel.CENTER );
         avgTimePerProblem.setBounds( 100, 105, 600, 75 );
@@ -81,7 +81,7 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         rotation = new JLabel( "Rotation: " + stats.getTime( 3 ) );
         rotation.setBounds( 400, 200, 100, 20 );
 
-        gravitation = new JLabel( "Graviation: " + stats.getTime( 4 ) );
+        gravitation = new JLabel( "Gravitation: " + stats.getTime( 4 ) );
         gravitation.setBounds( 500, 200, 100, 20 );
 
         fluids = new JLabel( "Fluids: " + stats.getTime( 5 ) );
