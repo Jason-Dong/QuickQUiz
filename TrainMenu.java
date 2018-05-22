@@ -201,7 +201,7 @@ public class TrainMenu
      * Updates the frame to show the current problem given by the index.
      */
     private void update()
-    {   
+    {
         ImageIcon icon = createImageIcon( question[index].getProblemImage(), "image1" );
         Image image = icon.getImage();
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
@@ -215,7 +215,7 @@ public class TrainMenu
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
         curAns.setText( "Current Answer: " + answers[index] );
-        
+
         timeStart = timerCount;
     }
 
@@ -230,15 +230,8 @@ public class TrainMenu
         int score = 0;
 
         timer.stop();
-        
+
         timePerProblem[index] += timerCount - timeStart;
-
-        int[] categories = new int[6];
-
-        for ( int i = 0; i < 25; i++ )
-        {
-            categories[question[i].getType()]++;
-        }
 
         for ( int i = 0; i < 25; i++ )
         {
@@ -251,6 +244,8 @@ public class TrainMenu
             {
                 stats.addScore( 0, 1, question[i].getType() );
             }
+            stats.addTime( question[i].getType(), timePerProblem[i] );
+
         }
 
         frame.dispose();
