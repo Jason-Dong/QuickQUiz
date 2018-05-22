@@ -9,16 +9,34 @@ import javax.swing.*;
 
 public class StartMenu
 {
+	/**
+	 * Holds the GUI elements
+	 */
     private JFrame frame;
 
+    /**
+	 * The text field for the problem name
+	 */
     private JTextField namepathfield;
 
+    /**
+	 * The container of the frame
+	 */
     private Container c;
 
+    /**
+	 * The text label to warn that the fields are not completed
+	 */
     private JLabel warntxt;
 
+    /**
+	 * The text label to warn that the name is not in problem
+	 */
     private JLabel notfoundtxt;
     
+    /**
+	 * The statistics from this set
+	 */
     private Statistics stats;
 
 
