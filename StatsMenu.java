@@ -7,7 +7,8 @@ import java.util.Scanner;
 import javax.swing.*;
 
 
-public class StatsMenu
+public class StatsMenu // problem encountered: percent dividing by 0: add
+                       // conditional statement in Statistics
 {
     private Statistics stats;
 
@@ -26,6 +27,18 @@ public class StatsMenu
     private JLabel gravitation;
 
     private JLabel fluids;
+
+    private JLabel kinematicsRight;
+
+    private JLabel newtonRight;
+
+    private JLabel energyRight;
+
+    private JLabel rotationRight;
+
+    private JLabel gravitationRight;
+
+    private JLabel fluidsRight;
 
 
     // percent by topic, average time per problem (array of time),
@@ -50,23 +63,49 @@ public class StatsMenu
         avgTimePerProblem.setHorizontalAlignment( JLabel.CENTER );
         avgTimePerProblem.setBounds( 100, 105, 600, 75 );
 
-        kinematics = new JLabel( "Kinematics: " + stats.getTime( 0 ) );
-        kinematics.setBounds( 100, 320, 100, 20 );
+        JLabel avgNumRight = new JLabel(
+            "Average Number of Problems Right" );
+        avgNumRight.setFont( new Font( "font", Font.PLAIN, 30 ) );
+        avgNumRight.setHorizontalAlignment( JLabel.CENTER );
+        avgNumRight.setBounds( 100, 250, 600, 75 );
 
-        newton = new JLabel( "Newton's Laws: " + stats.getTime( 1 ) );
-        newton.setBounds( 200, 320, 100, 20 );
+        kinematics = new JLabel( "Kinematics: " + stats.getTime( 0 ) );
+        kinematics.setBounds( 100, 200, 100, 20 );
+
+        newton = new JLabel( "Newton: " + stats.getTime( 1 ) );
+        newton.setBounds( 200, 200, 100, 20 );
 
         energy = new JLabel( "Energy: " + stats.getTime( 2 ) );
-        energy.setBounds( 300, 320, 100, 20 );
+        energy.setBounds( 300, 200, 100, 20 );
 
         rotation = new JLabel( "Rotation: " + stats.getTime( 3 ) );
-        rotation.setBounds( 400, 320, 100, 20 );
+        rotation.setBounds( 400, 200, 100, 20 );
 
         gravitation = new JLabel( "Graviation: " + stats.getTime( 4 ) );
-        gravitation.setBounds( 500, 320, 100, 20 );
+        gravitation.setBounds( 500, 200, 100, 20 );
 
         fluids = new JLabel( "Fluids: " + stats.getTime( 5 ) );
-        fluids.setBounds( 600, 320, 100, 20 );
+        fluids.setBounds( 600, 200, 100, 20 );
+
+        kinematicsRight = new JLabel(
+            "Kinematics: " + stats.getPercent( 0 ) );
+        kinematicsRight.setBounds( 100, 350, 100, 20 );
+
+        newtonRight = new JLabel( "Newton: " + stats.getPercent( 1 ) );
+        newtonRight.setBounds( 200, 350, 100, 20 );
+
+        energyRight = new JLabel( "Energy: " + stats.getPercent( 2 ) );
+        energyRight.setBounds( 300, 350, 100, 20 );
+
+        rotationRight = new JLabel( "Rotation: " + stats.getPercent( 3 ) );
+        rotationRight.setBounds( 400, 350, 100, 20 );
+
+        gravitationRight = new JLabel(
+            "Graviation: " + stats.getPercent( 4 ) );
+        gravitationRight.setBounds( 500, 350, 100, 20 );
+
+        fluidsRight = new JLabel( "Fluids: " + stats.getPercent( 5 ) );
+        fluidsRight.setBounds( 600, 350, 100, 20 );
 
         frame = new JFrame( "StatsMenu" );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -77,12 +116,19 @@ public class StatsMenu
         c.add( back );
         c.add( text );
         c.add( avgTimePerProblem );
+        c.add( avgNumRight );
         c.add( kinematics );
         c.add( newton );
         c.add( energy );
         c.add( rotation );
         c.add( gravitation );
         c.add( fluids );
+        c.add( kinematicsRight );
+        c.add( newtonRight );
+        c.add( energyRight );
+        c.add( rotationRight );
+        c.add( gravitationRight );
+        c.add( fluidsRight );
 
         frame.setResizable( false );
         frame.setVisible( true );
