@@ -233,7 +233,7 @@ public class QQMenu
     private void updateSolutionsPage( Problem prob )
     {
         frame.dispose();
-        stats.addTime( timerCount );
+        stats.addTime( forwardStack.peek().getType(), timerCount );
         timerCount = 0;
 
         scoreDisplay.setText( "Score: " + totalScore );
