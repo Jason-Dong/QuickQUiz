@@ -253,7 +253,7 @@ public class QQMenu
         nextProb.addActionListener( new NextButtonListener() );
 
         JButton viewSol = new JButton( "See Solution" );
-        viewSol.setBounds( 300, 425, 200, 50 );
+        viewSol.setBounds( 300, 450, 200, 25 );
         viewSol.addActionListener( new ViewButtonListener() );
 
         JButton continueButton = new JButton( "Continue to New Problem" );
@@ -273,6 +273,10 @@ public class QQMenu
         c.add( continueButton );
         c.add( problemImage );
         c.add( scoreDisplay );
+        
+        JLabel answer = new JLabel("Answer: " + forwardStack.peek().getAnswer());
+        answer.setHorizontalAlignment( JLabel.CENTER );
+        answer.setBounds( 200, 425, 400, 25 );
 
         ImageIcon icon = createImageIcon( forwardStack.peek().getProblemImage(), "image" );
         Image image = icon.getImage();
@@ -284,6 +288,7 @@ public class QQMenu
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
+        c.add( answer );
         c.add( problemImage );
 
         frame.setVisible( true );

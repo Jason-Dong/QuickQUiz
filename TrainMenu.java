@@ -84,6 +84,12 @@ public class TrainMenu
      */
     private int[] timePerProblem;
 
+    /**
+     * Denotes whether the finish button has already been clicked; used to show
+     * answers.
+     */
+    private boolean finished;
+
 
     /**
      * Constructs the TrainMenu object; creates the problem image, timer, back
@@ -146,7 +152,7 @@ public class TrainMenu
         nextProb.addActionListener( new NextButtonListener() );
 
         curAns = new JLabel( "Current Answer: " + answers[index] );
-        curAns.setBounds( 200, 400, 375, 25 );
+        curAns.setBounds( 200, 400, 400, 25 );
         curAns.setHorizontalAlignment( JLabel.CENTER );
 
         timerDisplay = new JLabel( "Time Left: 75:00" );
@@ -214,7 +220,14 @@ public class TrainMenu
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
-        curAns.setText( "Current Answer: " + answers[index] );
+        if ( !finished )
+        {
+            curAns.setText( "Current Answer: " + answers[index] );
+        }
+        else
+        {
+            curAns.setText( "Answer: " + question[index].getAnswer() );
+        }
 
         timeStart = timerCount;
     }
@@ -230,6 +243,8 @@ public class TrainMenu
         int score = 0;
 
         timer.stop();
+        
+        finished = true;
 
         timePerProblem[index] += timerCount - timeStart;
 
@@ -269,7 +284,10 @@ public class TrainMenu
         JButton viewSol = new JButton( "See Solution" );
         viewSol.setBounds( 300, 450, 200, 50 );
         viewSol.addActionListener( new ViewButtonListener() );
-
+        
+        curAns.setHorizontalAlignment( JLabel.CENTER );
+        curAns.setBounds( 200, 390, 400, 25 );
+        
         frame = new JFrame( "Training Menu" );
         frame.setDefaultCloseOperation( 0 );
         Container c = frame.getContentPane();
@@ -286,6 +304,7 @@ public class TrainMenu
         c.add( viewSol );
         c.add( problemImage );
         c.add( numCorrect );
+        c.add( curAns );
 
         frame.setVisible( true );
         frame.setResizable( false );
