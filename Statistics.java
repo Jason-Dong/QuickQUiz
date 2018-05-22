@@ -51,18 +51,26 @@ public class Statistics
             total += totalProblems[i];
         }
         if ( total != 0 )
+        {
             return correct / total;
+        }
         else
+        {
             return 0.0;
+        }
     }
 
 
     public double getPercent( int type )
     {
         if ( totalProblems[type] != 0 )
+        {
             return correctProblems[type] / totalProblems[type];
+        }
         else
+        {
             return 0.0;
+        }
     }
 
 
@@ -75,7 +83,16 @@ public class Statistics
 
     public double avgTimePerProblem( int category )
     {
-        return (double)quickQuizTimes[category] / totalProblems[category];
+        if ( totalProblems[category] != 0 )
+        {
+            return (double)quickQuizTimes[category]
+                / totalProblems[category];
+        }
+
+        else
+        {
+            return 0.0;
+        }
     }
 
 
@@ -88,7 +105,14 @@ public class Statistics
             total += quickQuizTimes[i];
             totProblems += totalProblems[i];
         }
-        return (double)total / totProblems;
+        if ( totProblems != 0 )
+        {
+            return (double)total / totProblems;
+        }
+        else
+        {
+            return 0.0;
+        }
     }
 
 }
