@@ -11,7 +11,7 @@ import javax.swing.*;
  * problems. At any time, the user can go back to MainMenu with the back button.
  *
  * @author AustinLei
- * @version May 19, 2018
+ * @version May 22, 2018
  * @author Period: 2
  * @author Assignment: QuickQuiz
  *
@@ -204,7 +204,9 @@ public class TrainMenu
 
 
     /**
-     * Updates the frame to show the current problem given by the index.
+     * Updates the frame to show the current problem given by the index and to
+     * show the current answer (if finished button not clicks) or the correct
+     * answer (if finished button is clicked).
      */
     private void update()
     {
@@ -243,7 +245,7 @@ public class TrainMenu
         int score = 0;
 
         timer.stop();
-        
+
         finished = true;
 
         timePerProblem[index] += timerCount - timeStart;
@@ -284,10 +286,10 @@ public class TrainMenu
         JButton viewSol = new JButton( "See Solution" );
         viewSol.setBounds( 300, 450, 200, 50 );
         viewSol.addActionListener( new ViewButtonListener() );
-        
+
         curAns.setHorizontalAlignment( JLabel.CENTER );
         curAns.setBounds( 200, 390, 400, 25 );
-        
+
         frame = new JFrame( "Training Menu" );
         frame.setDefaultCloseOperation( 0 );
         Container c = frame.getContentPane();
@@ -317,7 +319,7 @@ public class TrainMenu
      * updateFinish() to allow the user to see the problem solutions.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -351,7 +353,7 @@ public class TrainMenu
      * MainMenu by closing all of TypeMenu and creating a MainMenu object.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -374,7 +376,7 @@ public class TrainMenu
      * last problem. If at last problem, does not move to any problem.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -401,7 +403,7 @@ public class TrainMenu
      * last problem. If at last problem, does not move to any problem.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -428,7 +430,7 @@ public class TrainMenu
      * last problem. If at last problem, does not move to any problem.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -455,7 +457,7 @@ public class TrainMenu
      * last problem. If at last problem, does not move to any problem.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -482,7 +484,7 @@ public class TrainMenu
      * last problem. If at last problem, does not move to any problem.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -508,7 +510,7 @@ public class TrainMenu
      * previous problem, if possible. If not, does nothing.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -533,7 +535,7 @@ public class TrainMenu
      * problem, if possible. If not, does nothing.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -558,7 +560,7 @@ public class TrainMenu
      * SolutionsMenu for current problem.
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -578,7 +580,7 @@ public class TrainMenu
      * updateFinish().
      *
      * @author Austin Lei
-     * @version May 19, 2018
+     * @version May 22, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *

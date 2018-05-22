@@ -15,7 +15,7 @@ import javax.swing.Timer;
  * to MainMenu with the back button.
  *
  * @author Austin Lei
- * @version May 19, 2018
+ * @version May 22, 2018
  * @author Period: 2
  * @author Assignment: QuickQuiz
  *
@@ -222,10 +222,10 @@ public class QQMenu
 
     /**
      * Allow user to see the solutions page for a certain problem; displays the
-     * image of the problem, the score, buttons to go back and forth between
-     * problems, a back button, another button to see the solution, and another
-     * button to see a new problem. Also adds the time used for the problem into
-     * statistics.
+     * image of the problem, the score, the correct answer, buttons to go back
+     * and forth between problems, a back button, another button to see the
+     * solution, and another button to see a new problem. Also adds the time
+     * used for the problem into statistics.
      * 
      * @param prob
      *            the problem to display
@@ -273,8 +273,8 @@ public class QQMenu
         c.add( continueButton );
         c.add( problemImage );
         c.add( scoreDisplay );
-        
-        JLabel answer = new JLabel("Answer: " + forwardStack.peek().getAnswer());
+
+        JLabel answer = new JLabel( "Answer: " + forwardStack.peek().getAnswer() );
         answer.setHorizontalAlignment( JLabel.CENTER );
         answer.setBounds( 200, 425, 400, 25 );
 
@@ -356,6 +356,18 @@ public class QQMenu
     }
 
 
+    /**
+     * Deals with timing; every second, decrements the timer by one second,
+     * starting at 75 minutes. When the timer reaches 0, automatically calls
+     * updateFinish() to allow the user to see the problem solutions.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class TimerListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -374,6 +386,17 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the back button is clicked; when clicked, returns to
+     * MainMenu by closing all of TypeMenu and creating a MainMenu object.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -385,6 +408,18 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the A button is clicked; when clicked, sets the answer to
+     * the current problem to A, updates the score, and updates the page to show
+     * the solutions.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class AButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -396,6 +431,18 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the B button is clicked; when clicked, sets the answer to
+     * the current problem to B, updates the score, and updates the page to show
+     * the solutions.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -407,6 +454,18 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the C button is clicked; when clicked, sets the answer to
+     * the current problem to C, updates the score, and updates the page to show
+     * the solutions.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class CButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -418,6 +477,18 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the D button is clicked; when clicked, sets the answer to
+     * the current problem to D, updates the score, and updates the page to show
+     * the solutions.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class DButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -429,6 +500,18 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the E button is clicked; when clicked, sets the answer to
+     * the current problem to E, updates the score, and updates the page to show
+     * the solutions.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class EButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -440,6 +523,18 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the previous button is clicked; when clicked, moves to the
+     * previous problem and shows its solution, if possible. If not, does
+     * nothing.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class PrevButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -453,6 +548,17 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the next button is clicked; when clicked, moves to the next
+     * problem and shows its solution, if possible. If not, does nothing.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class NextButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -466,6 +572,17 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the View Solutions button is clicked; when clicked, creates
+     * SolutionsMenu for current problem.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class ViewButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
@@ -475,6 +592,17 @@ public class QQMenu
     }
 
 
+    /**
+     * Handles when the Continue to New Problem button is clicked; when clicked,
+     * calls updateProblem.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class ContinueButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
