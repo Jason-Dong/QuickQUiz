@@ -68,22 +68,20 @@ public class Statistics
 
 
     /**
-     * This returns the amount of time spent on a category of problems, which is the 
-     * @param category is the category of the problems which the user wants to see the time of
-     * @return
+     * This returns the average amount of time spent on a category of problems,
+     * which is the parameter taken in.
+     * 
+     * @param category
+     *            is the category of the problems which the user wants to see
+     *            the time of
+     * @return the integer average number of seconds that the person has spent
+     *         on each category of problems
      */
     public int getTime( int category )
     {
-        int total = 0;
-        int time = 0;
-        for ( int i = 0; i < 6; i++ )
+        if ( totalProblems[category] != 0 )
         {
-            time += quickQuizTimes[i];
-            total += totalProblems[i];
-        }
-        if ( total != 0 )
-        {
-            return time / total;
+            return quickQuizTimes[category] / totalProblems[category];
         }
         else
         {
@@ -92,6 +90,11 @@ public class Statistics
     }
 
 
+    /**
+     * TODO Write your method description here.
+     * 
+     * @return
+     */
     public double getPercent()
     {
         int total = 0;
@@ -103,7 +106,7 @@ public class Statistics
         }
         if ( total != 0 )
         {
-            return correct / total;
+            return (double) correct / total;
         }
         else
         {
@@ -116,7 +119,7 @@ public class Statistics
     {
         if ( totalProblems[type] != 0 )
         {
-            return correctProblems[type] / totalProblems[type];
+            return (double) correctProblems[type] / totalProblems[type];
         }
         else
         {
