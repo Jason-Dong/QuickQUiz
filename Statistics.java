@@ -96,7 +96,8 @@ public class Statistics
      * total number of problems, then returns the correct average (after
      * checking for a dividing by 0 menu)
      * 
-     * @return 
+     * @return double percentage of problems, or 0.0 if no problems completed
+     *         yet
      */
     public double getPercent()
     {
@@ -118,6 +119,16 @@ public class Statistics
     }
 
 
+    /**
+     * Returns the percent when given the type as a parameter. This returns the
+     * percent of problems right for a type of problem, and if there are no
+     * problems (the index for that totalproblems is 0) then returns 0.0
+     * 
+     * @param type
+     *            is the type of problem (categories determined previously)
+     * @return double percentage right or 0.0 if no problems have been completed
+     *         yet
+     */
     public double getPercent( int type )
     {
         if ( totalProblems[type] != 0 )
@@ -131,6 +142,17 @@ public class Statistics
     }
 
 
+    /**
+     * This method adds the proper number of problems correct and total number
+     * of problems completed to the respective type of problem.
+     * 
+     * @param numCorrect
+     *            is the number of problems the user correctly completed
+     * @param TotalNum
+     *            is the total number of problems
+     * @param type
+     *            is the category of problem
+     */
     public void addScore( int numCorrect, int TotalNum, int type )
     {
         correctProblems[type] += numCorrect;
@@ -138,6 +160,16 @@ public class Statistics
     }
 
 
+    /**
+     * Returns the average time the user spent per problem in a specific
+     * category, given by the category integer taken as a parameter. If no
+     * problems have been completed, then 0.0 is returned
+     * 
+     * @param category
+     *            is the type of problems that the average time is requested for
+     * @return the average time spent per problem or 0.0 if no problems have
+     *         been completed
+     */
     public double avgTimePerProblem( int category )
     {
         if ( totalProblems[category] != 0 )
@@ -153,6 +185,14 @@ public class Statistics
     }
 
 
+    /**
+     * Returns the average time the user spent per problem in all the
+     * categories, which means summing up the total times as well as the total
+     * number of problems completed
+     * 
+     * @return 0.0 if no problems have been completed or the average time spent
+     *         per all problems if problems have been attempted
+     */
     public double avgTimePerProblem()
     {
         int total = 0;
