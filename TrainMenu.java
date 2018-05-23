@@ -9,9 +9,10 @@ import javax.swing.*;
  * many as possible, then clicks finish test, which allows the user see their
  * score, scroll back and forth between problems, and see solutions for
  * problems. At any time, the user can go back to MainMenu with the back button.
+ * This class is called from MainMenu
  *
  * @author AustinLei
- * @version May 22, 2018
+ * @version May 23, 2018
  * @author Period: 2
  * @author Assignment: QuickQuiz
  *
@@ -150,7 +151,7 @@ public class TrainMenu
         JButton nextProb = new JButton( "Next Problem" );
         nextProb.setBounds( 475, 425, 150, 50 );
         nextProb.addActionListener( new NextButtonListener() );
-        
+
         JButton seeProb = new JButton( "See a Clearer Image" );
         seeProb.setBounds( 325, 425, 150, 50 );
         seeProb.addActionListener( new SeeButtonListener() );
@@ -562,10 +563,10 @@ public class TrainMenu
 
     /**
      * Handles when the View Solutions button is clicked; when clicked, creates
-     * SolutionsMenu for current problem.
+     * ImageMenu to display the solution image for the problem.
      *
      * @author Austin Lei
-     * @version May 22, 2018
+     * @version May 23, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
@@ -599,6 +600,18 @@ public class TrainMenu
         }
     }
 
+
+    /**
+     * Handles when the See a Clearer Image button is clicked; when clicked,
+     * creates a ImageMenu object to display a better problem image.
+     *
+     * @author Austin Lei
+     * @version May 23, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class SeeButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )

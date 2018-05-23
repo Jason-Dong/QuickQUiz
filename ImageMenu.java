@@ -25,7 +25,6 @@ public class ImageMenu
         }
         Image image = icon.getImage();
         Image newImage;
-        System.out.println( icon.getIconHeight() + " " + icon.getIconWidth() );
         if ( icon.getIconWidth() >= icon.getIconHeight() )
         {
 
