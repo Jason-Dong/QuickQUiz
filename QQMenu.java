@@ -587,7 +587,7 @@ public class QQMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            SolutionsMenu sol = new SolutionsMenu( forwardStack.peek() );
+            ImageMenu sol = new ImageMenu( forwardStack.peek(), false );
         }
     }
 
@@ -608,6 +608,15 @@ public class QQMenu
         public void actionPerformed( ActionEvent e )
         {
             updateProblem();
+        }
+    }
+
+
+    private class SeeButtonListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            ImageMenu menu = new ImageMenu( forwardStack.peek(), true );
         }
     }
 

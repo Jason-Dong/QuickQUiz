@@ -144,12 +144,16 @@ public class TrainMenu
         finish.addActionListener( new FinishButtonListener() );
 
         JButton prevProb = new JButton( "Previous Problem" );
-        prevProb.setBounds( 250, 425, 150, 50 );
+        prevProb.setBounds( 175, 425, 150, 50 );
         prevProb.addActionListener( new PrevButtonListener() );
 
         JButton nextProb = new JButton( "Next Problem" );
-        nextProb.setBounds( 400, 425, 150, 50 );
+        nextProb.setBounds( 475, 425, 150, 50 );
         nextProb.addActionListener( new NextButtonListener() );
+        
+        JButton seeProb = new JButton( "See a Clearer Image" );
+        seeProb.setBounds( 325, 425, 150, 50 );
+        seeProb.addActionListener( new SeeButtonListener() );
 
         curAns = new JLabel( "Current Answer: " + answers[index] );
         curAns.setBounds( 200, 400, 400, 25 );
@@ -175,6 +179,7 @@ public class TrainMenu
         c.add( finish );
         c.add( prevProb );
         c.add( nextProb );
+        c.add( seeProb );
         c.add( curAns );
         c.add( timerDisplay );
 
@@ -570,7 +575,7 @@ public class TrainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            SolutionsMenu sol = new SolutionsMenu( question[index] );
+            ImageMenu sol = new ImageMenu( question[index], false );
         }
     }
 
@@ -591,6 +596,14 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             updateFinish();
+        }
+    }
+
+    private class SeeButtonListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            ImageMenu menu = new ImageMenu( question[index], true );
         }
     }
 
