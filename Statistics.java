@@ -91,9 +91,12 @@ public class Statistics
 
 
     /**
-     * TODO Write your method description here.
+     * Returns the average percent for all the problems done, typically called
+     * by TrainMenu. This sums the total number of problems right as well as the
+     * total number of problems, then returns the correct average (after
+     * checking for a dividing by 0 menu)
      * 
-     * @return
+     * @return 
      */
     public double getPercent()
     {
@@ -106,7 +109,7 @@ public class Statistics
         }
         if ( total != 0 )
         {
-            return (double) correct / total;
+            return (double)correct / total;
         }
         else
         {
@@ -119,7 +122,7 @@ public class Statistics
     {
         if ( totalProblems[type] != 0 )
         {
-            return (double) correctProblems[type] / totalProblems[type];
+            return (double)correctProblems[type] / totalProblems[type];
         }
         else
         {

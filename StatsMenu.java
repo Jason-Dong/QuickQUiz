@@ -40,6 +40,12 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
 
     private JLabel fluidsRight;
 
+    private int hours[];
+
+    private String colon;
+
+    private int remainingSeconds[];
+
 
     // percent by topic, average time per problem (array of time),
 
@@ -47,6 +53,9 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
     {
         stats = statistics;
         problem = prob;
+        hours = new int[6];
+        remainingSeconds = new int[6];
+        colon = ":";
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
@@ -58,7 +67,7 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         text.setBounds( 100, 30, 600, 75 );
 
         JLabel avgTimePerProblem = new JLabel(
-            "Average Time Per Problem" );
+            "Average Time Per Problem in Seconds" );
         avgTimePerProblem.setFont( new Font( "font", Font.PLAIN, 30 ) );
         avgTimePerProblem.setHorizontalAlignment( JLabel.CENTER );
         avgTimePerProblem.setBounds( 100, 105, 600, 75 );
@@ -69,43 +78,57 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         avgNumRight.setHorizontalAlignment( JLabel.CENTER );
         avgNumRight.setBounds( 100, 250, 600, 75 );
 
-        kinematics = new JLabel( "Kinematics: " + stats.getTime( 0 ) );
-        kinematics.setBounds( 100, 200, 100, 20 );
+        for ( int i = 0; i < 6; i++ )
+        {
+            if ( stats.getTime( i ) > 60 )
+            {
+                hours[i] += ( stats.getTime( i ) ) / 60;
+                remainingSeconds[i] = stats.getTime( i ) - hours[i] * 60;
+            }
+        }
+        kinematics = new JLabel(
+            "Kinematics: " + hours[0] + colon + remainingSeconds[0] );
+        kinematics.setBounds( 150, 200, 100, 20 );
 
-        newton = new JLabel( "Newton: " + stats.getTime( 1 ) );
-        newton.setBounds( 200, 200, 100, 20 );
+        newton = new JLabel(
+            "Newton: " + hours[1] + colon + remainingSeconds[1] );
+        newton.setBounds( 350, 200, 100, 20 );
 
-        energy = new JLabel( "Energy: " + stats.getTime( 2 ) );
-        energy.setBounds( 300, 200, 100, 20 );
+        energy = new JLabel(
+            "Energy: " + hours[2] + colon + remainingSeconds[2] );
+        energy.setBounds( 550, 200, 100, 20 );
 
-        rotation = new JLabel( "Rotation: " + stats.getTime( 3 ) );
-        rotation.setBounds( 400, 200, 100, 20 );
+        rotation = new JLabel(
+            "Rotation: " + hours[3] + colon + remainingSeconds[3] );
+        rotation.setBounds( 150, 230, 100, 20 );
 
-        gravitation = new JLabel( "Graviation: " + stats.getTime( 4 ) );
-        gravitation.setBounds( 500, 200, 100, 20 );
+        gravitation = new JLabel(
+            "Gravitation: " + hours[4] + colon + remainingSeconds[4] );
+        gravitation.setBounds( 350, 230, 100, 20 );
 
-        fluids = new JLabel( "Fluids: " + stats.getTime( 5 ) );
-        fluids.setBounds( 600, 200, 100, 20 );
+        fluids = new JLabel(
+            "Fluids: " + hours[5] + colon + remainingSeconds[5] );
+        fluids.setBounds( 550, 230, 100, 20 );
 
         kinematicsRight = new JLabel(
             "Kinematics: " + stats.getPercent( 0 ) );
-        kinematicsRight.setBounds( 100, 350, 100, 20 );
+        kinematicsRight.setBounds( 150, 350, 100, 20 );
 
         newtonRight = new JLabel( "Newton: " + stats.getPercent( 1 ) );
-        newtonRight.setBounds( 200, 350, 100, 20 );
+        newtonRight.setBounds( 350, 350, 100, 20 );
 
         energyRight = new JLabel( "Energy: " + stats.getPercent( 2 ) );
-        energyRight.setBounds( 300, 350, 100, 20 );
+        energyRight.setBounds( 550, 350, 100, 20 );
 
         rotationRight = new JLabel( "Rotation: " + stats.getPercent( 3 ) );
-        rotationRight.setBounds( 400, 350, 100, 20 );
+        rotationRight.setBounds( 150, 380, 100, 20 );
 
         gravitationRight = new JLabel(
             "Graviation: " + stats.getPercent( 4 ) );
-        gravitationRight.setBounds( 500, 350, 100, 20 );
+        gravitationRight.setBounds( 350, 380, 100, 20 );
 
         fluidsRight = new JLabel( "Fluids: " + stats.getPercent( 5 ) );
-        fluidsRight.setBounds( 600, 350, 100, 20 );
+        fluidsRight.setBounds( 550, 380, 100, 20 );
 
         frame = new JFrame( "StatsMenu" );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
