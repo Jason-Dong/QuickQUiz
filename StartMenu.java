@@ -39,7 +39,11 @@ public class StartMenu
 	 */
     private Statistics stats;
 
-
+    /**
+     * The constructor, which makes visible the frame and adds the buttons and text fields
+     * @param statistics
+     * 			The statistics for this set (from QuickQuiz)
+     */
     public StartMenu(Statistics statistics)
     {
         stats = statistics;
@@ -95,7 +99,18 @@ public class StartMenu
         frame.setVisible( true );
     }
 
-
+    /**
+     * Handles when the enter button is clicked; when clicked, checks if all conditions are 
+     * satisfied (if all fields are entered and all pathnames exist) and displays the appropriate
+     * warnings if not. Otherwise, the frame closes itself and opens MainMenu.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 19, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class PathnameListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
