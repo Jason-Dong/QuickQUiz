@@ -34,7 +34,6 @@ public class ImageMenu
         }
         else
         {
-            System.out.println( "hi" );
             newImage = image.getScaledInstance( 680 * icon.getIconWidth() / icon.getIconHeight(),
                 680,
                 Image.SCALE_DEFAULT );
