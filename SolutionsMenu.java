@@ -3,6 +3,18 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
+/**
+ * This charge is in class of the window which shows the solution for each of
+ * the problems requested. This can be called from either TrainMenu or the
+ * QQMenu
+ *
+ * @author Jason Dong
+ * @version May 23, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: docs.oracle.com
+ */
 public class SolutionsMenu
 {
     private static JFrame thisWindow;
@@ -18,14 +30,20 @@ public class SolutionsMenu
         JButton back = new JButton( "Close" );
         back.setBounds( 375, 500, 50, 50 );
 
-        ImageIcon icon = createImageIcon( prob.getSolutionImage(), "image" );
+        ImageIcon icon = createImageIcon( prob.getSolutionImage(),
+            "image" );
         Image image = icon.getImage();
-        Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
+        Image newImage = image
+            .getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
 
         label1 = new JLabel( "Solution", icon, JLabel.CENTER );
 
         label1.setBounds( 60, 60, 680, 340 );
+        // label1.setVerticalTextPosition( JLabel.BOTTOM ); //only needed for
+        // text underneath
+        // label1.setHorizontalTextPosition( JLabel.CENTER ); //only needed for
+        // text underneath
         back.addActionListener( new BackButtonListener() );
 
         thisWindow = new JFrame( "SolutionsMenu" );
@@ -49,7 +67,7 @@ public class SolutionsMenu
      * passes in a 0, and TrainMenu passes in a 1). It then creates a new
      * TrainMenu GUI window, and closes the SolutionsMenu window.
      *
-     * @author jdong758
+     * @author Jason Dong
      * @version May 9, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz

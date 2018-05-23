@@ -1,59 +1,150 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import javax.swing.*;
 
 
+/**
+ * The StatsMenu class is in charge of displaying the different statistics given
+ * by the Statistics class in an organized manner. This class can be called from
+ * either TrainMenu or QQMenu, and has a back button to return to the screen
+ * this class was called from.
+ *
+ * @author Jason Dong
+ * @version May 23, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: none
+ */
 public class StatsMenu // problem encountered: percent dividing by 0: add
                        // conditional statement in Statistics
 {
+    /**
+     * This is the statstics field for holding the Statistics variable passed in
+     * as a parameter in the constructor
+     */
     private Statistics stats;
 
+    /**
+     * This is the ProblemDatabase field for holding the ProblemDatabase
+     * instance taken in as a parameter in the constructor.
+     */
     private ProblemDatabase problem;
 
+    /**
+     * This is the overall frame for the StatsMenu window
+     */
     private JFrame frame;
 
+    /**
+     * This is the label which will show the average time for the kinematics
+     * problems
+     */
     private JLabel kinematics;
 
+    /**
+     * This is the label which will show the average time for the newton's law
+     * problems
+     */
     private JLabel newton;
 
+    /**
+     * This is the label which will show the average time for all the energy
+     * problems
+     */
     private JLabel energy;
 
+    /**
+     * This is the label which will show the average time spent for all the
+     * rotation problems
+     */
     private JLabel rotation;
 
+    /**
+     * This is the label which shows the average time spent for all the
+     * gravitation problems
+     */
     private JLabel gravitation;
 
+    /**
+     * This is the label which shows the average time spent for all of the fluid
+     * problems
+     */
     private JLabel fluids;
 
+    /**
+     * This is the label which shows the average number of problems the user got
+     * right for the kinematics problems
+     */
     private JLabel kinematicsRight;
 
+    /**
+     * This is the label which shows the average number of problems the user got
+     * right for the Newton's laws problems
+     */
     private JLabel newtonRight;
 
+    /**
+     * This is the label which shows the average number of problems the user got
+     * right for the energy problems
+     */
     private JLabel energyRight;
 
+    /**
+     * This is the label which shows the average number of problems the user got
+     * right for the rotation problems
+     */
     private JLabel rotationRight;
 
+    /**
+     * This is the label which shows the average number of problems the user got
+     * right for the gravitation problems
+     */
     private JLabel gravitationRight;
 
+    /**
+     * This is the label which shows the average number of problems the user got
+     * right for the fluis problems
+     */
     private JLabel fluidsRight;
 
-    private int hours[];
+    /**
+     * This integer array shows the amount of minutes spent for each of the
+     * categories of problems
+     */
+    private int minutes[];
 
+    /**
+     * This string simply holds the colon symbol so is easier to refer to later
+     * on
+     */
     private String colon;
 
+    /**
+     * This integer array shows the amount of seconds remaining after deducting
+     * the correct number of minutes from it
+     */
     private int remainingSeconds[];
 
 
-    // percent by topic, average time per problem (array of time),
-
+    /**
+     * This constructs a StatsMenu. This means creating the two text labels, the
+     * average time per problem and average number right, as well as the
+     * different displays for each of the categories for both of these
+     * categories
+     * 
+     * @param prob
+     *            is the problem database which although is not used in this
+     *            class, is necessary to transfer around when called
+     * @param statistics
+     *            is class which contains all the information which is displayed
+     *            in StatsMenu
+     */
     public StatsMenu( ProblemDatabase prob, Statistics statistics )
     {
         stats = statistics;
         problem = prob;
-        hours = new int[6];
+        minutes = new int[6];
         remainingSeconds = new int[6];
         colon = ":";
 
@@ -82,32 +173,32 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         {
             if ( stats.getTime( i ) > 60 )
             {
-                hours[i] += ( stats.getTime( i ) ) / 60;
-                remainingSeconds[i] = stats.getTime( i ) - hours[i] * 60;
+                minutes[i] += ( stats.getTime( i ) ) / 60;
+                remainingSeconds[i] = stats.getTime( i ) - minutes[i] * 60;
             }
         }
         kinematics = new JLabel(
-            "Kinematics: " + hours[0] + colon + remainingSeconds[0] );
+            "Kinematics: " + minutes[0] + colon + remainingSeconds[0] );
         kinematics.setBounds( 150, 200, 100, 20 );
 
         newton = new JLabel(
-            "Newton: " + hours[1] + colon + remainingSeconds[1] );
+            "Newton: " + minutes[1] + colon + remainingSeconds[1] );
         newton.setBounds( 350, 200, 100, 20 );
 
         energy = new JLabel(
-            "Energy: " + hours[2] + colon + remainingSeconds[2] );
+            "Energy: " + minutes[2] + colon + remainingSeconds[2] );
         energy.setBounds( 550, 200, 100, 20 );
 
         rotation = new JLabel(
-            "Rotation: " + hours[3] + colon + remainingSeconds[3] );
+            "Rotation: " + minutes[3] + colon + remainingSeconds[3] );
         rotation.setBounds( 150, 230, 100, 20 );
 
         gravitation = new JLabel(
-            "Gravitation: " + hours[4] + colon + remainingSeconds[4] );
+            "Gravitation: " + minutes[4] + colon + remainingSeconds[4] );
         gravitation.setBounds( 350, 230, 100, 20 );
 
         fluids = new JLabel(
-            "Fluids: " + hours[5] + colon + remainingSeconds[5] );
+            "Fluids: " + minutes[5] + colon + remainingSeconds[5] );
         fluids.setBounds( 550, 230, 100, 20 );
 
         kinematicsRight = new JLabel(
@@ -159,6 +250,17 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
     }
 
 
+    /**
+     * This class is in charge of the back button, which creates a new MainMenu
+     * class (new window) and disposes of the StatsMenu window.
+     *
+     * @author Jason Dong
+     * @version May 23, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )

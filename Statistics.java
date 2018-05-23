@@ -2,6 +2,19 @@ import java.io.*;
 import java.util.*;
 
 
+/**
+ * This class is in charge of holding the statistics, including average time and
+ * average number of problems right for each category, for all the problems
+ * done. This holds the information regardless of whether the user is using the
+ * QQ mode or the Train mode.
+ *
+ * @author Jason Dong
+ * @version May 23, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: none
+ */
 public class Statistics
 {
     /**
