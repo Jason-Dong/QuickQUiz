@@ -10,34 +10,34 @@ import javax.swing.filechooser.FileSystemView;
 
 public class StartMenu
 {
-	/**
-	 * Holds the GUI elements
-	 */
+    /**
+     * Holds the GUI elements
+     */
     private JFrame frame;
 
     /**
-	 * The text field for the problem name
-	 */
+     * The text field for the problem name
+     */
     private JTextField namepathfield;
 
     /**
-	 * The container of the frame
-	 */
+     * The container of the frame
+     */
     private Container c;
 
     /**
-	 * The text label to warn that the fields are not completed
-	 */
+     * The text label to warn that the fields are not completed
+     */
     private JLabel warntxt;
 
     /**
-	 * The text label to warn that the name is not in problem
-	 */
+     * The text label to warn that the name is not in problem
+     */
     private JLabel notfoundtxt;
     
     /**
-	 * The statistics from this set
-	 */
+     * The statistics from this set
+     */
     private Statistics stats;
     
     private String pathFileChooser;
@@ -46,7 +46,7 @@ public class StartMenu
      * The constructor, which makes visible the frame and adds the enter button and
      * the single text field for the pathname of the folder in which the program is located.
      * @param statistics
-     * 			The statistics for this set (from QuickQuiz)
+     *          The statistics for this set (from QuickQuiz)
      */
     public StartMenu(Statistics statistics)
     {
@@ -66,7 +66,7 @@ public class StartMenu
         pathname.addActionListener( new PathnameListener() );
         
         JButton filechooser = new JButton( "Choose File" );
-        filechooser.setBounds( 500, 200, 100, 20 );
+        filechooser.setBounds( 600, 200, 100, 20 );
         filechooser.addActionListener( new FileListener() );
 
         JLabel text = new JLabel( "Welcome to Quick Quiz!" );
@@ -132,7 +132,7 @@ public class StartMenu
             }
             else
             {
-                String pathproblems = namepathfield.getText() + "ProblemFile/problems.txt";
+                String pathproblems = namepathfield.getText() + "/ProblemFile/problems.txt";
                 try
                 {
                     Scanner readIn = new Scanner( new File( pathproblems ) );
@@ -153,17 +153,17 @@ public class StartMenu
     
     private class FileListener implements ActionListener
     {
-    		public void actionPerformed( ActionEvent e)
-    		{
-    			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-    			jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-    			int returnValue = jfc.showOpenDialog(null);
+            public void actionPerformed( ActionEvent e)
+            {
+                JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int returnValue = jfc.showOpenDialog(null);
 
-    			if (returnValue == JFileChooser.APPROVE_OPTION) {
-    				File selectedFile = jfc.getSelectedFile();
-    				pathFileChooser = selectedFile.getAbsolutePath();
-    				namepathfield.setText(pathFileChooser);
-    			}
-    		}
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = jfc.getSelectedFile();
+                    pathFileChooser = selectedFile.getAbsolutePath();
+                    namepathfield.setText(pathFileChooser);
+                }
+            }
     }
 }
