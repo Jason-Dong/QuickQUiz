@@ -3,8 +3,9 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
 
 
 public class StartMenu
@@ -38,9 +39,12 @@ public class StartMenu
 	 * The statistics from this set
 	 */
     private Statistics stats;
+    
+    private String pathFileChooser;
 
     /**
-     * The constructor, which makes visible the frame and adds the buttons and text fields
+     * The constructor, which makes visible the frame and adds the enter button and
+     * the single text field for the pathname of the folder in which the program is located.
      * @param statistics
      * 			The statistics for this set (from QuickQuiz)
      */
@@ -60,6 +64,10 @@ public class StartMenu
         JButton pathname = new JButton( "Enter" );
         pathname.setBounds( 100, 200, 50, 20 );
         pathname.addActionListener( new PathnameListener() );
+        
+        JButton filechooser = new JButton( "Choose File" );
+        filechooser.setBounds( 500, 200, 100, 20 );
+        filechooser.addActionListener( new FileListener() );
 
         JLabel text = new JLabel( "Welcome to Quick Quiz!" );
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
@@ -91,6 +99,7 @@ public class StartMenu
         c.add( pathname );
         c.add( warntxt );
         c.add( notfoundtxt );
+        c.add(filechooser);
 
         c.add( namepathfield );
         c.add( nametxt );
@@ -140,5 +149,21 @@ public class StartMenu
 
             }
         }
+    }
+    
+    private class FileListener implements ActionListener
+    {
+    		public void actionPerformed( ActionEvent e)
+    		{
+    			JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+    			jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+    			int returnValue = jfc.showOpenDialog(null);
+
+    			if (returnValue == JFileChooser.APPROVE_OPTION) {
+    				File selectedFile = jfc.getSelectedFile();
+    				pathFileChooser = selectedFile.getAbsolutePath();
+    				namepathfield.setText(pathFileChooser);
+    			}
+    		}
     }
 }
