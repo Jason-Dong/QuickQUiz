@@ -736,7 +736,7 @@ public class AddMenu
     
     /**
      * Opens the system's file explorer to allow selection of the directory which 
-     * contains the image files and problem set.
+     * contains the image files and problem set. Only allows selection of PNG files.
      *
      * @author Krishnakumar Bhattaram
      * @version May 23, 2018
@@ -767,7 +767,7 @@ public class AddMenu
     
     /**
      * Opens the system's file explorer to allow selection of the directory which 
-     * contains the image files and problem set.
+     * contains the image files and problem set. Only allows selection of PNG files.
      *
      * @author Krishnakumar Bhattaram
      * @version May 23, 2018
