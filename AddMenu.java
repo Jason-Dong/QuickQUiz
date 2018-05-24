@@ -4,6 +4,8 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -170,6 +172,10 @@ public class AddMenu
         problemtxt.setVerticalAlignment( problemtxt.TOP );
         problempathfield = new JTextField();
         problempathfield.setBounds( 200, 200, 400, 20 );
+        
+        JButton chooseproblem = new JButton( "Choose File" );
+        chooseproblem.setBounds( 600, 200, 100, 20 );
+        chooseproblem.addActionListener( new ProblemFileListener() );
 
         JLabel solutiontxt = new JLabel( "Solution Image Pathname" );
         solutiontxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
@@ -178,6 +184,10 @@ public class AddMenu
         solutiontxt.setVerticalAlignment( solutiontxt.TOP );
         solutionpathfield = new JTextField();
         solutionpathfield.setBounds( 200, 240, 400, 20 );
+        
+        JButton choosesolution = new JButton( "Choose File" );
+        choosesolution.setBounds( 600, 240, 100, 20 );
+        choosesolution.addActionListener( new SolutionFileListener() );
 
         JLabel nametxt = new JLabel( "Problem Name" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
@@ -224,27 +234,27 @@ public class AddMenu
         answertxt.setVerticalAlignment( typetxt.TOP );
 
         ap = new JButton( "A" );
-        ap.setBounds( 200, 365, 50, 20 );
+        ap.setBounds( 200, 365, 80, 20 );
         ap.addActionListener( new aListener() );
 
         bp = new JButton( "B" );
-        bp.setBounds( 250, 365, 50, 20 );
+        bp.setBounds( 280, 365, 80, 20 );
         bp.addActionListener( new bListener() );
 
         cp = new JButton( "C" );
-        cp.setBounds( 300, 365, 50, 20 );
+        cp.setBounds( 360, 365, 80, 20 );
         cp.addActionListener( new cListener() );
 
         dp = new JButton( "D" );
-        dp.setBounds( 350, 365, 50, 20 );
+        dp.setBounds( 440, 365, 80, 20 );
         dp.addActionListener( new dListener() );
 
         ep = new JButton( "E" );
-        ep.setBounds( 400, 365, 50, 20 );
+        ep.setBounds( 520, 365, 80, 20 );
         ep.addActionListener( new eListener() );
 
         JButton pathname = new JButton( "Enter" );
-        pathname.setBounds( 300, 385, 200, 60 );
+        pathname.setBounds( 300, 400, 200, 60 );
         pathname.addActionListener( new PathnameListener() );
 
         JLabel text = new JLabel( "Add Problems" );
@@ -304,8 +314,10 @@ public class AddMenu
 
         c.add( problempathfield );
         c.add( problemtxt );
+        c.add( chooseproblem );
         c.add( solutionpathfield );
         c.add( solutiontxt );
+        c.add( choosesolution );
         c.add( namepathfield );
         c.add( nametxt );
 
@@ -719,6 +731,68 @@ public class AddMenu
             dp.setEnabled( true );
             ep.setEnabled( false );
             ans = 'e';
+        }
+    }
+    
+    /**
+     * Opens the system's file explorer to allow selection of the directory which 
+     * contains the image files and problem set.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 23, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html
+     */
+    private class ProblemFileListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            JFileChooser filechooser = new JFileChooser(
+                FileSystemView.getFileSystemView().getHomeDirectory() );
+            filechooser.setDialogTitle("Choose Problem File");
+            filechooser.setAcceptAllFileFilterUsed( false );
+            FileNameExtensionFilter types = new FileNameExtensionFilter("PNG images", "png");
+            filechooser.addChoosableFileFilter( types );
+            int ret = filechooser.showOpenDialog( null );
+
+            if ( ret == JFileChooser.APPROVE_OPTION )
+            {
+                File file = filechooser.getSelectedFile();
+                problempathfield.setText( file.getAbsolutePath() );
+            }
+        }
+    }
+    
+    /**
+     * Opens the system's file explorer to allow selection of the directory which 
+     * contains the image files and problem set.
+     *
+     * @author Krishnakumar Bhattaram
+     * @version May 23, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html
+     */
+    private class SolutionFileListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            JFileChooser filechooser = new JFileChooser(
+                FileSystemView.getFileSystemView().getHomeDirectory() );
+            filechooser.setDialogTitle("Choose Solution File");
+            filechooser.setAcceptAllFileFilterUsed( false );
+            FileNameExtensionFilter types = new FileNameExtensionFilter("PNG images", "png");
+            filechooser.addChoosableFileFilter( types );
+            int ret = filechooser.showOpenDialog( null );
+
+            if ( ret == JFileChooser.APPROVE_OPTION )
+            {
+                File file = filechooser.getSelectedFile();
+                solutionpathfield.setText( file.getAbsolutePath() );
+            }
         }
     }
 }
