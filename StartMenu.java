@@ -186,6 +186,7 @@ public class StartMenu
         {
             JFileChooser filechooser = new JFileChooser(
                 FileSystemView.getFileSystemView().getHomeDirectory() );
+            filechooser.setDialogTitle( "Choose Directory of Program Files" );
             filechooser.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
             int ret = filechooser.showOpenDialog( null );
 
