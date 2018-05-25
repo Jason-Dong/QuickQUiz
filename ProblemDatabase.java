@@ -3,9 +3,9 @@ import java.util.*;
 
 
 /**
- * TODO Write a one-sentence summary of your class here. TODO Follow it with
- * additional details about its purpose, what abstraction it represents, and how
- * to use it.
+ * Holds all of the physics problems that will be given. Can give random
+ * problems to QQMenu and TrainMenu, and can remove or add problems into the
+ * database.
  *
  * @author Austin Lei and Krishnakumar Bhattaram
  * @version May 25, 2018
@@ -107,8 +107,7 @@ public class ProblemDatabase
      * ArrayLists (both sorted and unsorted) and puts it onto the usedList, then
      * returns the problem.
      * 
-     * @param type
-     * @return
+     * @return a random problem of any type
      */
     public Problem giveRandProblem()
     {
@@ -132,6 +131,7 @@ public class ProblemDatabase
      * 
      * @author Austin Lei
      * @param type
+     *            the type of problems that are wanted
      * @return a random problem of a specific type
      */
     public Problem giveRandProblem( int type )
