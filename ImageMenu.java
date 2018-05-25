@@ -83,10 +83,9 @@ public class ImageMenu
      */
     protected ImageIcon createImageIcon( String path, String description )
     {
-        java.net.URL imgURL = getClass().getResource( path );
-        if ( imgURL != null )
+        if ( path != null )
         {
-            return new ImageIcon( imgURL, description );
+            return new ImageIcon( path, description );
         }
         else
         {

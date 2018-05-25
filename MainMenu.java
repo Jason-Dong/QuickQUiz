@@ -41,10 +41,11 @@ public class MainMenu
      * @param statistics
      *            holds the statistics
      */
-    public MainMenu( ProblemDatabase problem, Statistics statistics )
+    public MainMenu( ProblemDatabase problem, Statistics statistics, JFrame frame )
     {
         this.problem = problem;
         stats = statistics;
+        this.frame = frame;
 
         JButton QQMenu = new JButton( "Quick Quiz" );
         QQMenu.setBounds( 200, 125, 400, 75 );
@@ -71,22 +72,14 @@ public class MainMenu
         text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 75 );
 
-        frame = new JFrame( "Main Menu" );
-        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        Container c = frame.getContentPane();
-        frame.setLayout( null );
-        frame.setBounds( 0, 0, 800, 600 );
+        frame.setTitle( "Main Menu" );
 
-        c.add( QQMenu );
-        c.add( trainMenu );
-        c.add( addMenu );
-        c.add( removeMenu );
-        c.add( statsMenu );
-        c.add( text );
-
-        frame.setResizable( false );
-        frame.setVisible( true );
-
+        frame.add( QQMenu );
+        frame.add( trainMenu );
+        frame.add( addMenu );
+        frame.add( removeMenu );
+        frame.add( statsMenu );
+        frame.add( text );
     }
 
 
@@ -105,8 +98,8 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            TypeMenu typeMenu = new TypeMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            TypeMenu typeMenu = new TypeMenu( problem, stats, frame );
         }
     }
 
@@ -126,8 +119,8 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            TrainMenu trainMenu = new TrainMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            TrainMenu trainMenu = new TrainMenu( problem, stats, frame );
         }
     }
 
@@ -147,8 +140,8 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            AddMenu addMenu = new AddMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            AddMenu addMenu = new AddMenu( problem, stats, frame );
         }
     }
 
@@ -168,8 +161,8 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            RemoveMenu removeMenu = new RemoveMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            RemoveMenu removeMenu = new RemoveMenu( problem, stats, frame );
         }
     }
 
@@ -189,8 +182,8 @@ public class MainMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            StatsMenu statsMenu = new StatsMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            StatsMenu statsMenu = new StatsMenu( problem, stats, frame );
         }
     }
 

@@ -1,7 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 import javax.swing.*;
@@ -99,9 +97,10 @@ public class QQMenu
      * @param statistics
      *            holds the statistics about the solved problems
      */
-    public QQMenu( ProblemDatabase problem, int type, Statistics statistics )
+    public QQMenu( ProblemDatabase problem, int type, Statistics statistics, JFrame frame )
     {
         this.problem = problem;
+        this.frame = frame;
         backStack = new Stack<Problem>();
         forwardStack = new Stack<Problem>();
         problemType = type;
@@ -125,10 +124,7 @@ public class QQMenu
             backStack.push( forwardStack.pop() );
         }
 
-        if ( frame != null )
-        {
-            frame.dispose();
-        }
+        frame.removeAll();
 
         Problem prb;
 
@@ -182,20 +178,15 @@ public class QQMenu
             scoreDisplay.setBounds( 300, 400, 200, 50 );
             scoreDisplay.setHorizontalAlignment( JLabel.CENTER );
 
-            frame = new JFrame( "Quick Quiz Menu" );
-            frame.setDefaultCloseOperation( 0 );
-            Container c = frame.getContentPane();
-            frame.setLayout( null );
-            frame.setBounds( 0, 0, 800, 600 );
-
-            c.add( back );
-            c.add( choice1 );
-            c.add( choice2 );
-            c.add( choice3 );
-            c.add( choice4 );
-            c.add( choice5 );
-            c.add( scoreDisplay );
-            c.add( timerDisplay );
+            frame.setTitle("Quick Quiz Menu");
+            frame.add( back );
+            frame.add( choice1 );
+            frame.add( choice2 );
+            frame.add( choice3 );
+            frame.add( choice4 );
+            frame.add( choice5 );
+            frame.add( scoreDisplay );
+            frame.add( timerDisplay );
 
             ImageIcon icon = createImageIcon( forwardStack.peek().getProblemImage(), "image" );
             Image image = icon.getImage();
@@ -210,10 +201,7 @@ public class QQMenu
             problemImage.setVerticalTextPosition( JLabel.BOTTOM );
             problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
-            c.add( problemImage );
-
-            frame.setResizable( false );
-            frame.setVisible( true );
+            frame.add( problemImage );
 
             TimerListener time = new TimerListener();
             timer = new Timer( 1000, time );
@@ -234,7 +222,7 @@ public class QQMenu
      */
     private void updateSolutionsPage( Problem prob )
     {
-        frame.dispose();
+        frame.removeAll();
         stats.addTime( forwardStack.peek().getType(), timerCount );
         timerCount = 0;
 
@@ -262,19 +250,15 @@ public class QQMenu
         continueButton.setBounds( 300, 500, 200, 50 );
         continueButton.addActionListener( new ContinueButtonListener() );
 
-        frame = new JFrame( "Quick Quiz Menu" );
-        frame.setDefaultCloseOperation( 0 );
-        Container c = frame.getContentPane();
-        frame.setLayout( null );
-        frame.setBounds( 0, 0, 800, 600 );
+        frame.setTitle( "Quick Quiz Menu" );
 
-        c.add( back );
-        c.add( viewSol );
-        c.add( prevProb );
-        c.add( nextProb );
-        c.add( continueButton );
-        c.add( problemImage );
-        c.add( scoreDisplay );
+        frame.add( back );
+        frame.add( viewSol );
+        frame.add( prevProb );
+        frame.add( nextProb );
+        frame.add( continueButton );
+        frame.add( problemImage );
+        frame.add( scoreDisplay );
 
         JLabel answer = new JLabel( "Answer: " + forwardStack.peek().getAnswer() );
         answer.setHorizontalAlignment( JLabel.CENTER );
@@ -290,11 +274,8 @@ public class QQMenu
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
-        c.add( answer );
-        c.add( problemImage );
-
-        frame.setVisible( true );
-        frame.setResizable( false );
+        frame.add( answer );
+        frame.add( problemImage );
     }
 
 
@@ -333,14 +314,8 @@ public class QQMenu
      */
     private void updateFinish()
     {
-        if ( frame == null ) //no problems of a single type
+        if ( backStack.isEmpty() ) // no problems of a single type
         {
-            frame = new JFrame( "Quick Quiz Menu" );
-            frame.setDefaultCloseOperation( 0 );
-            Container c = frame.getContentPane();
-            frame.setLayout( null );
-            frame.setBounds( 0, 0, 800, 600 );
-
             JButton back = new JButton( "Back" );
             back.setBounds( 10, 10, 50, 50 );
             back.addActionListener( new BackButtonListener() );
@@ -350,21 +325,13 @@ public class QQMenu
             finish.setBounds( 60, 60, 680, 340 );
             finish.setHorizontalAlignment( JLabel.CENTER );
 
-            c.add( back );
-            c.add( finish );
+            frame.add( back );
+            frame.add( finish );
 
-            frame.setVisible( true );
-            frame.setResizable( false );
         }
         else
         {
-
-            frame.dispose();
-            frame = new JFrame( "Quick Quiz Menu" );
-            frame.setDefaultCloseOperation( 0 );
-            Container c = frame.getContentPane();
-            frame.setLayout( null );
-            frame.setBounds( 0, 0, 800, 600 );
+            frame.removeAll();
 
             JButton back = new JButton( "Back" );
             back.setBounds( 10, 10, 50, 50 );
@@ -375,11 +342,8 @@ public class QQMenu
             finish.setBounds( 60, 60, 680, 340 );
             finish.setHorizontalAlignment( JLabel.CENTER );
 
-            c.add( back );
-            c.add( finish );
-
-            frame.setVisible( true );
-            frame.setResizable( false );
+            frame.add( back );
+            frame.add( finish );
         }
     }
 
@@ -430,8 +394,8 @@ public class QQMenu
         public void actionPerformed( ActionEvent e )
         {
             problem.reset();
-            MainMenu mainMenu = new MainMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            MainMenu mainMenu = new MainMenu( problem, stats, frame );
         }
     }
 
@@ -671,10 +635,9 @@ public class QQMenu
      */
     protected ImageIcon createImageIcon( String path, String description )
     {
-        java.net.URL imgURL = getClass().getResource( path );
-        if ( imgURL != null )
+        if ( path != null )
         {
-            return new ImageIcon( imgURL, description );
+            return new ImageIcon( path, description );
         }
         else
         {

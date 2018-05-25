@@ -101,10 +101,11 @@ public class TrainMenu
      * @param statistics
      *            holds the statistics
      */
-    public TrainMenu( ProblemDatabase problem, Statistics statistics )
+    public TrainMenu( ProblemDatabase problem, Statistics statistics, JFrame frame )
     {
         this.problem = problem;
         stats = statistics;
+        this.frame = frame;
         question = new Problem[25];
         answers = new char[25];
         timePerProblem = new int[25];
@@ -173,24 +174,20 @@ public class TrainMenu
             timerDisplay.setBounds( 630, 10, 150, 50 );
             timerDisplay.setHorizontalAlignment( JLabel.CENTER );
 
-            frame = new JFrame( "Training Menu" );
-            frame.setDefaultCloseOperation( 0 );
-            Container c = frame.getContentPane();
-            frame.setLayout( null );
-            frame.setBounds( 0, 0, 800, 600 );
+            frame.setTitle( "Training Menu" );
 
-            c.add( back );
-            c.add( choice1 );
-            c.add( choice2 );
-            c.add( choice3 );
-            c.add( choice4 );
-            c.add( choice5 );
-            c.add( finish );
-            c.add( prevProb );
-            c.add( nextProb );
-            c.add( seeProb );
-            c.add( curAns );
-            c.add( timerDisplay );
+            frame.add( back );
+            frame.add( choice1 );
+            frame.add( choice2 );
+            frame.add( choice3 );
+            frame.add( choice4 );
+            frame.add( choice5 );
+            frame.add( finish );
+            frame.add( prevProb );
+            frame.add( nextProb );
+            frame.add( seeProb );
+            frame.add( curAns );
+            frame.add( timerDisplay );
 
             ImageIcon icon = createImageIcon( question[0].getProblemImage(), "image" );
             Image image = icon.getImage();
@@ -205,10 +202,7 @@ public class TrainMenu
             problemImage.setVerticalTextPosition( JLabel.BOTTOM );
             problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
-            c.add( problemImage );
-
-            frame.setResizable( false );
-            frame.setVisible( true );
+            frame.add( problemImage );
 
             TimerListener time = new TimerListener();
             timer = new Timer( 1000, time );
@@ -225,14 +219,10 @@ public class TrainMenu
             finish.setBounds( 60, 60, 680, 340 );
             finish.setHorizontalAlignment( JLabel.CENTER );
 
-            frame = new JFrame( "Training Menu" );
-            frame.setDefaultCloseOperation( 0 );
-            Container c = frame.getContentPane();
-            frame.setLayout( null );
-            frame.setBounds( 0, 0, 800, 600 );
+            frame.setTitle( "Training Menu" );
 
-            c.add( back );
-            c.add( finish );
+            frame.add( back );
+            frame.add( finish );
 
             frame.setResizable( false );
             frame.setVisible( true );
@@ -328,26 +318,17 @@ public class TrainMenu
         curAns.setHorizontalAlignment( JLabel.CENTER );
         curAns.setBounds( 200, 390, 400, 25 );
 
-        frame = new JFrame( "Training Menu" );
-        frame.setDefaultCloseOperation( 0 );
-        Container c = frame.getContentPane();
-        frame.setLayout( null );
-        frame.setBounds( 0, 0, 800, 600 );
-
         index = 0;
 
         update();
 
-        c.add( back );
-        c.add( prevProb );
-        c.add( nextProb );
-        c.add( viewSol );
-        c.add( problemImage );
-        c.add( numCorrect );
-        c.add( curAns );
-
-        frame.setVisible( true );
-        frame.setResizable( false );
+        frame.add( back );
+        frame.add( prevProb );
+        frame.add( nextProb );
+        frame.add( viewSol );
+        frame.add( problemImage );
+        frame.add( numCorrect );
+        frame.add( curAns );
     }
 
 
@@ -402,8 +383,8 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             problem.reset();
-            MainMenu mainMenu = new MainMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            MainMenu mainMenu = new MainMenu( problem, stats, frame );
         }
     }
 
@@ -664,10 +645,9 @@ public class TrainMenu
      */
     protected ImageIcon createImageIcon( String path, String description )
     {
-        java.net.URL imgURL = getClass().getResource( path );
-        if ( imgURL != null )
+        if ( path != null )
         {
-            return new ImageIcon( imgURL, description );
+            return new ImageIcon( path, description );
         }
         else
         {
