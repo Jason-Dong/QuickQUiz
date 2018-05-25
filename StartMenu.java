@@ -63,8 +63,10 @@ public class StartMenu
      * @param statistics
      *            The statistics for this set (from QuickQuiz)
      */
-    public StartMenu( Statistics statistics )
+    public StartMenu( Statistics statistics, JFrame frame )
     {
+        this.frame = frame;
+        c = frame.getContentPane();
         stats = statistics;
 
         JLabel nametxt = new JLabel(
@@ -88,13 +90,7 @@ public class StartMenu
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
         text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 100 );
-
-        frame = new JFrame( "Fîzîk" );
-        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        c = frame.getContentPane();
-        frame.setLayout( null );
-        frame.setBounds( 0, 0, 800, 600 );
-
+        
         warntxt = new JLabel( "Please complete the required field!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
@@ -119,8 +115,6 @@ public class StartMenu
         c.add( namepathfield );
         c.add( nametxt );
 
-        frame.setResizable( false );
-        frame.setVisible( true );
     }
 
 
@@ -160,9 +154,9 @@ public class StartMenu
                     notfoundtxt.setVisible( true );
                     return;
                 }
-
-                MainMenu main = new MainMenu( new ProblemDatabase( pathproblems ), stats );
-                frame.dispose();
+                
+                frame.removeAll();
+                MainMenu main = new MainMenu( new ProblemDatabase( pathproblems ), stats, frame );
 
             }
         }
