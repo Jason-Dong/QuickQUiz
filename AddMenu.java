@@ -205,27 +205,27 @@ public class AddMenu
 
         kinematics = new JButton( "Kinematics" );
         kinematics.setBounds( 100, 320, 100, 20 );
-        kinematics.addActionListener( new kinematicsListener() );
+        kinematics.addActionListener( new typeListener() );
 
         newton = new JButton( "Newton's Laws" );
         newton.setBounds( 200, 320, 100, 20 );
-        newton.addActionListener( new newtonListener() );
+        newton.addActionListener( new typeListener() );
 
         energy = new JButton( "Energy" );
         energy.setBounds( 300, 320, 100, 20 );
-        energy.addActionListener( new energyListener() );
+        energy.addActionListener( new typeListener() );
 
         rotation = new JButton( "Rotation" );
         rotation.setBounds( 400, 320, 100, 20 );
-        rotation.addActionListener( new rotationListener() );
+        rotation.addActionListener( new typeListener() );
 
         gravitation = new JButton( "Gravitation" );
         gravitation.setBounds( 500, 320, 100, 20 );
-        gravitation.addActionListener( new gravitationListener() );
+        gravitation.addActionListener( new typeListener() );
 
         fluids = new JButton( "Fluids" );
         fluids.setBounds( 600, 320, 100, 20 );
-        fluids.addActionListener( new fluidsListener() );
+        fluids.addActionListener( new typeListener() );
 
         JLabel answertxt = new JLabel( "Choose Answer:" );
         answertxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
@@ -235,23 +235,23 @@ public class AddMenu
 
         ap = new JButton( "A" );
         ap.setBounds( 200, 365, 80, 20 );
-        ap.addActionListener( new aListener() );
+        ap.addActionListener( new answerListener() );
 
         bp = new JButton( "B" );
         bp.setBounds( 280, 365, 80, 20 );
-        bp.addActionListener( new bListener() );
+        bp.addActionListener( new answerListener() );
 
         cp = new JButton( "C" );
         cp.setBounds( 360, 365, 80, 20 );
-        cp.addActionListener( new cListener() );
+        cp.addActionListener( new answerListener() );
 
         dp = new JButton( "D" );
         dp.setBounds( 440, 365, 80, 20 );
-        dp.addActionListener( new dListener() );
+        dp.addActionListener( new answerListener() );
 
         ep = new JButton( "E" );
         ep.setBounds( 520, 365, 80, 20 );
-        ep.addActionListener( new eListener() );
+        ep.addActionListener( new answerListener() );
 
         JButton pathname = new JButton( "Enter" );
         pathname.setBounds( 300, 400, 200, 60 );
@@ -455,282 +455,128 @@ public class AddMenu
     }
 
     /**
-     * Handles when the kinematics button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
+     * Handles when one of the type buttons (ex. kinematics, energy, etc.)
+     * are clicked; when clicked, changes the type field to match the topic chosen and
+     * disables the chosen type button while enabling all other type buttons.
      *
      * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
+     * @version May 24, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
      * @author Sources: none
      */
-    private class kinematicsListener implements ActionListener
+    private class typeListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
         {
-            kinematics.setEnabled( false );
-            newton.setEnabled( true );
-            energy.setEnabled( true );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 0;
-        }
-    }
-
-
-    /**
-     * Handles when the newton button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class newtonListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( false );
-            energy.setEnabled( true );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 1;
-        }
-    }
-
-
-    /**
-     * Handles when the energy button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class energyListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( true );
-            energy.setEnabled( false );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 3;
-        }
-    }
-
-
-    /**
-     * Handles when the rotation button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class rotationListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( true );
-            energy.setEnabled( true );
-            rotation.setEnabled( false );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 4;
-        }
-    }
-
-
-    /**
-     * Handles when the gravitational button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class gravitationListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( true );
-            energy.setEnabled( true );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( false );
-            fluids.setEnabled( true );
-            type = 4;
-        }
-    }
-
-
-    /**
-     * Handles when the fluids button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class fluidsListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
+            JButton clicked = (JButton)e.getSource();
+            String name = clicked.getText();
             kinematics.setEnabled( true );
             newton.setEnabled( true );
             energy.setEnabled( true );
             rotation.setEnabled( true );
             gravitation.setEnabled( true );
-            fluids.setEnabled( false );
-            type = 5;
+            fluids.setEnabled( true );
+            
+            if(name == null)
+            {
+                warntxt.setVisible( true );
+                newtxt.setVisible( false );
+                System.out.println( "Fatal Error!" );
+                return;
+            }
+            
+            if(name.equalsIgnoreCase( "Kinematics" ))
+            {
+                kinematics.setEnabled( false );
+                type = 0;
+            }
+            else if(name.equalsIgnoreCase( "Newton's Laws" ))
+            {
+                newton.setEnabled( false );
+                type = 1;
+            }
+            else if(name.equalsIgnoreCase( "Energy" ))
+            {
+                energy.setEnabled( false );
+                type = 2;
+            }
+            else if(name.equalsIgnoreCase( "Rotation" ))
+            {
+                rotation.setEnabled( false );
+                type = 3;
+            }
+            else if(name.equalsIgnoreCase( "Gravitation" ))
+            {
+                gravitation.setEnabled( false );
+                type = 4;
+            }
+            else if(name.equalsIgnoreCase( "Fluids" ))
+            {
+                fluids.setEnabled( false );
+                type = 5;
+            }
         }
     }
-
-
+    
     /**
-     * Handles when the 'a' button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all other answer buttons.
+     * Handles when one of the answer buttons (ex. 'A', 'B', etc.)
+     * are clicked; when clicked, changes the answer field to match the topic chosen and
+     * disables the chosen answer button while enabling all other answer buttons.
      *
      * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
+     * @version May 24, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
      * @author Sources: none
      */
-    private class aListener implements ActionListener
+    private class answerListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
         {
-            ap.setEnabled( false );
-            bp.setEnabled( true );
-            cp.setEnabled( true );
-            dp.setEnabled( true );
-            ep.setEnabled( true );
-            ans = 'a';
-        }
-    }
-
-
-    /**
-     * Handles when the 'b' button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all other answer buttons.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class bListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            ap.setEnabled( true );
-            bp.setEnabled( false );
-            cp.setEnabled( true );
-            dp.setEnabled( true );
-            ep.setEnabled( true );
-            ans = 'b';
-        }
-    }
-
-
-    /**
-     * Handles when the 'c' button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all other answer buttons.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class cListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            ap.setEnabled( true );
-            bp.setEnabled( true );
-            cp.setEnabled( false );
-            dp.setEnabled( true );
-            ep.setEnabled( true );
-            ans = 'c';
-        }
-    }
-
-
-    /**
-     * Handles when the 'd' button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all other answer buttons.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class dListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            ap.setEnabled( true );
-            bp.setEnabled( true );
-            cp.setEnabled( true );
-            dp.setEnabled( false );
-            ep.setEnabled( true );
-            ans = 'd';
-        }
-    }
-
-
-    /**
-     * Handles when the 'e' button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all other answer buttons.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class eListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
+            JButton clicked = (JButton)e.getSource();
+            String name = clicked.getText();
             ap.setEnabled( true );
             bp.setEnabled( true );
             cp.setEnabled( true );
             dp.setEnabled( true );
-            ep.setEnabled( false );
-            ans = 'e';
+            ep.setEnabled( true );
+            
+            if(name == null)
+            {
+                warntxt.setVisible( true );
+                newtxt.setVisible( false );
+                System.out.println( "Fatal Error!" );
+                return;
+            }
+            
+            if(name.equalsIgnoreCase( "A" ))
+            {
+                ap.setEnabled( false );
+                ans = 'a';
+            }
+            else if(name.equalsIgnoreCase( "B" ))
+            {
+                bp.setEnabled( false );
+                ans = 'b';
+            }
+            else if(name.equalsIgnoreCase( "C" ))
+            {
+                cp.setEnabled( false );
+                ans = 'c';
+            }
+            else if(name.equalsIgnoreCase( "D" ))
+            {
+                dp.setEnabled( false );
+                ans = 'd';
+            }
+            else if(name.equalsIgnoreCase( "E" ))
+            {
+                ep.setEnabled( false );
+                ans = 'e';
+            }
         }
     }
     
