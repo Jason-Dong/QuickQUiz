@@ -4,15 +4,29 @@ import java.util.*;
 
 public class ProblemDatabase
 {
+    /**
+     * ArrayList of ArrayLists of the problems, with 
+     * the upper ArrayList corresponding to the type 
+     * (0 = kinematics, 1=newton's laws, 2=energy, 3=rotation,
+     * 4=gravitation, 5=fluids)
+     */
     ArrayList<ArrayList<Problem>> problemListSorted;
 
+    /**
+     * ArrayList of all the Problems in random order
+     */
     ArrayList<Problem> problemListUnsorted;
 
     ArrayList<Problem> usedList;
 
 
     // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
-
+    /**
+     * By Austin Lei
+     * TODO Write your method description here.
+     * @param type
+     * @return
+     */
     public ProblemDatabase( String pathfield )
     {
         problemListSorted = new ArrayList<ArrayList<Problem>>();
@@ -50,7 +64,12 @@ public class ProblemDatabase
 
     }
 
-
+    /**
+     * By Austin Lei
+     * TODO Write your method description here.
+     * @param type
+     * @return
+     */
     public void reset()
     {
 
@@ -63,7 +82,12 @@ public class ProblemDatabase
         }
     }
 
-
+    /**
+     * By Austin Lei
+     * TODO Write your method description here.
+     * @param type
+     * @return
+     */
     public Problem giveRandProblem()
     {
         if ( problemListUnsorted.size() > 0 )
@@ -78,7 +102,12 @@ public class ProblemDatabase
         return null;
     }
 
-
+    /**
+     * By Austin Lei
+     * TODO Write your method description here.
+     * @param type
+     * @return
+     */
     public Problem giveRandProblem( int type )
     {
         if ( problemListSorted.get( type ).size() > 0 )
@@ -93,7 +122,19 @@ public class ProblemDatabase
         return null;
     }
 
-
+    /**
+     * By Krishnakumar Bhattaram
+     * Removes problem of the given name from the arraylists. If the type is not -1, 
+     * checks if the found problem also matches the type. If the arraylists does not
+     * contain a Problem of the name (or of name and type, if given), then returns false.
+     * Otherwise, removes Problem and returns true.
+     * @param name
+     *          Name of the Problem to remove.
+     * @param type
+     *          Type of the problem to remove.
+     *          Precondition: int from -1 to 5
+     * @return
+     */
     public boolean removeProblem( String name, int type )
     {
         if ( type == -1 )
@@ -140,7 +181,16 @@ public class ProblemDatabase
         }
     }
 
-
+    /**
+     * By Krishnakumar Bhattaram
+     * Checks if the problem to add shares a name with one in the database.
+     * If it isn't, adds it to the ArrayLists that contain Problems
+     * and returns true, false otherwise.
+     * @param pr
+     *          Problem to add
+     * @return
+     *         True if the problem is added, false if it shares a name
+     */
     public boolean addProblem( Problem pr )
     {
         for ( Problem p : problemListUnsorted )
@@ -154,5 +204,16 @@ public class ProblemDatabase
         problemListSorted.get( pr.getType() ).add( pr );
         problemListUnsorted.add( pr );
         return true;
+    }
+    
+    /**
+     * By Krishnakumar Bhattaram
+     * Accessor method to all the Problems in this structure.
+     * @return
+     *         Unsorted ArrayList of all the problems in this structure
+     */
+    public ArrayList<Problem> giveAllProblems()
+    {
+        return problemListUnsorted;
     }
 }
