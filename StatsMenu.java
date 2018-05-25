@@ -177,53 +177,53 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
                 remainingSeconds[i] = stats.getTime( i ) - minutes[i] * 60;
             }
         }
-        kinematics = new JLabel( "Kinematics: " + minutes[0] + colon
-            + Math.floor( remainingSeconds[0] * 100 ) / 100 );
-        kinematics.setBounds( 150, 200, 100, 20 );
+        kinematics = new JLabel(
+            "Kinematics: " + minutes[0] + colon + remainingSeconds[0] );
+        kinematics.setBounds( 150, 200, 150, 20 );
 
-        newton = new JLabel( "Newton: " + minutes[1] + colon
-            + Math.floor( remainingSeconds[1] * 100 ) / 100 );
-        newton.setBounds( 350, 200, 100, 20 );
+        newton = new JLabel(
+            "Newton: " + minutes[1] + colon + remainingSeconds[1] );
+        newton.setBounds( 350, 200, 150, 20 );
 
-        energy = new JLabel( "Energy: " + minutes[2] + colon
-            + Math.floor( remainingSeconds[2] * 100 ) / 100 );
-        energy.setBounds( 550, 200, 100, 20 );
+        energy = new JLabel(
+            "Energy: " + minutes[2] + colon + remainingSeconds[2] );
+        energy.setBounds( 550, 200, 150, 20 );
 
-        rotation = new JLabel( "Rotation: " + minutes[3] + colon
-            + Math.floor( remainingSeconds[3] * 100 ) / 100 );
-        rotation.setBounds( 150, 230, 100, 20 );
+        rotation = new JLabel(
+            "Rotation: " + minutes[3] + colon + remainingSeconds[3] );
+        rotation.setBounds( 150, 230, 150, 20 );
 
-        gravitation = new JLabel( "Gravitation: " + minutes[4] + colon
-            + Math.floor( remainingSeconds[4] * 100 ) / 100 );
-        gravitation.setBounds( 350, 230, 100, 20 );
+        gravitation = new JLabel(
+            "Gravitation: " + minutes[4] + colon + remainingSeconds[4] );
+        gravitation.setBounds( 350, 230, 150, 20 );
 
-        fluids = new JLabel( "Fluids: " + minutes[5] + colon
-            + Math.floor( remainingSeconds[5] * 100 ) / 100 );
-        fluids.setBounds( 550, 230, 100, 20 );
+        fluids = new JLabel(
+            "Fluids: " + minutes[5] + colon + remainingSeconds[5] );
+        fluids.setBounds( 550, 230, 150, 20 );
 
         kinematicsRight = new JLabel( "Kinematics: "
             + Math.floor( stats.getPercent( 0 ) * 100 ) / 100 );
-        kinematicsRight.setBounds( 150, 350, 100, 20 );
+        kinematicsRight.setBounds( 150, 350, 150, 20 );
 
         newtonRight = new JLabel(
             "Newton: " + Math.floor( stats.getPercent( 1 ) * 100 ) / 100 );
-        newtonRight.setBounds( 350, 350, 100, 20 );
+        newtonRight.setBounds( 350, 350, 150, 20 );
 
         energyRight = new JLabel(
             "Energy: " + Math.floor( stats.getPercent( 2 ) * 100 ) / 100 );
-        energyRight.setBounds( 550, 350, 100, 20 );
+        energyRight.setBounds( 550, 350, 150, 20 );
 
         rotationRight = new JLabel( "Rotation: "
             + Math.floor( stats.getPercent( 3 ) * 100 ) / 100 );
-        rotationRight.setBounds( 150, 380, 100, 20 );
+        rotationRight.setBounds( 150, 380, 150, 20 );
 
         gravitationRight = new JLabel( "Graviation: "
             + Math.floor( stats.getPercent( 4 ) * 100 ) / 100 );
-        gravitationRight.setBounds( 350, 380, 100, 20 );
+        gravitationRight.setBounds( 350, 380, 150, 20 );
 
         fluidsRight = new JLabel(
             "Fluids: " + Math.floor( stats.getPercent( 5 ) * 100 ) / 100 );
-        fluidsRight.setBounds( 550, 380, 100, 20 );
+        fluidsRight.setBounds( 550, 380, 150, 20 );
 
         frame = new JFrame( "StatsMenu" );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
