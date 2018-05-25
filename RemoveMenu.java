@@ -90,6 +90,8 @@ public class RemoveMenu
 	 * The statistics from this set
 	 */
     private Statistics stats;
+    
+    private JPanel pane;
 
     /**
      * The constructor, which makes visible the frame and adds the buttons and text fields
@@ -108,7 +110,7 @@ public class RemoveMenu
         back.setBounds( 10, 10, 50, 50 );
         back.addActionListener( new BackButtonListener() );
 
-        JLabel nametxt = new JLabel( "Problem to Remove Name" );
+        JLabel nametxt = new JLabel( "Problem to Remove's Name" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         nametxt.setBounds( 200, 180, 500, 20 );
         nametxt.setHorizontalAlignment( JLabel.LEFT );
@@ -124,27 +126,33 @@ public class RemoveMenu
 
         kinematics = new JButton( "Kinematics" );
         kinematics.setBounds( 100, 240, 100, 20 );
-        kinematics.addActionListener( new kinematicsListener() );
+        kinematics.addActionListener( new typeListener() );
 
         newton = new JButton( "Newton's Laws" );
         newton.setBounds( 200, 240, 100, 20 );
-        newton.addActionListener( new newtonListener() );
+        newton.addActionListener( new typeListener() );
 
         energy = new JButton( "Energy" );
         energy.setBounds( 300, 240, 100, 20 );
-        energy.addActionListener( new energyListener() );
+        energy.addActionListener( new typeListener() );
 
         rotation = new JButton( "Rotation" );
         rotation.setBounds( 400, 240, 100, 20 );
-        rotation.addActionListener( new rotationListener() );
+        rotation.addActionListener( new typeListener() );
 
         gravitation = new JButton( "Gravitation" );
         gravitation.setBounds( 500, 240, 100, 20 );
-        gravitation.addActionListener( new gravitationListener() );
+        gravitation.addActionListener( new typeListener() );
 
         fluids = new JButton( "Fluids" );
         fluids.setBounds( 600, 240, 100, 20 );
-        fluids.addActionListener( new fluidsListener() );
+        fluids.addActionListener( new typeListener() );
+        
+        JLabel choosetxt = new JLabel( "Or choose from the menu below" );
+        choosetxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
+        choosetxt.setBounds( 200, 270, 500, 20 );
+        choosetxt.setHorizontalAlignment( JLabel.LEFT );
+        choosetxt.setVerticalAlignment( JLabel.TOP );
 
         JButton pathname = new JButton( "Enter" );
         pathname.setBounds( 600, 200, 50, 20 );
@@ -154,7 +162,14 @@ public class RemoveMenu
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
         text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 100 );
-
+        
+        pane = new JPanel();
+        initialize();
+        JScrollPane scroll = new JScrollPane(pane);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scroll.setBounds(200, 290, 500, 50);
+        
         frame = new JFrame( "Fîzîk" );
         frame.setDefaultCloseOperation( 0 );
         c = frame.getContentPane();
@@ -199,11 +214,105 @@ public class RemoveMenu
         c.add( rotation );
         c.add( gravitation );
         c.add( fluids );
+        
+        c.add( choosetxt );
+        c.add( scroll );
 
         frame.setResizable( false );
         frame.setVisible( true );
     }
-
+    
+    /**
+     * By Krishnakumar Bhattaram
+     * Adds all the problems in the problem ProblemDatabase as buttons to pane
+     * and gives them the ClickedListener as an ActionListener
+     */
+    private void initialize()
+    {
+        for(Problem prob : problem.giveAllProblems())
+        {
+            JButton toadd = new JButton(prob.getName());
+            toadd.addActionListener(new ClickedListener());
+            pane.add( toadd );
+        }
+    }
+    
+    /**
+     * 
+     *  Handles when one of the problem buttons on the scroll menu is clicked.
+     *  When the button is clicked, changes the namepathfield to display the problem
+     *  name and the corresponding type is selected.
+     *
+     *  @author  Krishnakumar Bhattaram
+     *  @version May 24, 2018
+     *  @author  Period: 2
+     *  @author  Assignment: QuickQuiz
+     *
+     *  @author  Sources: none
+     */
+    private class ClickedListener implements ActionListener
+    {
+        public void actionPerformed( ActionEvent e )
+        {
+            JButton name = (JButton)e.getSource();
+            String problemname = name.getText();
+            namepathfield.setText( problemname );
+            Problem toRemove = null;
+            for(Problem prob : problem.giveAllProblems())
+            {
+                if(prob.getName().equals( problemname ))
+                {
+                    toRemove = prob;
+                    break;
+                }
+            }
+            
+            kinematics.setEnabled( true );
+            newton.setEnabled( true );
+            energy.setEnabled( true );
+            rotation.setEnabled( true );
+            gravitation.setEnabled( true );
+            fluids.setEnabled( true );
+            if(toRemove == null)
+            {
+                warntxt.setVisible( true );
+                System.out.println( "Fatal Error!" );
+                return;
+            }
+            
+            if(toRemove.getType() == 0)
+            {
+                kinematics.setEnabled( false );
+                type = 0;
+            }
+            else if(toRemove.getType() == 1)
+            {
+                newton.setEnabled( false );
+                type = 1;
+            }
+            else if(toRemove.getType() == 2)
+            {
+                energy.setEnabled( false );
+                type = 2;
+            }
+            else if(toRemove.getType() == 3)
+            {
+                rotation.setEnabled( false );
+                type = 3;
+            }
+            else if(toRemove.getType() == 4)
+            {
+                gravitation.setEnabled( false );
+                type = 4;
+            }
+            else if(toRemove.getType() == 5)
+            {
+                fluids.setEnabled( false );
+                type = 5;
+            }
+        }
+    }
+    
     /**
      * Handles when the back button is clicked; when clicked, returns to
      * MainMenu by closing all of TypeMenu and creating a MainMenu object.
@@ -223,7 +332,7 @@ public class RemoveMenu
             frame.dispose();
         }
     }
-
+    
     /**
      * Handles when the enter button is clicked; when clicked, checks if all conditions are 
      * satisfied (if all fields are entered and all pathnames exist) and displays the appropriate
@@ -267,158 +376,79 @@ public class RemoveMenu
                     warntxt.setVisible( false );
                     newtxt.setVisible( true );
                     notfoundtxt.setVisible( false );
+                    pane.removeAll();
+                    initialize();
+                    pane.repaint();
+                    pane.revalidate();
                 }
             }
         }
     }
-
+    
     /**
-     * Handles when the kinematics button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
+     * Handles when one of the type buttons (ex. kinematics, energy, etc.)
+     * are clicked; when clicked, changes the type field to match the topic chosen and
+     * disables the chosen type button while enabling all other type buttons.
      *
      * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
+     * @version May 24, 2018
      * @author Period: 2
      * @author Assignment: QuickQuiz
      *
      * @author Sources: none
      */
-    private class kinematicsListener implements ActionListener
+    private class typeListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
         {
-            kinematics.setEnabled( false );
-            newton.setEnabled( true );
-            energy.setEnabled( true );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 0;
-        }
-    }
-
-    /**
-     * Handles when the newton button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class newtonListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( false );
-            energy.setEnabled( true );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 1;
-        }
-    }
-
-    /**
-     * Handles when the energy button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class energyListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( true );
-            energy.setEnabled( false );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 3;
-        }
-    }
-
-    /**
-     * Handles when the rotation button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class rotationListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( true );
-            energy.setEnabled( true );
-            rotation.setEnabled( false );
-            gravitation.setEnabled( true );
-            fluids.setEnabled( true );
-            type = 4;
-        }
-    }
-
-    /**
-     * Handles when the gravitational button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class gravitationListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
-            kinematics.setEnabled( true );
-            newton.setEnabled( true );
-            energy.setEnabled( true );
-            rotation.setEnabled( true );
-            gravitation.setEnabled( false );
-            fluids.setEnabled( true );
-            type = 4;
-        }
-    }
-
-    /**
-     * Handles when the fluids button is clicked; when clicked, changes the type field to match
-     * the topic chosen and disables the chosen button while enabling all others.
-     *
-     * @author Krishnakumar Bhattaram
-     * @version May 19, 2018
-     * @author Period: 2
-     * @author Assignment: QuickQuiz
-     *
-     * @author Sources: none
-     */
-    private class fluidsListener implements ActionListener
-    {
-        public void actionPerformed( ActionEvent e )
-        {
+            JButton clicked = (JButton)e.getSource();
+            String name = clicked.getText();
             kinematics.setEnabled( true );
             newton.setEnabled( true );
             energy.setEnabled( true );
             rotation.setEnabled( true );
             gravitation.setEnabled( true );
-            fluids.setEnabled( false );
-            type = 5;
+            fluids.setEnabled( true );
+            
+            if(name == null)
+            {
+                warntxt.setVisible( true );
+                newtxt.setVisible( false );
+                notfoundtxt.setVisible( false );
+                System.out.println( "Fatal Error!" );
+                return;
+            }
+            
+            if(name.equalsIgnoreCase( "Kinematics" ))
+            {
+                kinematics.setEnabled( false );
+                type = 0;
+            }
+            else if(name.equalsIgnoreCase( "Newton's Laws" ))
+            {
+                newton.setEnabled( false );
+                type = 1;
+            }
+            else if(name.equalsIgnoreCase( "Energy" ))
+            {
+                energy.setEnabled( false );
+                type = 2;
+            }
+            else if(name.equalsIgnoreCase( "Rotation" ))
+            {
+                rotation.setEnabled( false );
+                type = 3;
+            }
+            else if(name.equalsIgnoreCase( "Gravitation" ))
+            {
+                gravitation.setEnabled( false );
+                type = 4;
+            }
+            else if(name.equalsIgnoreCase( "Fluids" ))
+            {
+                fluids.setEnabled( false );
+                type = 5;
+            }
         }
     }
 }
