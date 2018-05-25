@@ -155,7 +155,7 @@ public class RemoveMenu
         choosetxt.setVerticalAlignment( JLabel.TOP );
 
         JButton pathname = new JButton( "Enter" );
-        pathname.setBounds( 600, 200, 50, 20 );
+        pathname.setBounds( 300, 350, 200, 60 );
         pathname.addActionListener( new PathnameListener() );
 
         JLabel text = new JLabel( "Remove Problems" );
@@ -168,7 +168,7 @@ public class RemoveMenu
         JScrollPane scroll = new JScrollPane(pane);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scroll.setBounds(200, 290, 500, 50);
+        scroll.setBounds(100, 290, 600, 50);
         
         frame = new JFrame( "Fîzîk" );
         frame.setDefaultCloseOperation( 0 );
