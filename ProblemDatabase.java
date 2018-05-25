@@ -2,13 +2,24 @@ import java.io.*;
 import java.util.*;
 
 
+/**
+ * TODO Write a one-sentence summary of your class here. TODO Follow it with
+ * additional details about its purpose, what abstraction it represents, and how
+ * to use it.
+ *
+ * @author Austin Lei and Krishnakumar Bhattaram
+ * @version May 25, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: none
+ */
 public class ProblemDatabase
 {
     /**
-     * ArrayList of ArrayLists of the problems, with 
-     * the upper ArrayList corresponding to the type 
-     * (0 = kinematics, 1=newton's laws, 2=energy, 3=rotation,
-     * 4=gravitation, 5=fluids)
+     * ArrayList of ArrayLists of the problems, with the upper ArrayList
+     * corresponding to the type (0 = kinematics, 1=newton's laws, 2=energy,
+     * 3=rotation, 4=gravitation, 5=fluids)
      */
     ArrayList<ArrayList<Problem>> problemListSorted;
 
@@ -17,15 +28,22 @@ public class ProblemDatabase
      */
     ArrayList<Problem> problemListUnsorted;
 
+    /**
+     * Stores all the problems that have been used.
+     */
     ArrayList<Problem> usedList;
 
 
     // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
     /**
-     * By Austin Lei
-     * TODO Write your method description here.
-     * @param type
-     * @return
+     * Reading the file determined by pathfield, constructs all of the default
+     * problems and stores them in the arrayLists, sorting them to put in the
+     * sorted list and putting every problem into the unsorted list. The file
+     * that the program is intended to read is problems.txt
+     * 
+     * @author Austin Lei
+     * @param pathfield
+     *            the path name of the file to read from
      */
     public ProblemDatabase( String pathfield )
     {
@@ -64,11 +82,12 @@ public class ProblemDatabase
 
     }
 
+
     /**
-     * By Austin Lei
-     * TODO Write your method description here.
-     * @param type
-     * @return
+     * Moves all of the usedList problems back unto the problemList arrayLists,
+     * both unsorted and sorted. Called when QQMenu and TrainMenu are exited.
+     * 
+     * @author Austin Lei
      */
     public void reset()
     {
@@ -82,9 +101,12 @@ public class ProblemDatabase
         }
     }
 
+
     /**
-     * By Austin Lei
-     * TODO Write your method description here.
+     * Finds a random problem of any type, takes it off the problemList
+     * ArrayLists (both sorted and unsorted) and puts it onto the usedList, then
+     * returns the problem.
+     * 
      * @param type
      * @return
      */
@@ -102,11 +124,15 @@ public class ProblemDatabase
         return null;
     }
 
+
     /**
-     * By Austin Lei
-     * TODO Write your method description here.
+     * Finds a random problem of a certain type, takes it off the problemList
+     * ArrayLists (both sorted and unsorted) and puts it onto the usedList, then
+     * returns the problem.
+     * 
+     * @author Austin Lei
      * @param type
-     * @return
+     * @return a random problem of a specific type
      */
     public Problem giveRandProblem( int type )
     {
@@ -122,18 +148,19 @@ public class ProblemDatabase
         return null;
     }
 
+
     /**
-     * By Krishnakumar Bhattaram
-     * Removes problem of the given name from the arraylists. If the type is not -1, 
-     * checks if the found problem also matches the type. If the arraylists does not
-     * contain a Problem of the name (or of name and type, if given), then returns false.
-     * Otherwise, removes Problem and returns true.
+     * Removes problem of the given name from the arraylists. If the type is not
+     * -1, checks if the found problem also matches the type. If the arraylists
+     * does not contain a Problem of the name (or of name and type, if given),
+     * then returns false. Otherwise, removes Problem and returns true.
+     * 
+     * @author Krishnakumar Bhattaram
      * @param name
-     *          Name of the Problem to remove.
+     *            Name of the Problem to remove.
      * @param type
-     *          Type of the problem to remove.
-     *          Precondition: int from -1 to 5
-     * @return
+     *            Type of the problem to remove. Precondition: int from -1 to 5
+     * @return whether or not the problem was removed correctly
      */
     public boolean removeProblem( String name, int type )
     {
@@ -181,15 +208,16 @@ public class ProblemDatabase
         }
     }
 
+
     /**
-     * By Krishnakumar Bhattaram
-     * Checks if the problem to add shares a name with one in the database.
-     * If it isn't, adds it to the ArrayLists that contain Problems
-     * and returns true, false otherwise.
+     * Checks if the problem to add shares a name with one in the database. If
+     * it isn't, adds it to the ArrayLists that contain Problems and returns
+     * true, false otherwise.
+     * 
+     * @author Krishnakumar Bhattaram
      * @param pr
-     *          Problem to add
-     * @return
-     *         True if the problem is added, false if it shares a name
+     *            Problem to add
+     * @return True if the problem is added, false if it shares a name
      */
     public boolean addProblem( Problem pr )
     {
@@ -205,12 +233,13 @@ public class ProblemDatabase
         problemListUnsorted.add( pr );
         return true;
     }
-    
+
+
     /**
-     * By Krishnakumar Bhattaram
      * Accessor method to all the Problems in this structure.
-     * @return
-     *         Unsorted ArrayList of all the problems in this structure
+     * 
+     * @author Krishnakumar Bhattaram
+     * @return Unsorted ArrayList of all the problems in this structure
      */
     public ArrayList<Problem> giveAllProblems()
     {
