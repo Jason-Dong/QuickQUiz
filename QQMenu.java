@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 import javax.swing.*;
@@ -331,28 +333,54 @@ public class QQMenu
      */
     private void updateFinish()
     {
-        frame.dispose();
+        if ( frame == null ) //no problems of a single type
+        {
+            frame = new JFrame( "Quick Quiz Menu" );
+            frame.setDefaultCloseOperation( 0 );
+            Container c = frame.getContentPane();
+            frame.setLayout( null );
+            frame.setBounds( 0, 0, 800, 600 );
 
-        frame = new JFrame( "Quick Quiz Menu" );
-        frame.setDefaultCloseOperation( 0 );
-        Container c = frame.getContentPane();
-        frame.setLayout( null );
-        frame.setBounds( 0, 0, 800, 600 );
+            JButton back = new JButton( "Back" );
+            back.setBounds( 10, 10, 50, 50 );
+            back.addActionListener( new BackButtonListener() );
 
-        JButton back = new JButton( "Back" );
-        back.setBounds( 10, 10, 50, 50 );
-        back.addActionListener( new BackButtonListener() );
+            JLabel finish = new JLabel( "There's no problems of this type!" );
+            finish.setFont( new Font( "font", Font.PLAIN, 36 ) );
+            finish.setBounds( 60, 60, 680, 340 );
+            finish.setHorizontalAlignment( JLabel.CENTER );
 
-        JLabel finish = new JLabel( "That's all of the problems!" );
-        finish.setFont( new Font( "font", Font.PLAIN, 36 ) );
-        finish.setBounds( 60, 60, 680, 340 );
-        finish.setHorizontalAlignment( JLabel.CENTER );
+            c.add( back );
+            c.add( finish );
 
-        c.add( back );
-        c.add( finish );
+            frame.setVisible( true );
+            frame.setResizable( false );
+        }
+        else
+        {
 
-        frame.setVisible( true );
-        frame.setResizable( false );
+            frame.dispose();
+            frame = new JFrame( "Quick Quiz Menu" );
+            frame.setDefaultCloseOperation( 0 );
+            Container c = frame.getContentPane();
+            frame.setLayout( null );
+            frame.setBounds( 0, 0, 800, 600 );
+
+            JButton back = new JButton( "Back" );
+            back.setBounds( 10, 10, 50, 50 );
+            back.addActionListener( new BackButtonListener() );
+
+            JLabel finish = new JLabel( "That's all of the problems!" );
+            finish.setFont( new Font( "font", Font.PLAIN, 36 ) );
+            finish.setBounds( 60, 60, 680, 340 );
+            finish.setHorizontalAlignment( JLabel.CENTER );
+
+            c.add( back );
+            c.add( finish );
+
+            frame.setVisible( true );
+            frame.setResizable( false );
+        }
     }
 
 
