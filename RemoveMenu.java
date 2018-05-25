@@ -91,6 +91,9 @@ public class RemoveMenu
 	 */
     private Statistics stats;
     
+    /**
+     * The pane of the scroll menu
+     */
     private JPanel pane;
 
     /**
@@ -100,8 +103,10 @@ public class RemoveMenu
      * @param statistics
      * 			The statistics for this set
      */
-    public RemoveMenu( ProblemDatabase problem, Statistics statistics )
+    public RemoveMenu( ProblemDatabase problem, Statistics statistics, JFrame frame )
     {
+        this.frame = frame;
+        c = frame.getContentPane();
         type = -1;
         this.problem = problem;
         stats = statistics;
@@ -117,6 +122,7 @@ public class RemoveMenu
         nametxt.setVerticalAlignment( JLabel.TOP );
         namepathfield = new JTextField();
         namepathfield.setBounds( 200, 200, 400, 20 );
+        namepathfield.setText( "" );
 
         JLabel typetxt = new JLabel( "Choose Problem to Remove's Type (if known)" );
         typetxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
@@ -170,12 +176,6 @@ public class RemoveMenu
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scroll.setBounds(100, 290, 600, 50);
         
-        frame = new JFrame( "Fîzîk" );
-        frame.setDefaultCloseOperation( 0 );
-        c = frame.getContentPane();
-        frame.setLayout( null );
-        frame.setBounds( 0, 0, 800, 600 );
-
         warntxt = new JLabel( "Please complete all required fields!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
@@ -328,8 +328,8 @@ public class RemoveMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            MainMenu mainMenu = new MainMenu( problem, stats );
-            frame.dispose();
+            frame.removeAll();
+            MainMenu mainMenu = new MainMenu( problem, stats, frame );
         }
     }
     
@@ -349,7 +349,7 @@ public class RemoveMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            if ( namepathfield.getText() == "" )
+            if ( namepathfield.getText().equals( "" ))
             {
                 newtxt.setVisible( false );
                 warntxt.setVisible( true );
