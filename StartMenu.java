@@ -10,7 +10,7 @@ import javax.swing.filechooser.FileSystemView;
 
 /**
  * This class is the Start Menu, which asks for the location of the directory
- * which contains the program files and the image and problem files to set the 
+ * which contains the program files and the image and problem files to set the
  * space in which the code functions and accesses problems.
  *
  * @author Krishnkumar Bhattaram
@@ -68,7 +68,7 @@ public class StartMenu
         stats = statistics;
 
         JLabel nametxt = new JLabel(
-            "Enter the location of the program file to begin (ex. /Users/JohnDoe/Desktop/QuickQuiz)" );
+            "Enter the directory of the program file to begin (ex. /Users/JohnDoe/Desktop/QuickQuiz)" );
         nametxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         nametxt.setBounds( 200, 180, 500, 20 );
         nametxt.setHorizontalAlignment( JLabel.LEFT );
@@ -80,8 +80,8 @@ public class StartMenu
         pathname.setBounds( 600, 200, 100, 20 );
         pathname.addActionListener( new PathnameListener() );
 
-        JButton filechooser = new JButton( "Choose File" );
-        filechooser.setBounds( 100, 200, 100, 20 );
+        JButton filechooser = new JButton( "Choose Directory" );
+        filechooser.setBounds( 75, 200, 125, 20 );
         filechooser.addActionListener( new FileListener() );
 
         JLabel text = new JLabel( "Welcome to Quick Quiz!" );
@@ -170,8 +170,8 @@ public class StartMenu
 
 
     /**
-     * Opens the system's file explorer to allow selection of the directory which 
-     * contains the image files and problem set.
+     * Opens the system's file explorer to allow selection of the directory
+     * which contains the image files and problem set.
      *
      * @author Krishnakumar Bhattaram
      * @version May 23, 2018
