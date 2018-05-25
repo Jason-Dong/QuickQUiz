@@ -2,8 +2,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 /**
- * Allows the user to remove problems, checking each field to ensure that all 
+ * Allows the user to remove problems, checking each field to ensure that all
  * fields are completed and the file pathnames are valid. It also ensures that
  * nonexistent problems are not removed.
  *
@@ -16,97 +17,95 @@ import javax.swing.*;
  */
 public class RemoveMenu
 {
-	/**
-	 * Holds the GUI elements
-	 */
+    /**
+     * Holds the GUI elements
+     */
     private JFrame frame;
 
     /**
-   	 * The problem database for this set
-   	 */
+     * The problem database for this set
+     */
     private ProblemDatabase problem;
 
     /**
-	 * The text field for the problem name
-	 */
+     * The text field for the problem name
+     */
     private JTextField namepathfield;
 
     /**
-	 * Type of problem to add chosen by the buttons
-	 */
+     * Type of problem to add chosen by the buttons
+     */
     private int type;
 
     /**
-	 * The button to select problem type as kinematics
-	 */
+     * The button to select problem type as kinematics
+     */
     private JButton kinematics;
 
     /**
-	 * The button to select problem type as newton's laws
-	 */
+     * The button to select problem type as newton's laws
+     */
     private JButton newton;
 
     /**
-	 * The button to select problem type as energy
-	 */
+     * The button to select problem type as energy
+     */
     private JButton energy;
 
     /**
-	 * The button to select problem type as rotation
-	 */
+     * The button to select problem type as rotation
+     */
     private JButton rotation;
 
     /**
-	 * The button to select problem type as gravitation
-	 */
+     * The button to select problem type as gravitation
+     */
     private JButton gravitation;
 
     /**
-   	 * The button to select problem type as fluids
-   	 */
+     * The button to select problem type as fluids
+     */
     private JButton fluids;
 
     /**
-	 * The container of the frame
-	 */
+     * The container of the frame
+     */
     private Container c;
 
     /**
-	 * The text label to warn that the fields are not completed
-	 */
+     * The text label to warn that the fields are not completed
+     */
     private JLabel warntxt;
 
     /**
-	 * The text label to indicate that a problem was removed
-	 */
+     * The text label to indicate that a problem was removed
+     */
     private JLabel newtxt;
 
     /**
-	 * The text label to warn that the name is not in problem
-	 */
-    private JLabel notfoundtxt;
-    
-    /**
-	 * The statistics from this set
-	 */
-    private Statistics stats;
-    
-    /**
-     * The pane of the scroll menu
+     * The text label to warn that the name is not in problem
      */
-    private JPanel pane;
+    private JLabel notfoundtxt;
 
     /**
-     * The constructor, which makes visible the frame and adds the buttons and text fields
-     * @param problem	
-     * 			The problem database for this set
-     * @param statistics
-     * 			The statistics for this set
+     * The statistics from this set
      */
-    public RemoveMenu( ProblemDatabase problem, Statistics statistics, JFrame frame )
+    private Statistics stats;
+
+    private JPanel pane;
+
+
+    /**
+     * The constructor, which makes visible the frame and adds the buttons and
+     * text fields
+     * 
+     * @param problem
+     *            The problem database for this set
+     * @param statistics
+     *            The statistics for this set
+     */
+    public RemoveMenu( ProblemDatabase problem, Statistics statistics )
     {
-        this.frame = frame;
-        c = frame.getContentPane();
         type = -1;
         this.problem = problem;
         stats = statistics;
@@ -122,7 +121,6 @@ public class RemoveMenu
         nametxt.setVerticalAlignment( JLabel.TOP );
         namepathfield = new JTextField();
         namepathfield.setBounds( 200, 200, 400, 20 );
-        namepathfield.setText( "" );
 
         JLabel typetxt = new JLabel( "Choose Problem to Remove's Type (if known)" );
         typetxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
@@ -153,7 +151,7 @@ public class RemoveMenu
         fluids = new JButton( "Fluids" );
         fluids.setBounds( 600, 240, 100, 20 );
         fluids.addActionListener( new typeListener() );
-        
+
         JLabel choosetxt = new JLabel( "Or choose from the menu below" );
         choosetxt.setFont( new Font( "font", Font.PLAIN, 10 ) );
         choosetxt.setBounds( 200, 270, 500, 20 );
@@ -168,14 +166,20 @@ public class RemoveMenu
         text.setFont( new Font( "font", Font.PLAIN, 30 ) );
         text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 100 );
-        
+
         pane = new JPanel();
         initialize();
-        JScrollPane scroll = new JScrollPane(pane);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scroll.setBounds(100, 290, 600, 50);
-        
+        JScrollPane scroll = new JScrollPane( pane );
+        scroll.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        scroll.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_NEVER );
+        scroll.setBounds( 100, 290, 600, 50 );
+
+        frame = new JFrame( "Fîzîk" );
+        frame.setDefaultCloseOperation( 0 );
+        c = frame.getContentPane();
+        frame.setLayout( null );
+        frame.setBounds( 0, 0, 800, 600 );
+
         warntxt = new JLabel( "Please complete all required fields!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
@@ -214,41 +218,43 @@ public class RemoveMenu
         c.add( rotation );
         c.add( gravitation );
         c.add( fluids );
-        
+
         c.add( choosetxt );
         c.add( scroll );
 
         frame.setResizable( false );
         frame.setVisible( true );
     }
-    
+
+
     /**
-     * By Krishnakumar Bhattaram
-     * Adds all the problems in the problem ProblemDatabase as buttons to pane
-     * and gives them the ClickedListener as an ActionListener
+     * By Krishnakumar Bhattaram Adds all the problems in the problem
+     * ProblemDatabase as buttons to pane and gives them the ClickedListener as
+     * an ActionListener
      */
     private void initialize()
     {
-        for(Problem prob : problem.giveAllProblems())
+        for ( Problem prob : problem.giveAllProblems() )
         {
-            JButton toadd = new JButton(prob.getName());
-            toadd.addActionListener(new ClickedListener());
+            JButton toadd = new JButton( prob.getName() );
+            toadd.addActionListener( new ClickedListener() );
             pane.add( toadd );
         }
     }
-    
+
+
     /**
      * 
-     *  Handles when one of the problem buttons on the scroll menu is clicked.
-     *  When the button is clicked, changes the namepathfield to display the problem
-     *  name and the corresponding type is selected.
+     * Handles when one of the problem buttons on the scroll menu is clicked.
+     * When the button is clicked, changes the namepathfield to display the
+     * problem name and the corresponding type is selected.
      *
-     *  @author  Krishnakumar Bhattaram
-     *  @version May 24, 2018
-     *  @author  Period: 2
-     *  @author  Assignment: QuickQuiz
+     * @author Krishnakumar Bhattaram
+     * @version May 24, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
      *
-     *  @author  Sources: none
+     * @author Sources: none
      */
     private class ClickedListener implements ActionListener
     {
@@ -258,61 +264,62 @@ public class RemoveMenu
             String problemname = name.getText();
             namepathfield.setText( problemname );
             Problem toRemove = null;
-            for(Problem prob : problem.giveAllProblems())
+            for ( Problem prob : problem.giveAllProblems() )
             {
-                if(prob.getName().equals( problemname ))
+                if ( prob.getName().equals( problemname ) )
                 {
                     toRemove = prob;
                     break;
                 }
             }
-            
+
             kinematics.setEnabled( true );
             newton.setEnabled( true );
             energy.setEnabled( true );
             rotation.setEnabled( true );
             gravitation.setEnabled( true );
             fluids.setEnabled( true );
-            if(toRemove == null)
+            if ( toRemove == null )
             {
                 warntxt.setVisible( true );
                 System.out.println( "Fatal Error!" );
                 return;
             }
-            
-            if(toRemove.getType() == 0)
+
+            if ( toRemove.getType() == 0 )
             {
                 kinematics.setEnabled( false );
                 type = 0;
             }
-            else if(toRemove.getType() == 1)
+            else if ( toRemove.getType() == 1 )
             {
                 newton.setEnabled( false );
                 type = 1;
             }
-            else if(toRemove.getType() == 2)
+            else if ( toRemove.getType() == 2 )
             {
                 energy.setEnabled( false );
                 type = 2;
             }
-            else if(toRemove.getType() == 3)
+            else if ( toRemove.getType() == 3 )
             {
                 rotation.setEnabled( false );
                 type = 3;
             }
-            else if(toRemove.getType() == 4)
+            else if ( toRemove.getType() == 4 )
             {
                 gravitation.setEnabled( false );
                 type = 4;
             }
-            else if(toRemove.getType() == 5)
+            else if ( toRemove.getType() == 5 )
             {
                 fluids.setEnabled( false );
                 type = 5;
             }
         }
     }
-    
+
+
     /**
      * Handles when the back button is clicked; when clicked, returns to
      * MainMenu by closing all of TypeMenu and creating a MainMenu object.
@@ -328,15 +335,16 @@ public class RemoveMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            frame.removeAll();
-            MainMenu mainMenu = new MainMenu( problem, stats, frame );
+            MainMenu mainMenu = new MainMenu( problem, stats );
+            frame.dispose();
         }
     }
-    
+
+
     /**
-     * Handles when the enter button is clicked; when clicked, checks if all conditions are 
-     * satisfied (if all fields are entered and all pathnames exist) and displays the appropriate
-     * warnings/successes
+     * Handles when the enter button is clicked; when clicked, checks if all
+     * conditions are satisfied (if all fields are entered and all pathnames
+     * exist) and displays the appropriate warnings/successes
      *
      * @author Krishnakumar Bhattaram
      * @version May 19, 2018
@@ -349,7 +357,7 @@ public class RemoveMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            if ( namepathfield.getText().equals( "" ))
+            if ( namepathfield.getText() == "" )
             {
                 newtxt.setVisible( false );
                 warntxt.setVisible( true );
@@ -384,11 +392,13 @@ public class RemoveMenu
             }
         }
     }
-    
+
+
     /**
-     * Handles when one of the type buttons (ex. kinematics, energy, etc.)
-     * are clicked; when clicked, changes the type field to match the topic chosen and
-     * disables the chosen type button while enabling all other type buttons.
+     * Handles when one of the type buttons (ex. kinematics, energy, etc.) are
+     * clicked; when clicked, changes the type field to match the topic chosen
+     * and disables the chosen type button while enabling all other type
+     * buttons.
      *
      * @author Krishnakumar Bhattaram
      * @version May 24, 2018
@@ -409,8 +419,8 @@ public class RemoveMenu
             rotation.setEnabled( true );
             gravitation.setEnabled( true );
             fluids.setEnabled( true );
-            
-            if(name == null)
+
+            if ( name == null )
             {
                 warntxt.setVisible( true );
                 newtxt.setVisible( false );
@@ -418,33 +428,33 @@ public class RemoveMenu
                 System.out.println( "Fatal Error!" );
                 return;
             }
-            
-            if(name.equalsIgnoreCase( "Kinematics" ))
+
+            if ( name.equalsIgnoreCase( "Kinematics" ) )
             {
                 kinematics.setEnabled( false );
                 type = 0;
             }
-            else if(name.equalsIgnoreCase( "Newton's Laws" ))
+            else if ( name.equalsIgnoreCase( "Newton's Laws" ) )
             {
                 newton.setEnabled( false );
                 type = 1;
             }
-            else if(name.equalsIgnoreCase( "Energy" ))
+            else if ( name.equalsIgnoreCase( "Energy" ) )
             {
                 energy.setEnabled( false );
                 type = 2;
             }
-            else if(name.equalsIgnoreCase( "Rotation" ))
+            else if ( name.equalsIgnoreCase( "Rotation" ) )
             {
                 rotation.setEnabled( false );
                 type = 3;
             }
-            else if(name.equalsIgnoreCase( "Gravitation" ))
+            else if ( name.equalsIgnoreCase( "Gravitation" ) )
             {
                 gravitation.setEnabled( false );
                 type = 4;
             }
-            else if(name.equalsIgnoreCase( "Fluids" ))
+            else if ( name.equalsIgnoreCase( "Fluids" ) )
             {
                 fluids.setEnabled( false );
                 type = 5;

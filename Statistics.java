@@ -187,8 +187,7 @@ public class Statistics
     {
         if ( totalProblems[category] != 0 )
         {
-            return (double)quickQuizTimes[category]
-                / totalProblems[category];
+            return (double)quickQuizTimes[category] / totalProblems[category];
         }
 
         else

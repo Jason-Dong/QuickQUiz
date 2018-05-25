@@ -3,7 +3,6 @@ import java.io.*;
 import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
@@ -157,10 +156,8 @@ public class AddMenu
      * @param statistics
      *            The statistics for this set
      */
-    public AddMenu( ProblemDatabase problem, Statistics statistics, JFrame frame )
+    public AddMenu( ProblemDatabase problem, Statistics statistics )
     {
-        this.frame = frame;
-        c = frame.getContentPane();
         stats = statistics;
         ans = 'h';
         type = -1;
@@ -267,6 +264,12 @@ public class AddMenu
         text.setHorizontalAlignment( text.CENTER );
         text.setBounds( 100, 30, 600, 100 );
 
+        frame = new JFrame( "Fîzîk" );
+        frame.setDefaultCloseOperation( 0 );
+        c = frame.getContentPane();
+        frame.setLayout( null );
+        frame.setBounds( 0, 0, 800, 600 );
+
         warntxt = new JLabel( "Please complete all required fields!" );
         warntxt.setFont( new Font( "font", Font.PLAIN, 15 ) );
         warntxt.setBounds( 200, 500, 500, 20 );
@@ -335,6 +338,8 @@ public class AddMenu
         c.add( dp );
         c.add( ep );
 
+        frame.setResizable( false );
+        frame.setVisible( true );
     }
 
 
@@ -353,8 +358,8 @@ public class AddMenu
     {
         public void actionPerformed( ActionEvent e )
         {
-            frame.removeAll();
-            MainMenu mainMenu = new MainMenu( problem, stats, frame );
+            MainMenu mainMenu = new MainMenu( problem, stats );
+            frame.dispose();
         }
     }
 

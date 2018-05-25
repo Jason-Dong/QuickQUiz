@@ -2,18 +2,6 @@ import java.io.*;
 import java.util.*;
 
 
-/**
- * Holds all of the physics problems that will be given. Can give random
- * problems to QQMenu and TrainMenu, and can remove or add problems into the
- * database.
- *
- * @author Austin Lei and Krishnakumar Bhattaram
- * @version May 25, 2018
- * @author Period: 2
- * @author Assignment: QuickQuiz
- *
- * @author Sources: none
- */
 public class ProblemDatabase
 {
     /**
@@ -28,22 +16,15 @@ public class ProblemDatabase
      */
     ArrayList<Problem> problemListUnsorted;
 
-    /**
-     * Stores all the problems that have been used.
-     */
     ArrayList<Problem> usedList;
 
 
     // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
     /**
-     * Reading the file determined by pathfield, constructs all of the default
-     * problems and stores them in the arrayLists, sorting them to put in the
-     * sorted list and putting every problem into the unsorted list. The file
-     * that the program is intended to read is problems.txt
+     * By Austin Lei TODO Write your method description here.
      * 
-     * @author Austin Lei
-     * @param pathfield
-     *            the path name of the file to read from
+     * @param type
+     * @return
      */
     public ProblemDatabase( String pathfield )
     {
@@ -84,10 +65,10 @@ public class ProblemDatabase
 
 
     /**
-     * Moves all of the usedList problems back unto the problemList arrayLists,
-     * both unsorted and sorted. Called when QQMenu and TrainMenu are exited.
+     * By Austin Lei TODO Write your method description here.
      * 
-     * @author Austin Lei
+     * @param type
+     * @return
      */
     public void reset()
     {
@@ -103,11 +84,10 @@ public class ProblemDatabase
 
 
     /**
-     * Finds a random problem of any type, takes it off the problemList
-     * ArrayLists (both sorted and unsorted) and puts it onto the usedList, then
-     * returns the problem.
+     * By Austin Lei TODO Write your method description here.
      * 
-     * @return a random problem of any type
+     * @param type
+     * @return
      */
     public Problem giveRandProblem()
     {
@@ -125,14 +105,10 @@ public class ProblemDatabase
 
 
     /**
-     * Finds a random problem of a certain type, takes it off the problemList
-     * ArrayLists (both sorted and unsorted) and puts it onto the usedList, then
-     * returns the problem.
+     * By Austin Lei TODO Write your method description here.
      * 
-     * @author Austin Lei
      * @param type
-     *            the type of problems that are wanted
-     * @return a random problem of a specific type
+     * @return
      */
     public Problem giveRandProblem( int type )
     {
@@ -150,17 +126,17 @@ public class ProblemDatabase
 
 
     /**
-     * Removes problem of the given name from the arraylists. If the type is not
-     * -1, checks if the found problem also matches the type. If the arraylists
-     * does not contain a Problem of the name (or of name and type, if given),
-     * then returns false. Otherwise, removes Problem and returns true.
+     * By Krishnakumar Bhattaram Removes problem of the given name from the
+     * arraylists. If the type is not -1, checks if the found problem also
+     * matches the type. If the arraylists does not contain a Problem of the
+     * name (or of name and type, if given), then returns false. Otherwise,
+     * removes Problem and returns true.
      * 
-     * @author Krishnakumar Bhattaram
      * @param name
      *            Name of the Problem to remove.
      * @param type
      *            Type of the problem to remove. Precondition: int from -1 to 5
-     * @return whether or not the problem was removed correctly
+     * @return
      */
     public boolean removeProblem( String name, int type )
     {
@@ -210,11 +186,10 @@ public class ProblemDatabase
 
 
     /**
-     * Checks if the problem to add shares a name with one in the database. If
-     * it isn't, adds it to the ArrayLists that contain Problems and returns
-     * true, false otherwise.
+     * By Krishnakumar Bhattaram Checks if the problem to add shares a name with
+     * one in the database. If it isn't, adds it to the ArrayLists that contain
+     * Problems and returns true, false otherwise.
      * 
-     * @author Krishnakumar Bhattaram
      * @param pr
      *            Problem to add
      * @return True if the problem is added, false if it shares a name
@@ -236,9 +211,9 @@ public class ProblemDatabase
 
 
     /**
-     * Accessor method to all the Problems in this structure.
+     * By Krishnakumar Bhattaram Accessor method to all the Problems in this
+     * structure.
      * 
-     * @author Krishnakumar Bhattaram
      * @return Unsorted ArrayList of all the problems in this structure
      */
     public ArrayList<Problem> giveAllProblems()

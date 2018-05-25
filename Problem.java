@@ -111,6 +111,7 @@ public class Problem
         return type;
     }
 
+
     /**
      * Accessor for the answer of the problem
      * 
@@ -121,51 +122,61 @@ public class Problem
         return answer;
     }
 
+
     /**
      * Mutator for the problem image pathname
+     * 
      * @param probim
-     *        Problem image pathname
+     *            Problem image pathname
      */
     public void setProblemImage( String probim )
     {
         problemImage = probim;
     }
 
+
     /**
      * Mutator for the solution image pathname
+     * 
      * @param solim
-     *        Solution image pathname
+     *            Solution image pathname
      */
     public void setSolutionImage( String solim )
     {
         solutionImage = solim;
     }
 
+
     /**
      * Mutator for the problem name
+     * 
      * @param nam
-     *        Problem name
+     *            Problem name
      */
     public void setName( String nam )
     {
         name = nam;
     }
 
+
     /**
      * Mutator for the problem category
+     * 
      * @param category
-     *        Problem category, with with 0 being kinematics, 1, newton's laws,
-     *         2, energy, 3, rotation, 4, gravitation, and 5, fluids
+     *            Problem category, with with 0 being kinematics, 1, newton's
+     *            laws, 2, energy, 3, rotation, 4, gravitation, and 5, fluids
      */
     public void setType( int category )
     {
         type = category;
     }
 
+
     /**
      * Mutator for the problem answer
+     * 
      * @param ans
-     *        Problem answer (a through e)
+     *            Problem answer (a through e)
      */
     public void setAnswer( char ans )
     {

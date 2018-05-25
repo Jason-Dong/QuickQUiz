@@ -126,16 +126,6 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
      */
     private int remainingSeconds[];
 
-    /**
-     * This is an optional zero for the display of the times
-     */
-    private int optionalZero;
-
-    /**
-     * This is the string for the display of the different times
-     */
-    private String stringToReturn[];
-
 
     /**
      * This constructs a StatsMenu. This means creating the two text labels, the
@@ -150,22 +140,13 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
      *            is class which contains all the information which is displayed
      *            in StatsMenu
      */
-    public StatsMenu( ProblemDatabase prob, Statistics statistics, JFrame frame )
+    public StatsMenu( ProblemDatabase prob, Statistics statistics )
     {
-        this.frame = frame;
         stats = statistics;
         problem = prob;
         minutes = new int[6];
         remainingSeconds = new int[6];
         colon = ":";
-        optionalZero = 0;
-        stringToReturn = new String[6];
-        stringToReturn[0] = "Kinematics: ";
-        stringToReturn[1] = "Newton's: ";
-        stringToReturn[2] = "Energy: ";
-        stringToReturn[3] = "Rotation: ";
-        stringToReturn[4] = "Gravitation: ";
-        stringToReturn[5] = "Fluids: ";
 
         JButton back = new JButton( "Back" );
         back.setBounds( 10, 10, 50, 50 );
@@ -193,52 +174,23 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
                 minutes[i] += ( stats.getTime( i ) ) / 60;
                 remainingSeconds[i] = stats.getTime( i ) - minutes[i] * 60;
             }
-            else
-            {
-                minutes[i] = 0;
-                remainingSeconds[i] = stats.getTime( i );
-            }
-            if ( minutes[i] < 10 )
-            {
-                if ( remainingSeconds[i] < 10 )
-                {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon + optionalZero
-                        + remainingSeconds[i];
-                }
-                else
-                {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon + remainingSeconds[i];
-                }
-            }
-            else
-            {
-                if ( remainingSeconds[i] < 10 )
-                {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon + optionalZero
-                        + remainingSeconds[i];
-                }
-                else
-                {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon + remainingSeconds[i];
-                }
-            }
         }
-        kinematics = new JLabel( stringToReturn[0] );
+        kinematics = new JLabel( "Kinematics: " + minutes[0] + colon + remainingSeconds[0] );
         kinematics.setBounds( 150, 200, 150, 20 );
 
-        newton = new JLabel( stringToReturn[1] );
+        newton = new JLabel( "Newton: " + minutes[1] + colon + remainingSeconds[1] );
         newton.setBounds( 350, 200, 150, 20 );
 
-        energy = new JLabel( stringToReturn[2] );
+        energy = new JLabel( "Energy: " + minutes[2] + colon + remainingSeconds[2] );
         energy.setBounds( 550, 200, 150, 20 );
 
-        rotation = new JLabel( stringToReturn[3] );
+        rotation = new JLabel( "Rotation: " + minutes[3] + colon + remainingSeconds[3] );
         rotation.setBounds( 150, 230, 150, 20 );
 
-        gravitation = new JLabel( stringToReturn[4] );
+        gravitation = new JLabel( "Gravitation: " + minutes[4] + colon + remainingSeconds[4] );
         gravitation.setBounds( 350, 230, 150, 20 );
 
-        fluids = new JLabel( stringToReturn[5] );
+        fluids = new JLabel( "Fluids: " + minutes[5] + colon + remainingSeconds[5] );
         fluids.setBounds( 550, 230, 150, 20 );
 
         kinematicsRight = new JLabel(
@@ -262,24 +214,32 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         fluidsRight = new JLabel( "Fluids: " + Math.floor( stats.getPercent( 5 ) * 100 ) / 100 );
         fluidsRight.setBounds( 550, 380, 150, 20 );
 
-        frame.setTitle( "Stats Menu" );
+        frame = new JFrame( "StatsMenu" );
+        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        Container c = frame.getContentPane();
+        frame.setLayout( null );
+        frame.setBounds( 0, 0, 800, 600 );
 
-        frame.add( back );
-        frame.add( text );
-        frame.add( avgTimePerProblem );
-        frame.add( avgNumRight );
-        frame.add( kinematics );
-        frame.add( newton );
-        frame.add( energy );
-        frame.add( rotation );
-        frame.add( gravitation );
-        frame.add( fluids );
-        frame.add( kinematicsRight );
-        frame.add( newtonRight );
-        frame.add( energyRight );
-        frame.add( rotationRight );
-        frame.add( gravitationRight );
-        frame.add( fluidsRight );
+        c.add( back );
+        c.add( text );
+        c.add( avgTimePerProblem );
+        c.add( avgNumRight );
+        c.add( kinematics );
+        c.add( newton );
+        c.add( energy );
+        c.add( rotation );
+        c.add( gravitation );
+        c.add( fluids );
+        c.add( kinematicsRight );
+        c.add( newtonRight );
+        c.add( energyRight );
+        c.add( rotationRight );
+        c.add( gravitationRight );
+        c.add( fluidsRight );
+
+        frame.setResizable( false );
+        frame.setVisible( true );
+
     }
 
 
@@ -298,8 +258,8 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
     {
         public void actionPerformed( ActionEvent e )
         {
-            frame.removeAll();
-            MainMenu mainMenu = new MainMenu( problem, stats, frame );
+            MainMenu mainMenu = new MainMenu( problem, stats );
+            frame.dispose();
         }
     }
 }

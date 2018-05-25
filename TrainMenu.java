@@ -101,11 +101,10 @@ public class TrainMenu
      * @param statistics
      *            holds the statistics
      */
-    public TrainMenu( ProblemDatabase problem, Statistics statistics, JFrame frame )
+    public TrainMenu( ProblemDatabase problem, Statistics statistics )
     {
         this.problem = problem;
         stats = statistics;
-        this.frame = frame;
         question = new Problem[25];
         answers = new char[25];
         timePerProblem = new int[25];
@@ -174,20 +173,24 @@ public class TrainMenu
             timerDisplay.setBounds( 630, 10, 150, 50 );
             timerDisplay.setHorizontalAlignment( JLabel.CENTER );
 
-            frame.setTitle( "Training Menu" );
+            frame = new JFrame( "Training Menu" );
+            frame.setDefaultCloseOperation( 0 );
+            Container c = frame.getContentPane();
+            frame.setLayout( null );
+            frame.setBounds( 0, 0, 800, 600 );
 
-            frame.add( back );
-            frame.add( choice1 );
-            frame.add( choice2 );
-            frame.add( choice3 );
-            frame.add( choice4 );
-            frame.add( choice5 );
-            frame.add( finish );
-            frame.add( prevProb );
-            frame.add( nextProb );
-            frame.add( seeProb );
-            frame.add( curAns );
-            frame.add( timerDisplay );
+            c.add( back );
+            c.add( choice1 );
+            c.add( choice2 );
+            c.add( choice3 );
+            c.add( choice4 );
+            c.add( choice5 );
+            c.add( finish );
+            c.add( prevProb );
+            c.add( nextProb );
+            c.add( seeProb );
+            c.add( curAns );
+            c.add( timerDisplay );
 
             ImageIcon icon = createImageIcon( question[0].getProblemImage(), "image" );
             Image image = icon.getImage();
@@ -202,7 +205,10 @@ public class TrainMenu
             problemImage.setVerticalTextPosition( JLabel.BOTTOM );
             problemImage.setHorizontalTextPosition( JLabel.CENTER );
 
-            frame.add( problemImage );
+            c.add( problemImage );
+
+            frame.setResizable( false );
+            frame.setVisible( true );
 
             TimerListener time = new TimerListener();
             timer = new Timer( 1000, time );
@@ -219,10 +225,14 @@ public class TrainMenu
             finish.setBounds( 60, 60, 680, 340 );
             finish.setHorizontalAlignment( JLabel.CENTER );
 
-            frame.setTitle( "Training Menu" );
+            frame = new JFrame( "Training Menu" );
+            frame.setDefaultCloseOperation( 0 );
+            Container c = frame.getContentPane();
+            frame.setLayout( null );
+            frame.setBounds( 0, 0, 800, 600 );
 
-            frame.add( back );
-            frame.add( finish );
+            c.add( back );
+            c.add( finish );
 
             frame.setResizable( false );
             frame.setVisible( true );
@@ -318,17 +328,26 @@ public class TrainMenu
         curAns.setHorizontalAlignment( JLabel.CENTER );
         curAns.setBounds( 200, 390, 400, 25 );
 
+        frame = new JFrame( "Training Menu" );
+        frame.setDefaultCloseOperation( 0 );
+        Container c = frame.getContentPane();
+        frame.setLayout( null );
+        frame.setBounds( 0, 0, 800, 600 );
+
         index = 0;
 
         update();
 
-        frame.add( back );
-        frame.add( prevProb );
-        frame.add( nextProb );
-        frame.add( viewSol );
-        frame.add( problemImage );
-        frame.add( numCorrect );
-        frame.add( curAns );
+        c.add( back );
+        c.add( prevProb );
+        c.add( nextProb );
+        c.add( viewSol );
+        c.add( problemImage );
+        c.add( numCorrect );
+        c.add( curAns );
+
+        frame.setVisible( true );
+        frame.setResizable( false );
     }
 
 
@@ -383,8 +402,8 @@ public class TrainMenu
         public void actionPerformed( ActionEvent e )
         {
             problem.reset();
-            frame.removeAll();
-            MainMenu mainMenu = new MainMenu( problem, stats, frame );
+            MainMenu mainMenu = new MainMenu( problem, stats );
+            frame.dispose();
         }
     }
 
