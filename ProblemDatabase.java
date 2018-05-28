@@ -16,15 +16,19 @@ public class ProblemDatabase
      */
     ArrayList<Problem> problemListUnsorted;
 
+    /**
+     * Holds all of the problems that have been used.
+     */
     ArrayList<Problem> usedList;
 
 
-    // Kinematics, Newton's, Energy, Rotation, Gravitation, Fluids
     /**
-     * By Austin Lei TODO Write your method description here.
+     * Constructs a ProblemDatabase by automatically creating problems from the
+     * problems.txt at the given pathfield.
      * 
-     * @param type
-     * @return
+     * @param pathfield
+     *            the path for which to look for the problems.txt file
+     * @author Austin Lei
      */
     public ProblemDatabase( String pathfield )
     {
@@ -65,10 +69,10 @@ public class ProblemDatabase
 
 
     /**
-     * By Austin Lei TODO Write your method description here.
+     * Moves all of the used problems backed into the two problem lists, both
+     * sorted and unsorted.
      * 
-     * @param type
-     * @return
+     * @author Austin Lei
      */
     public void reset()
     {
@@ -84,10 +88,11 @@ public class ProblemDatabase
 
 
     /**
-     * By Austin Lei TODO Write your method description here.
+     * Gives a random problem of any type. Moves the problem off of the two
+     * problem lists and onto the used list.
      * 
-     * @param type
-     * @return
+     * @return the random problem
+     * @author Austin Lei
      */
     public Problem giveRandProblem()
     {
@@ -105,10 +110,13 @@ public class ProblemDatabase
 
 
     /**
-     * By Austin Lei TODO Write your method description here.
+     * Gives a random problem of a specific type. Moves the problem off of the
+     * two problem lists and onto the used list.
      * 
      * @param type
-     * @return
+     *            the type of problem to give
+     * @return the random problem of that type
+     * @author Austin Lei
      */
     public Problem giveRandProblem( int type )
     {
@@ -126,17 +134,17 @@ public class ProblemDatabase
 
 
     /**
-     * By Krishnakumar Bhattaram Removes problem of the given name from the
-     * arraylists. If the type is not -1, checks if the found problem also
-     * matches the type. If the arraylists does not contain a Problem of the
-     * name (or of name and type, if given), then returns false. Otherwise,
-     * removes Problem and returns true.
+     * Removes problem of the given name from the arraylists. If the type is not
+     * -1, checks if the found problem also matches the type. If the arraylists
+     * does not contain a Problem of the name (or of name and type, if given),
+     * then returns false. Otherwise, removes Problem and returns true.
      * 
      * @param name
      *            Name of the Problem to remove.
      * @param type
      *            Type of the problem to remove. Precondition: int from -1 to 5
-     * @return
+     * @return whether or not the problem was removed correctly
+     * @author Krishnakumar Bhattaram
      */
     public boolean removeProblem( String name, int type )
     {
@@ -193,6 +201,7 @@ public class ProblemDatabase
      * @param pr
      *            Problem to add
      * @return True if the problem is added, false if it shares a name
+     * @author Krishnakumar Bhattaram
      */
     public boolean addProblem( Problem pr )
     {
@@ -211,10 +220,10 @@ public class ProblemDatabase
 
 
     /**
-     * By Krishnakumar Bhattaram Accessor method to all the Problems in this
-     * structure.
+     * Accessor method to all the Problems in this structure.
      * 
      * @return Unsorted ArrayList of all the problems in this structure
+     * @author Krishnakumar Bhattaram
      */
     public ArrayList<Problem> giveAllProblems()
     {

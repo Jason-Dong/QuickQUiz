@@ -3,19 +3,45 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
+/**
+ * Opens a separate menu that displays a correctly scaled image, either a
+ * problem or solution image. Called from either QQMenu or TrainMenu.s
+ *
+ * @author Austin Lei and Jason Dong
+ * @version May 28, 2018
+ * @author Period: 2
+ * @author Assignment: QuickQuiz
+ *
+ * @author Sources: docs.oracle.com for the createImageIcon method
+ */
 public class ImageMenu
 {
+    /**
+     * Holds all of the GUI elements.
+     */
     private static JFrame frame;
 
 
-    public ImageMenu( Problem prob, boolean problem )
+    /**
+     * Constructs the menu given the problem and the boolean isProblem. If
+     * isProblem is true, creates a menu with a back button and the problem's
+     * problem image. Otherwise, creates a menu with a back button and the
+     * problem's solution image.
+     * 
+     * @param prob
+     *            the problem for which the images should be displayed
+     * @param isProblem
+     *            whether the problem image should be shown or the solution
+     *            image
+     */
+    public ImageMenu( Problem prob, boolean isProblem )
     {
         JLabel label1;
         JButton back = new JButton( "Close" );
         back.setBounds( 5, 5, 50, 50 );
 
         ImageIcon icon;
-        if ( problem )
+        if ( isProblem )
         {
             icon = createImageIcon( prob.getProblemImage(), "image" );
         }
@@ -62,6 +88,17 @@ public class ImageMenu
     }
 
 
+    /**
+     * Handles when the back button is clicked; when clicked, returns to
+     * MainMenu by closing all of TypeMenu and creating a MainMenu object.
+     *
+     * @author Austin Lei
+     * @version May 22, 2018
+     * @author Period: 2
+     * @author Assignment: QuickQuiz
+     *
+     * @author Sources: none
+     */
     private class BackButtonListener implements ActionListener
     {
         public void actionPerformed( ActionEvent e )
