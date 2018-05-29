@@ -52,6 +52,9 @@ public class StartMenu
      */
     private Statistics stats;
 
+    /**
+     * Label to allow user to choose path
+     */
     private String pathFileChooser;
 
 
