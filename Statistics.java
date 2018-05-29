@@ -21,23 +21,71 @@ public class Statistics
      * TotalProblems holds the total problems for each category, with the same
      * order throughout all the classes
      */
-    int[] totalProblems;
+    private int[] totalProblems;
 
     /**
      * Holds the numer of problems right for each category, with the same order
      * of categories as quickquiz
      */
-    int[] correctProblems;
+    private int[] correctProblems;
 
     /**
      * This double array holds all the percents for the different categories
      */
-    Double[] quickQuizPercents;
+    private Double[] quickQuizPercents;
 
     /**
      * This holds the times for all the different categories
      */
-    int[] quickQuizTimes;
+    private int[] quickQuizTimes;
+
+
+    /**
+     * Method returns the integer array holding the number of problems for each
+     * category
+     * 
+     * @return integer array totalProblems
+     */
+    public int[] getTotalProblems()
+    {
+        return totalProblems;
+    }
+
+
+    /**
+     * Returns the integer array holding the number of correct problems for each
+     * category
+     * 
+     * @return integer array correctProblems
+     */
+    public int[] getCorrectProblems()
+    {
+        return correctProblems;
+    }
+
+
+    /**
+     * Returns the field, quickQuizPercents which is a double array holding the
+     * percentage of problems right
+     * 
+     * @return double array quickQuizPercents
+     */
+    public Double[] getQuickQuizPercents()
+    {
+        return quickQuizPercents;
+    }
+
+
+    /**
+     * Returns the field, quickQuizTimes which is an integer array holding the
+     * amount of time spent on each category of problems
+     * 
+     * @return integer array quickQuizTimes
+     */
+    public int[] getQuickQuizTimes()
+    {
+        return quickQuizTimes;
+    }
 
 
     /**
@@ -187,7 +235,8 @@ public class Statistics
     {
         if ( totalProblems[category] != 0 )
         {
-            return (double)quickQuizTimes[category] / totalProblems[category];
+            return (double)quickQuizTimes[category]
+                / totalProblems[category];
         }
 
         else

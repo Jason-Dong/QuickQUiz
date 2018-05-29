@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import org.junit.Test;
 
 
@@ -15,25 +18,19 @@ import org.junit.Test;
  */
 public class JUQuickQuizTest
 {
-    // --Test TradeOrder
-    /**
-     * Quick Quiz Tests:
-     * 
-     */
+    private Statistics tester = new Statistics();
 
-    public Statistics tester = new Statistics();
+    private static String namePathField = "/Users/guest/Dropbox/workspaceAPCS/QuickQuiz/ProblemFile/problems.txt";
 
-    public String namePathField = "/Users/guest/Dropbox/workspaceAPCS/QuickQuiz/ProblemFile/problems.txt";
+    private ProblemDatabase testing = new ProblemDatabase( namePathField );
 
-    public ProblemDatabase testing = new ProblemDatabase( namePathField );
-
-    public Problem problem1 = new Problem( "probPath",
+    private Problem problem1 = new Problem( "probPath",
         "solutPath",
         "name",
         3,
         'C' );
 
-    public Problem problem2 = new Problem( "probPath2",
+    private Problem problem2 = new Problem( "probPath2",
         "solutionPath",
         "name2",
         3,
@@ -43,10 +40,10 @@ public class JUQuickQuizTest
     @Test
     public void StatisticsConstructor()
     {
-        assertNotNull( tester.quickQuizPercents );
-        assertNotNull( tester.quickQuizTimes );
-        assertNotNull( tester.totalProblems );
-        assertNotNull( tester.correctProblems );
+        assertNotNull( tester.getQuickQuizPercents() );
+        assertNotNull( tester.getQuickQuizTimes() );
+        assertNotNull( tester.getTotalProblems() );
+        assertNotNull( tester.getCorrectProblems() );
 
     }
 
@@ -55,7 +52,7 @@ public class JUQuickQuizTest
     public void StatisticsAddTime()
     {
         tester.addTime( 3, 2 );
-        assertEquals( tester.quickQuizTimes[3], 2 );
+        assertEquals( tester.getQuickQuizTimes()[3], 2 );
     }
 
 
@@ -63,8 +60,8 @@ public class JUQuickQuizTest
     public void StatisticsGetTime()
     {
         tester.addTime( 3, 2 );
-        assertEquals( tester.quickQuizTimes[3], 2 );
-        assertEquals( tester.quickQuizTimes[0], 0 );
+        assertEquals( tester.getQuickQuizTimes()[3], 2 );
+        assertEquals( tester.getQuickQuizTimes()[0], 0 );
     }
 
 
@@ -72,8 +69,8 @@ public class JUQuickQuizTest
     public void StatisticsAddScore()
     {
         tester.addScore( 3, 4, 3 );
-        assertEquals( tester.correctProblems[3], 3 );
-        assertEquals( tester.totalProblems[3], 4 );
+        assertEquals( tester.getCorrectProblems()[3], 3 );
+        assertEquals( tester.getTotalProblems()[3], 4 );
     }
 
 
@@ -135,7 +132,7 @@ public class JUQuickQuizTest
         testing.addProblem( problem1 );
         assertTrue( testing.removeProblem( "name", -1 ) );
         assertFalse( testing.removeProblem( "notName", -1 ) );
-        
+
         testing.addProblem( problem2 );
         assertTrue( testing.removeProblem( "name2", 3 ) );
         testing.addProblem( problem2 );
@@ -160,5 +157,22 @@ public class JUQuickQuizTest
     public void ProblemDatabaseGiveAllProblems()
     {
         assertNotNull( testing.giveAllProblems() );
+    }
+
+
+    public static void main( String[] args ) throws IOException
+    {
+        BufferedReader standardInput = new BufferedReader(
+            new InputStreamReader( System.in ) );
+
+        System.out.println( "hi" );
+
+        // System.out.print(
+        // "An example path to the problems.txt file:
+        // /Users/Jason/Dropbox/workspaceAPCS/QuickQuiz/ProblemFile/problems.txt"
+        // );
+        // System.out.print( "Enter your pathname: " );
+        // namePathField = standardInput.readLine();
+        // System.out.println( "Hello " + namePathField );
     }
 }
