@@ -92,6 +92,9 @@ public class RemoveMenu
      */
     private Statistics stats;
 
+    /**
+     *  The scroll pane
+     */
     private JPanel pane;
 
 
