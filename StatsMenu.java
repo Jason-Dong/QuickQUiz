@@ -284,6 +284,7 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         c.add( gravitationRight );
         c.add( fluidsRight );
 
+        frame.setDefaultCloseOperation( 0 );
         frame.setResizable( false );
         frame.setVisible( true );
 
