@@ -1,7 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 import javax.swing.*;
@@ -173,6 +171,10 @@ public class QQMenu
             choice5.setBounds( 550, 500, 100, 50 );
             choice5.addActionListener( new EButtonListener() );
 
+            JButton seeProb = new JButton( "See a Clearer Image" );
+            seeProb.setBounds( 325, 450, 150, 50 );
+            seeProb.addActionListener( new SeeButtonListener() );
+
             timerDisplay = new JLabel( "Time: 0:00" );
             timerDisplay.setFont( new Font( "font", Font.PLAIN, 18 ) );
             timerDisplay.setBounds( 650, 10, 150, 50 );
@@ -196,6 +198,7 @@ public class QQMenu
             c.add( choice5 );
             c.add( scoreDisplay );
             c.add( timerDisplay );
+            c.add( seeProb );
 
             ImageIcon icon = createImageIcon( forwardStack.peek().getProblemImage(), "image" );
             Image image = icon.getImage();
