@@ -175,14 +175,12 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         text.setHorizontalAlignment( JLabel.CENTER );
         text.setBounds( 100, 30, 600, 75 );
 
-        JLabel avgTimePerProblem = new JLabel(
-            "Average Time Per Problem" );
+        JLabel avgTimePerProblem = new JLabel( "Average Time Per Problem in Seconds" );
         avgTimePerProblem.setFont( new Font( "font", Font.PLAIN, 30 ) );
         avgTimePerProblem.setHorizontalAlignment( JLabel.CENTER );
         avgTimePerProblem.setBounds( 100, 105, 600, 75 );
 
-        JLabel avgNumRight = new JLabel(
-            "Average Number of Problems Right" );
+        JLabel avgNumRight = new JLabel( "Average Number of Problems Right" );
         avgNumRight.setFont( new Font( "font", Font.PLAIN, 30 ) );
         avgNumRight.setHorizontalAlignment( JLabel.CENTER );
         avgNumRight.setBounds( 100, 250, 600, 75 );
@@ -203,26 +201,24 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
             {
                 if ( remainingSeconds[i] < 10 )
                 {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon
-                        + optionalZero + remainingSeconds[i];
+                    stringToReturn[i] += optionalZero + minutes[i] + colon + optionalZero
+                        + remainingSeconds[i];
                 }
                 else
                 {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon
-                        + remainingSeconds[i];
+                    stringToReturn[i] += optionalZero + minutes[i] + colon + remainingSeconds[i];
                 }
             }
             else
             {
                 if ( remainingSeconds[i] < 10 )
                 {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon
-                        + optionalZero + remainingSeconds[i];
+                    stringToReturn[i] += optionalZero + minutes[i] + colon + optionalZero
+                        + remainingSeconds[i];
                 }
                 else
                 {
-                    stringToReturn[i] += optionalZero + minutes[i] + colon
-                        + remainingSeconds[i];
+                    stringToReturn[i] += optionalZero + minutes[i] + colon + remainingSeconds[i];
                 }
             }
         }
@@ -244,28 +240,25 @@ public class StatsMenu // problem encountered: percent dividing by 0: add
         fluids = new JLabel( stringToReturn[5] );
         fluids.setBounds( 550, 230, 150, 20 );
 
-        kinematicsRight = new JLabel( "Kinematics: "
-            + Math.floor( stats.getPercent( 0 ) * 100 ) / 100 );
+        kinematicsRight = new JLabel(
+            "Kinematics: " + Math.floor( stats.getPercent( 0 ) * 100 ) / 100 );
         kinematicsRight.setBounds( 150, 350, 150, 20 );
 
-        newtonRight = new JLabel(
-            "Newton: " + Math.floor( stats.getPercent( 1 ) * 100 ) / 100 );
+        newtonRight = new JLabel( "Newton: " + Math.floor( stats.getPercent( 1 ) * 100 ) / 100 );
         newtonRight.setBounds( 350, 350, 150, 20 );
 
-        energyRight = new JLabel(
-            "Energy: " + Math.floor( stats.getPercent( 2 ) * 100 ) / 100 );
+        energyRight = new JLabel( "Energy: " + Math.floor( stats.getPercent( 2 ) * 100 ) / 100 );
         energyRight.setBounds( 550, 350, 150, 20 );
 
-        rotationRight = new JLabel( "Rotation: "
-            + Math.floor( stats.getPercent( 3 ) * 100 ) / 100 );
+        rotationRight = new JLabel(
+            "Rotation: " + Math.floor( stats.getPercent( 3 ) * 100 ) / 100 );
         rotationRight.setBounds( 150, 380, 150, 20 );
 
-        gravitationRight = new JLabel( "Graviation: "
-            + Math.floor( stats.getPercent( 4 ) * 100 ) / 100 );
+        gravitationRight = new JLabel(
+            "Graviation: " + Math.floor( stats.getPercent( 4 ) * 100 ) / 100 );
         gravitationRight.setBounds( 350, 380, 150, 20 );
 
-        fluidsRight = new JLabel(
-            "Fluids: " + Math.floor( stats.getPercent( 5 ) * 100 ) / 100 );
+        fluidsRight = new JLabel( "Fluids: " + Math.floor( stats.getPercent( 5 ) * 100 ) / 100 );
         fluidsRight.setBounds( 550, 380, 150, 20 );
 
         frame = new JFrame( "StatsMenu" );
