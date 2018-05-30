@@ -112,7 +112,7 @@ public class StartMenu
         notfoundtxt.setVerticalAlignment( JLabel.TOP );
         notfoundtxt.setVisible( false );
 
-        namepathfield.setText( "/Users/JohnDoe/Desktop/QuickQuiz" );
+        namepathfield.setText( getClass().getResource("").toString().substring(5) );
         c.add( text );
         c.add( pathname );
         c.add( warntxt );
