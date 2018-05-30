@@ -205,9 +205,8 @@ public class QQMenu
             Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
             icon.setImage( newImage );
 
-            problemImage = new JLabel( "Problem " + ( this.backStack.size() + 1 ) + forwardStack.peek().getName(),
-                icon,
-                JLabel.CENTER );
+            problemImage = new JLabel( "Problem " + ( this.backStack.size() + 1 ) + " - "
+                + forwardStack.peek().getName(), icon, JLabel.CENTER );
             problemImage.setFont( new Font( "font", Font.PLAIN, 18 ) );
             problemImage.setBounds( 60, 60, 680, 340 );
             problemImage.setVerticalTextPosition( JLabel.BOTTOM );
@@ -288,7 +287,8 @@ public class QQMenu
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
 
-        problemImage.setText( "Problem " + ( backStack.size() + 1 ) + forwardStack.peek().getName() );
+        problemImage.setText(
+            "Problem " + ( backStack.size() + 1 ) + " - " + forwardStack.peek().getName() );
         problemImage.setIcon( icon );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );

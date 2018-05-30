@@ -255,7 +255,7 @@ public class TrainMenu
 
         int number = index + 1;
 
-        problemImage.setText( "Problem " + number + question[index].getName() );
+        problemImage.setText( "Problem " + number + " - " + question[index].getName() );
         problemImage.setIcon( icon );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
