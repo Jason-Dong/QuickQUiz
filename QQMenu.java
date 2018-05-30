@@ -180,7 +180,7 @@ public class QQMenu
             timerDisplay.setBounds( 650, 10, 150, 50 );
             timerDisplay.setHorizontalAlignment( JLabel.CENTER );
 
-            scoreDisplay = new JLabel( "Score: 0" );
+            scoreDisplay = new JLabel( "Score: " + totalScore );
             scoreDisplay.setBounds( 300, 400, 200, 50 );
             scoreDisplay.setHorizontalAlignment( JLabel.CENTER );
 
@@ -205,7 +205,7 @@ public class QQMenu
             Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
             icon.setImage( newImage );
 
-            problemImage = new JLabel( "Problem " + ( this.backStack.size() + 1 ),
+            problemImage = new JLabel( "Problem " + ( this.backStack.size() + 1 ) + forwardStack.peek().getName(),
                 icon,
                 JLabel.CENTER );
             problemImage.setFont( new Font( "font", Font.PLAIN, 18 ) );
@@ -288,7 +288,7 @@ public class QQMenu
         Image newImage = image.getScaledInstance( 680, 300, Image.SCALE_DEFAULT );
         icon.setImage( newImage );
 
-        problemImage.setText( "Problem " + ( backStack.size() + 1 ) );
+        problemImage.setText( "Problem " + ( backStack.size() + 1 ) + forwardStack.peek().getName() );
         problemImage.setIcon( icon );
         problemImage.setVerticalTextPosition( JLabel.BOTTOM );
         problemImage.setHorizontalTextPosition( JLabel.CENTER );
