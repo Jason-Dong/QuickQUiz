@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.*;
-import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
 
@@ -111,6 +110,16 @@ public class StartMenu
         notfoundtxt.setHorizontalAlignment( JLabel.LEFT );
         notfoundtxt.setVerticalAlignment( JLabel.TOP );
         notfoundtxt.setVisible( false );
+        
+        ImageIcon icon = new ImageIcon( getClass().getResource("/images/Icon.png"));
+        Image image = icon.getImage();
+        Image newImage = image.getScaledInstance( 150, 75, Image.SCALE_DEFAULT );
+        icon.setImage( newImage );
+        JLabel imageLabel = new JLabel();
+        imageLabel.setBounds( 300, 100, 150, 75 );
+        imageLabel.setIcon(icon);
+        imageLabel.setVerticalTextPosition( JLabel.BOTTOM );
+        imageLabel.setHorizontalTextPosition( JLabel.CENTER );
 
         namepathfield.setText( getClass().getResource("").toString().substring(5) );
         c.add( text );
@@ -121,6 +130,7 @@ public class StartMenu
 
         c.add( namepathfield );
         c.add( nametxt );
+        c.add(imageLabel);
 
         frame.setResizable( false );
         frame.setVisible( true );
