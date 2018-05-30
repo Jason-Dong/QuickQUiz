@@ -20,7 +20,7 @@ public class JUQuickQuizTest
 {
     private Statistics tester = new Statistics();
 
-    private static String namePathField = "/Users/guest/Dropbox/workspaceAPCS/QuickQuiz/ProblemFile/problems.txt";
+    private String namePathField = getClass().getResource("/ProblemFile/problems.txt").toString().substring(5);
 
     private ProblemDatabase testing = new ProblemDatabase( namePathField );
 
@@ -40,6 +40,7 @@ public class JUQuickQuizTest
     @Test
     public void StatisticsConstructor()
     {
+    		System.out.println(namePathField);
         assertNotNull( tester.getQuickQuizPercents() );
         assertNotNull( tester.getQuickQuizTimes() );
         assertNotNull( tester.getTotalProblems() );
