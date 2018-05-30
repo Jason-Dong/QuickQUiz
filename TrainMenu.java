@@ -199,7 +199,9 @@ public class TrainMenu
 
             int number = index + 1;
 
-            problemImage = new JLabel( "Problem " + number, icon, JLabel.CENTER );
+            problemImage = new JLabel( "Problem " + number + " - " + question[0].getName(),
+                icon,
+                JLabel.CENTER );
             problemImage.setFont( new Font( "font", Font.PLAIN, 18 ) );
             problemImage.setBounds( 60, 60, 680, 340 );
             problemImage.setVerticalTextPosition( JLabel.BOTTOM );
